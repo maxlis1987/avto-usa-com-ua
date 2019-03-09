@@ -1,0 +1,33 @@
+{
+  "name": "react",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "babel-loader": "^8.0.5",
+    "mdbreact": "^4.11.0",
+    "prop-types": "^15.7.2",
+    "react": "16.8.0",
+    "react-dom": "16.8.0",
+    "react-redux": "^6.0.1",
+    "react-video-cover": "^1.2.2",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.0.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "react-scripts": "latest"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
