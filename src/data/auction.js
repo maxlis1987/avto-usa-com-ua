@@ -1,9 +1,7 @@
 export default [ { value: 'Copart' }, { value: 'IAAI' } ];
 export const typeCar = [
-  [ 'AL', 'Мотоцикл', 5 ],
   [ 'AR', 'Седан', 4 ],
   [ 'AZ', 'Внедорожник', 3 ],
-  [ 'CO', 'Грузовик', 3 ],
 ];
 export const copartState = [
   { value: 'AL' },

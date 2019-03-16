@@ -62,7 +62,7 @@ const addApplyPickCyti = (state, action) => {
   const mainCraft = state.cytisData.filter(
     item => item[1] === action.payload.cytiUse,
   );
-
+console.log(mainCraft)
   return {
     ...state,
     mainCraft: mainCraft[0],

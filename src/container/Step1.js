@@ -1,17 +1,23 @@
-import React, { useEffect, useMemo, useImperativeHandle } from 'react';
+import React, { useState,useEffect, useMemo, useImperativeHandle } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Select from '../components/select';
 import Radio from '../components/radio';
 import Paper from '../components/paper';
+import Input from '../components/input';
 import MainCard from '../components/MainCard';
 import auction_data, { typeCar } from '../data/auction';
-
+import {portListOdessa} from '../data/ports';
 import { connect } from 'react-redux';
-import { doAddAuction, doAddSize, doAddCyti } from '../actions';
+import { doAddAuction, doAddSize, doAddCyti,doAddCostTransit } from '../actions';
 import { useFormInput } from '../components/functions';
 
-function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti }){
+
+{/**
+ @{} + 1% к  стоимости
+*/}
+function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti, onAddCostTransit, summaState }){
   const auction = useFormInput('auction');
+
 
   useEffect(
     () => {
@@ -28,7 +34,6 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti }){
     },
     [ size.value ],
   );
-  var index = typeCar.filter(item => item[1] === size.value && item[2]);
   const cytiUse = useFormInput('cityUse');
 
   useEffect(
@@ -38,10 +43,41 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti }){
     [ cytiUse.value ],
   );
 
-  return (
-    <MainCard header='Доставка'>
-      <Paper>
+  var index = typeCar.filter(item => item[1] === size.value && item[2]);
+  let costTransit = 0;
+  let result = 0;
+  let summ = 0;
+  if(stepState.mainCraft){
+    result = portListOdessa.map(item => item[0] === stepState.mainCraft[2] && item[1]).filter(el => el !== false);
+    result = +result[0];
+
+    costTransit = stepState.mainCraft && (+stepState.mainCraft[index[0] && index[0][2]]) + 77;
+    summ =  result + costTransit
+      console.log('Доставка в порт', costTransit);
+      console.log('Доставка в одесса', result);
+      console.log('summ', summ);
+  }
+      const [stateResult, setStateResult] = useState(null);
+      useEffect(() => {
+
+
+
+        setStateResult(summ)
+        onAddCostTransit({ stateResult });
+      },
+      [ stateResult ])
+
+function test() {
+  const tmp = portListOdessa.map(item => item[0] === stepState.mainCraft[2] && item[1]).filter(el => el !== false);
+  const result = +tmp[0];
+ const costTransit = stepState.mainCraft && (+stepState.mainCraft[index[0] && index[0][2]]) + 77;
+  const summ =  result + summaState.costTransit;
+
+}
+
+  {/* <Paper>
         <Paper>
+    // var index = typeCar.filter(item => item[1] === size.value && item[2]);
           <Typography variant='subtitle1'>
             <Typography variant='h3'>
               <Typography variant='display1'>Стоимость : </Typography>{' '}
@@ -49,46 +85,71 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti }){
                 stepState.mainCraft[index[0] && index[0][2]]}{' '}
               $
             </Typography>
-          </Typography>
-        </Paper>
-        <hr />
-        <Radio
-          labelPlacement='Выберете Aукцион'
-          {...auction}
-          options={auction_data}
-        />
+          </Typography>  </Paper>
+        </Paper> */}
+
+  return (
+    <Paper >
+      <Radio
+        labelPlacement='Выберете Aукцион'
+        {...auction}
+        options={auction_data}
+      />
+      <Typography variant="h6" color="inherit">
+          Цена лота
+      </Typography>
+
+        <label >
+          <Input />
+        </label>
+        <Typography variant="h6" color="inherit">
+            Цена доставки
+        </Typography>
+
         <div style={{ display: 'inline-flex' }}>
-          <Select header='Размер Машины' {...size} options={typeCar} />
-          <div style={{ width: 75 }} />
-          <Select
-            header='Выберите штат'
+        <Select
+            header='Выберете площадку'
             {...cytiUse}
             options={stepState.cytisData}
           />
+            <br />
+          <div style={{ width: 75 }} />
         </div>
 
-        <br />
-        <Typography variant='display1'>
-          {stepState.mainCraft && stepState.mainCraft[2]}
+
+        <Select header='Размер Машины' {...size} options={typeCar} />
+        <Typography   variant="h6" color="secondary">
+          {(stepState.mainCraft && stepState.mainCraft[2]) + ' - Ближайший порт'}
         </Typography>
-      </Paper>
-      <Paper>
-        <Typography variant='subtitle1'>
-          {stepState.mainCraft &&
-            'Доставка в Одесский порт займет  ' +
-              stepState.mainCraft[6] +
-              ' недель'}
+        <Typography variant="h6" color="secondary">
+          Страховка: + 77 $
         </Typography>
-      </Paper>
-    </MainCard>
+        <Typography variant="h6" color="primary">
+            {stepState.mainCraft &&
+              'СТОИМОСТЬ ДОСТАВКИ В ПОРТ ОДЕССЫ: ' + ' ' + summ + ' $'}
+        </Typography>
+      <hr />
+      <Typography variant="h5" color="primary">
+          ОБЩАЯ СУММА: {summaState.allCost  && summaState.costTransit ? summaState.allCost : null}
+      </Typography>
+      <Typography variant="h6" color="secondary">
+      {stepState.mainCraft &&
+      'Доставка в Одесский порт займет  ' +
+        stepState.mainCraft[6] +
+        ' недель'}
+      </Typography>
+    </Paper>
+
   );
 }
 const mapStateToProps = state => ({
   stepState: state.step1State,
+  summaState: state.summaState,
 });
 const mapDispatchToProps = dispatch => ({
   onAddAuction: payload => dispatch(doAddAuction(payload)),
   onAddSize: payload => dispatch(doAddSize(payload)),
   onAddCyti: payload => dispatch(doAddCyti(payload)),
+  onAddCostTransit: payload => dispatch(doAddCostTransit(payload)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Step1);

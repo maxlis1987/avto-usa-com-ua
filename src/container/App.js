@@ -149,21 +149,29 @@
 // export default connect(null, mapDispatchToProps)(Index);
 import React from 'react';
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
+import NavBar from '../components/NavBar'
 import './index.css';
+import { withSnackbar } from 'notistack';
 
 import Step1 from './Step1';
+import Step2 from './Step2';
 const gridExamplesPage = () => {
   return (
+    <MDBContainer style={{display: 'inline-flex'}}>
+
     <MDBContainer>
-      <MDBRow>
-        <MDBCol style={{ height: '90vh', zIndex: 0 }}>
-          <Step1 style={{ zIndex: 1 }} />
-        </MDBCol>
-        <MDBCol>.col-md-4</MDBCol>
-        <MDBCol>.col-md-4</MDBCol>
-      </MDBRow>
+    <NavBar title='Расчет доставки авто' />
+      <Step1 />
+      </MDBContainer>
+      {/* <MDBContainer>
+    <NavBar title='Таможенный розсчет' />
+      <Step2 />
+      </MDBContainer> */}
+
     </MDBContainer>
+
+
   );
 };
 
-export default gridExamplesPage;
+export default withSnackbar(gridExamplesPage);

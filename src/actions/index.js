@@ -15,4 +15,15 @@ export const doAddCyti = payload => ({
   payload,
 });
 
-export default { doAddAuction, doAddSize, doAddCyti };
+export const doAddCostCar = payload => ({
+  type: actionTypes.COST_CAR,
+  payload,
+});
+
+export const doAddCostTransit = payload => ({
+  type: actionTypes.COST_TRANSIT,
+  payload,
+});
+
+
+export default { doAddAuction, doAddSize, doAddCyti,doAddCostCar,doAddCostTransit };
