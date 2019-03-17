@@ -147,7 +147,7 @@
 // });
 
 // export default connect(null, mapDispatchToProps)(Index);
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import NavBar from '../components/NavBar'
 import './index.css';
@@ -156,22 +156,48 @@ import { withSnackbar } from 'notistack';
 import Step1 from './Step1';
 import Step2 from './Step2';
 const gridExamplesPage = () => {
+  const [flexState, setFlexState] = useState('');
+
+  const width = setWindowWidth();
+
+  useEffect(() => {
+    if(width < 992){
+    setFlexState('desctop');
+    }
+    else setFlexState('mobail');
+  }, [width]);
+
   return (
-    <MDBContainer style={{display: 'inline-flex'}}>
+    <MDBContainer style={{display: 'flex', flexDirection: flexState == 'desctop' ? 'column' : 'row'}}>
 
     <MDBContainer>
     <NavBar title='Расчет доставки авто' />
       <Step1 />
       </MDBContainer>
-      {/* <MDBContainer>
-    <NavBar title='Таможенный розсчет' />
+      <br />
+      <MDBContainer>
+    <NavBar title='Разсчет розтаможки' />
       <Step2 />
-      </MDBContainer> */}
+      </MDBContainer>
 
     </MDBContainer>
 
 
   );
 };
+function setWindowWidth() {
+	const [width, setWidth] = useState(window.innerWidth);
+
+
+
+	useEffect(() => {
+		const handlyResize = () => setWidth(window.innerWidth);
+		window.addEventListener('resize', handlyResize);
+
+		return () =>
+			window.removeEventListener('resize', handlyResize);
+	});
+	return width;
+}
 
 export default withSnackbar(gridExamplesPage);

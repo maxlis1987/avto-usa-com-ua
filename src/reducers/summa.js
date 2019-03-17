@@ -30,7 +30,7 @@ const applyCostCar = (state, action) => {
 const applyCostTransit = (state, action) => {
   const summ =  +action.payload.stateResult ;
   const costCar = state.costCar;
-  const allCost  = costCar + summ;
+  const allCost  = +costCar + +summ;
 console.log('applyCostTransit', summ)
   return {
     ...state,

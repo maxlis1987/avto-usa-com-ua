@@ -3,44 +3,6 @@
 // import { withStyles } from '@material-ui/core/styles';
 // import TextField from '@material-ui/core/TextField';
 
-// import { useFormInput } from './functions';
-
-// const styles = theme => ({
-//   container: {
-//     display: 'flex',
-//     flexWrap: 'wrap',
-//   },
-//   textField: {
-//     marginLeft: theme.spacing.unit,
-//     marginRight: theme.spacing.unit,
-//     minWidth: 300,
-//   },
-// });
-
-// function Input (props){
-//   const { classes, placeholder } = props;
-//   const value = useFormInput('');
-
-//   return (
-//     <div className={classes.container}>
-//       <TextField
-//         id='standard-textarea'
-//         label={placeholder}
-//         placeholder={placeholder}
-//         multiline
-//         {...value}
-//         className={classes.textField}
-//         margin='normal'
-//       />
-//     </div>
-//   );
-// }
-
-// Input.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
-
-// export default withStyles(styles)(Input);
 import React from 'react';
 import MaskedInput from 'react-text-mask';
 import NumberFormat from 'react-number-format';
@@ -49,7 +11,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import {doAddCostCar,doAddCostTransit,doAddCostAll} from '../actions';
+import { doAddCostCar, doAddCostTamojnya } from '../actions';
+
+import { useFormInput } from './functions';
 
 const styles = theme => ({
   container: {
@@ -59,7 +23,37 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
   },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    minWidth: 300,
+  },
 });
+
+function MuiInput (props){
+  const { classes, placeholder, value } = props;
+  return (
+    <div className={classes.container}>
+      <TextField
+        id='standard-textarea'
+        label={placeholder}
+        placeholder={placeholder}
+        multiline
+        {...value}
+        className={classes.textField}
+        margin='normal'
+      />
+    </div>
+  );
+}
+
+MuiInput.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export const Input = withStyles(styles)(MuiInput);
+
+
 
 function TextMaskCustom(props) {
   const { inputRef, ...other } = props;
@@ -120,11 +114,15 @@ class FormattedInputs extends React.PureComponent {
   };
 componentDidUpdate(){
   const {  numberformat } = this.state;
-  this.props.onAddCostCar({ numberformat })
+  if(this.props.enableLabel){
+
+    this.props.onAddCostCar({ numberformat })
+  }
+  this.props.onAddCostTamojnya({ numberformat })
 }
 
   render() {
-    const { classes, costCar } = this.props;
+    const { classes, costCar, cost, costTamojnya } = this.props;
     const {  numberformat } = this.state;
 
     return (
@@ -141,14 +139,14 @@ componentDidUpdate(){
           }}
         /><br />
       </div>
-      {this.state.numberformat > 1 && (
+
+      {(this.state.numberformat > 1 && this.props.enableLabel) && (
         <React.Fragment>
-          <Typography  variant="h6" color="secondary">
+          <Typography  variant="subheading" color="secondary">
             {(+this.state.numberformat / 100).toFixed(2)}$   - 1% Комиссия аукциона
           </Typography>
-          <Typography   variant="h6" color="primary">
+          <Typography   variant="title" color="primary">
               ИТОГО: {(+this.state.numberformat + +this.state.numberformat / 100).toFixed(2)}$
-
           </Typography>
         </React.Fragment>
       )}
@@ -164,11 +162,13 @@ FormattedInputs.propTypes = {
 const WithFormatInputs = withStyles(styles)(FormattedInputs);
 
 const mapStateToProps = state => ({
-  summaState: state.summaState.costCar,
+  costCar: state.summaState.costCar,
+  step2State: state.step2State.cost,
+  costTamojnya: state.step2State.costTamojnya,
 });
 
 const mapDispatchToProps = dispatch => ({
   onAddCostCar: payload => dispatch(doAddCostCar(payload)),
-
+  onAddCostTamojnya: payload => dispatch(doAddCostTamojnya(payload)),
 });
 export default connect(mapStateToProps,mapDispatchToProps)(WithFormatInputs);

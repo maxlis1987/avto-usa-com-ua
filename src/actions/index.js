@@ -25,5 +25,36 @@ export const doAddCostTransit = payload => ({
   payload,
 });
 
+export const doAddCostTamojnya = payload => ({
+  type: actionTypes.COST_TAMOJNYA,
+  payload,
+});
+export const doAddTypeEngine = payload => ({
+  type: actionTypes.TYPE_ANGINE,
+  payload,
+});
+export const doAddTypeFuel = payload => ({
+  type: actionTypes.TYPE_FUEL,
+  payload,
+});
+export const doAddYear = payload => ({
+  type: actionTypes.YEAR,
+  payload,
+});
+export const doAddCost = payload => ({
+  type: actionTypes.COST,
+  payload,
+});
 
-export default { doAddAuction, doAddSize, doAddCyti,doAddCostCar,doAddCostTransit };
+export default {
+  doAddAuction,
+  doAddSize,
+  doAddCyti,
+  doAddCostCar,
+  doAddCostTransit,
+  doAddCostTamojnya,
+  doAddTypeEngine,
+  doAddTypeFuel,
+  doAddYear,
+  doAddCost
+ };

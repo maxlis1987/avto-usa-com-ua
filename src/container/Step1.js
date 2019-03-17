@@ -52,28 +52,10 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti, onAddCostTransi
     result = +result[0];
 
     costTransit = stepState.mainCraft && (+stepState.mainCraft[index[0] && index[0][2]]) + 77;
-    summ =  result + costTransit
-      console.log('Доставка в порт', costTransit);
-      console.log('Доставка в одесса', result);
-      console.log('summ', summ);
+    summ =  +result + +costTransit
+
   }
-      const [stateResult, setStateResult] = useState(null);
-      useEffect(() => {
 
-
-
-        setStateResult(summ)
-        onAddCostTransit({ stateResult });
-      },
-      [ stateResult ])
-
-function test() {
-  const tmp = portListOdessa.map(item => item[0] === stepState.mainCraft[2] && item[1]).filter(el => el !== false);
-  const result = +tmp[0];
- const costTransit = stepState.mainCraft && (+stepState.mainCraft[index[0] && index[0][2]]) + 77;
-  const summ =  result + summaState.costTransit;
-
-}
 
   {/* <Paper>
         <Paper>
@@ -100,7 +82,7 @@ function test() {
       </Typography>
 
         <label >
-          <Input />
+          <Input enableLabel/>
         </label>
         <Typography variant="h6" color="inherit">
             Цена доставки
@@ -118,25 +100,25 @@ function test() {
 
 
         <Select header='Размер Машины' {...size} options={typeCar} />
-        <Typography   variant="h6" color="secondary">
-          {(stepState.mainCraft && stepState.mainCraft[2]) + ' - Ближайший порт'}
+        <Typography   variant="subheading" color="secondary">
+          {(stepState.mainCraft && stepState.mainCraft[2]) === undefined ? null : (stepState.mainCraft && stepState.mainCraft[2]) + ' - Ближайший порт'}
         </Typography>
-        <Typography variant="h6" color="secondary">
+        <Typography variant="subheading" color="secondary">
           Страховка: + 77 $
         </Typography>
-        <Typography variant="h6" color="primary">
-            {stepState.mainCraft &&
-              'СТОИМОСТЬ ДОСТАВКИ В ПОРТ ОДЕССЫ: ' + ' ' + summ + ' $'}
+        <Typography variant="title" color="secondary">
+            { !isNaN(summ) &&
+              'СТОИМОСТЬ ДОСТАВКИ В ПОРТ ОДЕССЫ: ' + ' ' +  summ.toLocaleString() + ' $'}
         </Typography>
       <hr />
       <Typography variant="h5" color="primary">
-          ОБЩАЯ СУММА: {summaState.allCost  && summaState.costTransit ? summaState.allCost : null}
+          ОБЩАЯ СУММА: {(summaState.costCar  && summ) && !isNaN((+summaState.costCar + +summ).toFixed(2)) ? (+summaState.costCar + +summ).toFixed(2) : null}
       </Typography>
       <Typography variant="h6" color="secondary">
       {stepState.mainCraft &&
       'Доставка в Одесский порт займет  ' +
-        stepState.mainCraft[6] +
-        ' недель'}
+      portListOdessa.map(item => item[0] === stepState.mainCraft[2] && item[item.length - 1]).filter(el => el !== false) +
+        ' дней'}
       </Typography>
     </Paper>
 
