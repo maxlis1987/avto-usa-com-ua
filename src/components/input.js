@@ -11,9 +11,9 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import { doAddCostCar, doAddCostTamojnya } from '../actions';
+import { doAddCostCar, doAddCostTamojnya, doAddBrocker } from '../actions';
 
-import { useFormInput } from './functions';
+import { useFormInput, calculta } from './functions';
 
 const styles = theme => ({
   container: {
@@ -51,7 +51,7 @@ MuiInput.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export const Input = withStyles(styles)(MuiInput);
+export const UseInput = withStyles(styles)(MuiInput);
 
 
 
@@ -102,35 +102,46 @@ NumberFormatCustom.propTypes = {
 
 
 class FormattedInputs extends React.PureComponent {
-  state = {
-    numberformat: '1',
+  constructor(props){
+    super(props);
+    this.state = {
+      numberformat: props.brocker ? props.brocker : '0',
 
-  };
+    };
+
+  }
 
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
+      comision: 0
     });
   };
 componentDidUpdate(){
-  const {  numberformat } = this.state;
-  if(this.props.enableLabel){
+  const { numberformat } = this.state;
+  const { enableLabel, auction, enableBrocker, onAddCostCar, onAddCostTamojnya, onAddBrocker } = this.props;
+  if(enableLabel){
 
-    this.props.onAddCostCar({ numberformat })
+    onAddCostCar({ numberformat })
+    this.setState({ comision: calculta(auction, +numberformat) });
   }
-  this.props.onAddCostTamojnya({ numberformat })
+  if(enableBrocker){
+    onAddBrocker({ numberformat })
+  }
+  console.log(+numberformat + 400)
+  onAddCostTamojnya({numberformat: +numberformat + 400 })
 }
 
   render() {
-    const { classes, costCar, cost, costTamojnya } = this.props;
-    const {  numberformat } = this.state;
+    const { classes, brocker } = this.props;
+    const { numberformat, comision } = this.state;
 
     return (
       <React.Fragment>
       <div className={classes.container}>
         <TextField
           className={classes.formControl}
-          label="Цена покупки"
+          label={brocker ? "Брокер" : "Цена покупки"}
           value={numberformat}
           onChange={this.handleChange('numberformat')}
           id="formatted-numberformat-input"
@@ -143,10 +154,10 @@ componentDidUpdate(){
       {(this.state.numberformat > 1 && this.props.enableLabel) && (
         <React.Fragment>
           <Typography  variant="subheading" color="secondary">
-            {(+this.state.numberformat / 100).toFixed(2)}$   - 1% Комиссия аукциона
+            {comision}$  - Комиссия аукциона
           </Typography>
           <Typography   variant="title" color="primary">
-              ИТОГО: {(+this.state.numberformat + +this.state.numberformat / 100).toFixed(2)}$
+              ИТОГО: {Math.ceil(+numberformat + comision)}$
           </Typography>
         </React.Fragment>
       )}
@@ -165,10 +176,12 @@ const mapStateToProps = state => ({
   costCar: state.summaState.costCar,
   step2State: state.step2State.cost,
   costTamojnya: state.step2State.costTamojnya,
+  auction: state.step1State.auction,
 });
 
 const mapDispatchToProps = dispatch => ({
   onAddCostCar: payload => dispatch(doAddCostCar(payload)),
   onAddCostTamojnya: payload => dispatch(doAddCostTamojnya(payload)),
+  onAddBrocker: payload => dispatch(doAddBrocker(payload)),
 });
 export default connect(mapStateToProps,mapDispatchToProps)(WithFormatInputs);

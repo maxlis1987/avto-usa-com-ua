@@ -11,3 +11,5 @@ export const TYPE_ANGINE = 'TYPE_ANGINE';
 export const TYPE_FUEL = 'TYPE_FUEL';
 export const YEAR = 'YEAR';
 export const COST = 'COST';
+
+export const BROCKER = 'BROCKER';

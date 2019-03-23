@@ -9,13 +9,13 @@ import auction_data, { typeCar } from '../data/auction';
 import {portListOdessa} from '../data/ports';
 import { connect } from 'react-redux';
 import { doAddAuction, doAddSize, doAddCyti,doAddCostTransit } from '../actions';
-import { useFormInput } from '../components/functions';
+import { useFormInput, calculta } from '../components/functions';
 
 
 {/**
  @{} + 1% к  стоимости
 */}
-function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti, onAddCostTransit, summaState }){
+function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti,  summaState, children }){
   const auction = useFormInput('auction');
 
 
@@ -71,7 +71,8 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti, onAddCostTransi
         </Paper> */}
 
   return (
-    <Paper >
+    <Paper background='tomato' header='Расчет доствки авто'>
+      {children}
       <Radio
         labelPlacement='Выберете Aукцион'
         {...auction}
@@ -114,12 +115,7 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti, onAddCostTransi
       <Typography variant="h5" color="primary">
           ОБЩАЯ СУММА: {(summaState.costCar  && summ) && !isNaN((+summaState.costCar + +summ).toFixed(2)) ? (+summaState.costCar + +summ).toFixed(2) : null}
       </Typography>
-      <Typography variant="h6" color="secondary">
-      {stepState.mainCraft &&
-      'Доставка в Одесский порт займет  ' +
-      portListOdessa.map(item => item[0] === stepState.mainCraft[2] && item[item.length - 1]).filter(el => el !== false) +
-        ' дней'}
-      </Typography>
+
     </Paper>
 
   );

@@ -5,7 +5,8 @@ const initialState = {
   angineType: 0,
   typeFuel: '',
   yearCost: null,
-  cost: 0
+  cost: 0,
+  brockerValue: 900
 };
 
 export default (state = initialState, action) => {
@@ -24,6 +25,9 @@ export default (state = initialState, action) => {
     }
     case actionTypes.COST: {
       return applyCost(state, action);
+    }
+    case actionTypes.BROCKER: {
+      return applyBrockerValue(state, action);
     }
     default:
       return state;
@@ -77,5 +81,14 @@ const applyYear = (state, action) => {
   return {
     ...state,
     yearCost: year
+  }
+};
+
+const applyBrockerValue = (state, action) => {
+  const brockerValue = +action.payload.numberformat;
+  return {
+    ...state,
+    brockerValue,
+
   }
 };

@@ -7,8 +7,11 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
-
+    width: '100vw',
+    height: 30,
+    zIndex: 10,
+    position: 'absolute',
+    display: 'fixed'
   },
 });
 
@@ -17,10 +20,10 @@ function SimpleAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="secondary">
+      <AppBar position="relative" color="primary">
         <Toolbar>
           <Typography variant="h6" color="inherit">
-           {title}
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>

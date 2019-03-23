@@ -4,23 +4,33 @@ import Typography from '@material-ui/core/Typography';
 import Select from '../components/select';
 import Radio from '../components/radio';
 import Paper from '../components/paper';
-import Input from '../components/input';
+import Input, { UseInput } from '../components/input';
 import years_data from '../data/years';
 import fuel_data from '../data/fuel';
 import engines_data from '../data/engine';
 
 import { useFormInput } from '../components/functions';
 import { connect } from 'react-redux';
-import { doAddTypeEngine ,doAddTypeFuel, doAddYear, doAddCost} from '../actions';
+import { doAddTypeEngine ,doAddTypeFuel, doAddYear, doAddCost } from '../actions';
 
 
-function Step2 ({ onAddTypeEngine, onAddTypeFuel, onAddYear ,onAddCost, stepState }){
-  const {angineType,
+function Step2 ({
+  onAddTypeEngine,
+  onAddTypeFuel,
+  onAddYear,
+  step2State,
+  stepState,
+  cost,
+  children
+}){
+  const {
+    angineType,
     typeFuel,
     yearCost,
-    costTamojnya} = stepState;
+    costTamojnya
+  } = stepState;
 
-    const fuelType = useFormInput(null);
+    const fuelType = useFormInput('Бензин');
 
     useEffect(() => {
       const typeFuel = fuelType.value;
@@ -28,7 +38,7 @@ function Step2 ({ onAddTypeEngine, onAddTypeFuel, onAddYear ,onAddCost, stepStat
 
     }, [fuelType.value]);
 
-  const engines = useFormInput(null);
+  const engines = useFormInput('2.0');
 
   useEffect(() => {
     const angineType = engines.value;
@@ -36,7 +46,7 @@ function Step2 ({ onAddTypeEngine, onAddTypeFuel, onAddYear ,onAddCost, stepStat
 
   }, [engines.value]);
 
-  const years = useFormInput(null);
+  const years = useFormInput(2019);
 
   useEffect(() => {
     const year = years.value;
@@ -44,7 +54,7 @@ function Step2 ({ onAddTypeEngine, onAddTypeFuel, onAddYear ,onAddCost, stepStat
 
   }, [years.value]);
   // let cost;
-  const [cost, setCost] = useState(0);
+  const [stepCost, setCost] = useState(cost);
 
   useEffect(() => {
     if(typeFuel !== '' && angineType > 1){
@@ -82,24 +92,19 @@ function Step2 ({ onAddTypeEngine, onAddTypeFuel, onAddYear ,onAddCost, stepStat
       }
 
     }
+    console.log('step2Effect');
+  }, [typeFuel, angineType, costTamojnya, yearCost, cost,stepCost]);
 
-    onAddCost({ cost: cost.toFixed(0)})
-  }, [typeFuel, angineType,  costTamojnya, yearCost, cost]);
 
-// const [mainCost, setMainCost] = useState(null);
+  const [brockerValue, setBrockerValue] = useState(stepState.brockerValue);
 
-// useEffect(() => {
-
-//   if(costTamojnya > 0 && cost && yearCost){
-//     setMainCost(costTamojnya + cost)
-//   }
-// }, [cost, costTamojnya, yearCost])
-
+    useEffect(() => {
+      setBrockerValue(stepState.brockerValue)
+    }, [stepState.brockerValue]);
 
 
   return (
-    <div >
-      <Paper>
+      <Paper background='tomato' header='Расчет розтаможки'>
       <Typography variant="title" color="inherit">
         Выберете тип топлива
         </Typography>
@@ -128,51 +133,53 @@ function Step2 ({ onAddTypeEngine, onAddTypeFuel, onAddYear ,onAddCost, stepStat
           options={years_data}
         />
 
-        <Typography variant="title" color="inherit">
-        Цена автомобиля
+        <Typography variant="title" color="secondary">
+          Цена автомобиля {cost}$
         </Typography>
-        <Input enableCost />
         {costTamojnya > 0  && (
           <React.Fragment>
 
           <Typography  variant="subheading" color="secondary">
-            {+costTamojnya.toFixed(2) + +((costTamojnya / 100) * 20).toFixed(2) } $ +20% НДС
+            {Math.ceil(+((cost / 100) * 20))} $ +20% НДС
           </Typography>
           <Typography  variant="subheading" color="secondary">
-            {+costTamojnya.toFixed(2) + +((costTamojnya / 100) * 10).toFixed(2) } $ +10% Пошлина
+            {Math.ceil(+((cost / 100) * 10))} $ +10% Пошлина
           </Typography>
-          {+costTamojnya <= 10000 ? (
+          {+cost <= 7340 ? (
           <Typography  variant="subheading" color="secondary">
-            {+costTamojnya.toFixed(2) + +((costTamojnya / 100) * 3).toFixed(2) } $ + 3% От Пенсионный
+            {Math.ceil(+((cost / 100) * 3))} $ + 3% От Пенсионный
           </Typography>
-          ): +costTamojnya < 20000 ?  (
+          ): +cost < 18350 ?  (
           <Typography  variant="subheading" color="secondary">
-            {+costTamojnya.toFixed(2) + +((costTamojnya / 100) * 4).toFixed(2) } $ + 4% От Пенсионный
+            {Math.ceil(+((cost / 100) * 4))} $ + 4% От Пенсионный
           </Typography>
-          ) : +costTamojnya >= 20000 ? (
+          ) : +cost >= 20000 ? (
           <Typography  variant="subheading" color="secondary">
-            {+costTamojnya.toFixed(2) + +((costTamojnya / 100) * 5).toFixed(2) } $ + 5% От Пенсионный
+            {Math.ceil(+((cost / 100) * 5))} $ + 5% От Пенсионный
           </Typography>
           ) : null}
 
           </React.Fragment>
         )}
+        <Typography  variant="h6" color="primary">
+          Брокер  <Input brocker={900} enableBrocker/>
+        </Typography>
           <hr />
         {(costTamojnya > 0 && cost > 0) && (
           <Typography  variant="h6" color="primary">
               ОБЩИЙ ТАМОЖЕННЫЙ СБОР: {
-             (+cost.toFixed(2) + +((costTamojnya / 100) * 20).toFixed(2) +  +((costTamojnya / 100) * 10).toFixed(2) + +((costTamojnya / 100) * costTamojnya <= 10000 ? 3 : costTamojnya > 10000  && costTamojnya <= 20000 ? 4 : 5).toFixed(2)).toFixed(2)
+                Math.ceil(+cost + +((costTamojnya / 100) * 20) +  +((costTamojnya / 100) * 10) + +((costTamojnya / 100) * costTamojnya <= 10000 ? 3 : costTamojnya > 10000  && costTamojnya <= 20000 ? 4 : 5)) + brockerValue
         }$
           </Typography>
         )}
 
       </Paper>
-    </div>
+
   );
 }
 const mapStateToProps = state => ({
   stepState: state.step2State,
-
+  cost: state.summaState.costCar,
 });
 const mapDispatchToProps = dispatch => ({
   onAddTypeEngine: payload => dispatch(doAddTypeEngine(payload)),

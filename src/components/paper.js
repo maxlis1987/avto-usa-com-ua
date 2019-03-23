@@ -9,16 +9,35 @@ export const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    background: 'rgba(255,255,255)',
+    position: 'absolute',
+    display: 'block',
+    zIndex: 10000,
+    background: 'rgb(255,255,255)',
+    opacity: 0.9
   },
+  paperTitle: {
+    height: 30,
+    textAlign: 'center',
+    color: 'white',
+    display: 'flex'
+  },
+  title: {
+    color: '#ffffff',
+    margin: 'auto',
+    fontSize: 18
+  }
 });
 
 function PaperSheet (props){
-  const { classes, children } = props;
+  const { classes, children, background, header } = props;
 
   return (
     <div>
       <Paper className={classes.root} elevation={1}>
+        <Paper className={classes.paperTitle} style={{ background }}>
+          <Typography variant='title' className={classes.title} >{header}</Typography>
+        </Paper>
+        <br />
         <Typography variant='display1'>{children}</Typography>
       </Paper>
     </div>

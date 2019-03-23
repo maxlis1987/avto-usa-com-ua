@@ -20,8 +20,8 @@ export default (state = initialState, action) => {
 };
 
 const applyCostCar = (state, action) => {
-  let costCar = action.payload.numberformat;
-  costCar = (+costCar + +costCar / 100).toFixed(2);
+  const costCar = action.payload.numberformat;
+
   return {
     ...state,
     costCar

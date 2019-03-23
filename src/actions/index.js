@@ -45,6 +45,10 @@ export const doAddCost = payload => ({
   type: actionTypes.COST,
   payload,
 });
+export const doAddBrocker = payload => ({
+  type: actionTypes.BROCKER,
+  payload,
+});
 
 export default {
   doAddAuction,
