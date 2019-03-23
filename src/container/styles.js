@@ -9,6 +9,7 @@ export const styles = theme => ({
     minWidth: '100%',
     minHeight: '100%',
 
+
     '@media (min-aspect-ratio: 16/9)': {
       height: '300%',
       top: '-100%'
@@ -34,6 +35,7 @@ export const styles = theme => ({
   root: {
     boxSizing: 'border-box',
     display: 'flex',
+    justifyContent: 'space-around',
 
     '@media (max-width: 992px)': {
       flexDirection: 'column'
@@ -46,7 +48,7 @@ export const styles = theme => ({
   step: {
     position: 'relative',
     marginTop: 70,
-    minWidth: 300,
+    minWidth: '35%',
     minHeight: '80vh'
   }
 });

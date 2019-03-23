@@ -15,6 +15,8 @@ import { useFormInput, calculta } from '../components/functions';
 {/**
  @{} + 1% к  стоимости
 */}
+
+
 function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti,  summaState, children }){
   const auction = useFormInput('auction');
 
@@ -51,11 +53,16 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti,  summaState, ch
     result = portListOdessa.map(item => item[0] === stepState.mainCraft[2] && item[1]).filter(el => el !== false);
     result = +result[0];
 
-    costTransit = stepState.mainCraft && (+stepState.mainCraft[index[0] && index[0][2]]) + 77;
+    costTransit = stepState.mainCraft && (+stepState.mainCraft[index[0] && index[0][2]]);
     summ =  +result + +costTransit
 
   }
+  const [calcInsurance, setCalcInsurance] = useState(null);
 
+  useEffect(() => {
+    const calcInsurance = Math.ceil(summaState.costCar * 0.015)
+    setCalcInsurance(calcInsurance)
+  }, [summaState.costCar])
 
   {/* <Paper>
         <Paper>
@@ -105,7 +112,7 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti,  summaState, ch
           {(stepState.mainCraft && stepState.mainCraft[2]) === undefined ? null : (stepState.mainCraft && stepState.mainCraft[2]) + ' - Ближайший порт'}
         </Typography>
         <Typography variant="subheading" color="secondary">
-          Страховка: + 77 $
+         { calcInsurance > 0 && 'Страховка:' + calcInsurance + '$'}
         </Typography>
         <Typography variant="title" color="secondary" style={{fontSize: 14}}>
             {!isNaN(summ) && summ ? 'СТОИМОСТЬ ДОСТАВКИ В ПОРТ ОДЕССА: ' + ' ' +  summ.toLocaleString() + ' $' : null}
@@ -114,7 +121,11 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti,  summaState, ch
       <div style={{display: 'flex'}}>
 
       <Typography variant="h6" color="primary" style={{margin: 'auto'}}>
-        {(summaState.costCar  && summ) && !isNaN((+summaState.costCar + +summ).toFixed(0)) ?    'ОБЩАЯ СТОИМОСТЬ ДОСТАВКИ: ' + (+summaState.costCar + +summ).toFixed(0) +'$' : null}
+        {(summaState.costCar  && summ) &&
+        !isNaN((+summaState.costCar + +summ).toFixed(0))
+        ? 'ОБЩАЯ СТОИМОСТЬ ДОСТАВКИ: '
+        + (+summaState.costCar + +summ).toFixed(0)
+        +'$' : null}
       </Typography>
       </div>
 

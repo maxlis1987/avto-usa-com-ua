@@ -151,13 +151,12 @@ componentDidUpdate(){
           }}
         /><br />
       </div>
-
       {(this.state.numberformat > 1 && this.props.enableLabel) && (
         <React.Fragment>
-          <Typography  variant="subheading" color="secondary">
+          <Typography  variant="subheading" color="secondary" style={{marginBottom: 10}}>
             {comision}$  - Комиссия аукциона
           </Typography>
-          <hr />
+
           <Typography   variant="title" color="primary">
               ИТОГО: {Math.ceil(+numberformat + comision)}$
           </Typography>

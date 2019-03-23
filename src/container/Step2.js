@@ -92,7 +92,7 @@ function Step2 ({
 
     }
 
-  }, [typeFuel, angineType, costTamojnya, yearCost, cost,stepCost]);
+  }, [typeFuel, angineType, yearCost,  costTamojnya, cost,stepCost]);
 
 
   const [brockerValue, setBrockerValue] = useState(stepState.brockerValue);

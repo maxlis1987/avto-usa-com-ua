@@ -13,7 +13,8 @@ export const styles = theme => ({
     display: 'block',
     zIndex: 10000,
     background: 'rgb(255,255,255)',
-    opacity: 0.9
+    opacity: 0.9,
+    width: '100%'
   },
   paperTitle: {
     height: 30,
@@ -25,14 +26,15 @@ export const styles = theme => ({
     color: '#ffffff',
     margin: 'auto',
     fontSize: 18
-  }
+  },
+
 });
 
 function PaperSheet (props){
   const { classes, children, background, header } = props;
 
   return (
-    <div>
+    <div className={classes.paperContainer}>
       <Paper className={classes.root} elevation={1}>
         <Paper className={classes.paperTitle} style={{ background }}>
           <Typography variant='title' className={classes.title} >{header}</Typography>
