@@ -105,7 +105,7 @@ class FormattedInputs extends React.PureComponent {
   constructor(props){
     super(props);
     this.state = {
-      numberformat: props.brocker ? props.brocker : '0',
+      numberformat: props.brocker ? props.brocker : null,
 
     };
 
@@ -119,7 +119,7 @@ class FormattedInputs extends React.PureComponent {
   };
 componentDidUpdate(){
   const { numberformat } = this.state;
-  const { enableLabel, auction, enableBrocker, onAddCostCar, onAddCostTamojnya, onAddBrocker } = this.props;
+  const { enableLabel, auction, enableBrocker, onAddCostCar, onAddCostTamojnya, onAddBrocker, costTamojnya, enableTamojnya } = this.props;
   if(enableLabel){
 
     onAddCostCar({ numberformat })
@@ -128,8 +128,9 @@ componentDidUpdate(){
   if(enableBrocker){
     onAddBrocker({ numberformat })
   }
-  console.log(+numberformat + 400)
-  onAddCostTamojnya({numberformat: +numberformat + 400 })
+  if(enableTamojnya && enableLabel){
+    onAddCostTamojnya({ numberformat })
+  }
 }
 
   render() {
@@ -156,6 +157,7 @@ componentDidUpdate(){
           <Typography  variant="subheading" color="secondary">
             {comision}$  - Комиссия аукциона
           </Typography>
+          <hr />
           <Typography   variant="title" color="primary">
               ИТОГО: {Math.ceil(+numberformat + comision)}$
           </Typography>

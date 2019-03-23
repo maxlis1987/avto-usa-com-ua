@@ -9,7 +9,7 @@ import years_data from '../data/years';
 import fuel_data from '../data/fuel';
 import engines_data from '../data/engine';
 
-import { useFormInput } from '../components/functions';
+import { useFormInput, feeString } from '../components/functions';
 import { connect } from 'react-redux';
 import { doAddTypeEngine ,doAddTypeFuel, doAddYear, doAddCost } from '../actions';
 
@@ -21,7 +21,6 @@ function Step2 ({
   step2State,
   stepState,
   cost,
-  children
 }){
   const {
     angineType,
@@ -92,7 +91,7 @@ function Step2 ({
       }
 
     }
-    console.log('step2Effect');
+
   }, [typeFuel, angineType, costTamojnya, yearCost, cost,stepCost]);
 
 
@@ -101,6 +100,23 @@ function Step2 ({
     useEffect(() => {
       setBrockerValue(stepState.brockerValue)
     }, [stepState.brockerValue]);
+
+    const [money, setMoney] = useState(null);
+
+    useEffect(() => {
+      const nds = +(costTamojnya * 0.2);
+      const fee = +(costTamojnya * 0.1);
+      let percent;
+      if(costTamojnya <= 10000){
+        percent = 0.03;}
+      else if(costTamojnya <= 20000){
+        percent = 0.04;}
+      else {percent = 0.05;}
+      const feeP = +(costTamojnya * percent);
+      const summ = Math.ceil(feeP + fee + nds + brockerValue);
+
+      setMoney( { summ, nds, fee , feeP, percent })
+    }, [costTamojnya]);
 
 
   return (
@@ -133,43 +149,18 @@ function Step2 ({
           options={years_data}
         />
 
+        <Typography  variant="title" color="inherit">
+          Брокер
+        </Typography>
+        <Input brocker={900} enableBrocker/>
         <Typography variant="title" color="secondary">
           Цена автомобиля {cost}$
         </Typography>
-        {costTamojnya > 0  && (
-          <React.Fragment>
-
-          <Typography  variant="subheading" color="secondary">
-            {Math.ceil(+((cost / 100) * 20))} $ +20% НДС
-          </Typography>
-          <Typography  variant="subheading" color="secondary">
-            {Math.ceil(+((cost / 100) * 10))} $ +10% Пошлина
-          </Typography>
-          {+cost <= 7340 ? (
-          <Typography  variant="subheading" color="secondary">
-            {Math.ceil(+((cost / 100) * 3))} $ + 3% От Пенсионный
-          </Typography>
-          ): +cost < 18350 ?  (
-          <Typography  variant="subheading" color="secondary">
-            {Math.ceil(+((cost / 100) * 4))} $ + 4% От Пенсионный
-          </Typography>
-          ) : +cost >= 20000 ? (
-          <Typography  variant="subheading" color="secondary">
-            {Math.ceil(+((cost / 100) * 5))} $ + 5% От Пенсионный
-          </Typography>
-          ) : null}
-
-          </React.Fragment>
-        )}
-        <Typography  variant="h6" color="primary">
-          Брокер  <Input brocker={900} enableBrocker/>
-        </Typography>
+        {costTamojnya > 0  && (feeString(money))}
           <hr />
         {(costTamojnya > 0 && cost > 0) && (
           <Typography  variant="h6" color="primary">
-              ОБЩИЙ ТАМОЖЕННЫЙ СБОР: {
-                Math.ceil(+cost + +((costTamojnya / 100) * 20) +  +((costTamojnya / 100) * 10) + +((costTamojnya / 100) * costTamojnya <= 10000 ? 3 : costTamojnya > 10000  && costTamojnya <= 20000 ? 4 : 5)) + brockerValue
-        }$
+              ОБЩИЙ ТАМОЖЕННЫЙ СБОР: {money.summ}$
           </Typography>
         )}
 

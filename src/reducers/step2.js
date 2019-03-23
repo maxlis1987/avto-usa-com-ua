@@ -42,7 +42,10 @@ const cost = +action.payload.cost
   }
 };
 const applyCostTamojnya = (state, action) => {
-  const costTamojnya = +action.payload.numberformat;
+  let costTamojnya = +action.payload.numberformat;
+if(costTamojnya > 0){
+  costTamojnya = costTamojnya + 400;
+}
 
   return {
     ...state,

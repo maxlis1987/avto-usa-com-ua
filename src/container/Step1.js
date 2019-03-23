@@ -71,7 +71,7 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti,  summaState, ch
         </Paper> */}
 
   return (
-    <Paper background='tomato' header='Расчет доствки авто'>
+    <Paper background='tomato' header='Расчет доставки авто'>
       {children}
       <Radio
         labelPlacement='Выберете Aукцион'
@@ -83,7 +83,7 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti,  summaState, ch
       </Typography>
 
         <label >
-          <Input enableLabel/>
+          <Input enableLabel enableTamojnya/>
         </label>
         <Typography variant="h6" color="inherit">
             Цена доставки
@@ -107,14 +107,16 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti,  summaState, ch
         <Typography variant="subheading" color="secondary">
           Страховка: + 77 $
         </Typography>
-        <Typography variant="title" color="secondary">
-            { !isNaN(summ) &&
-              'СТОИМОСТЬ ДОСТАВКИ В ПОРТ ОДЕССЫ: ' + ' ' +  summ.toLocaleString() + ' $'}
+        <Typography variant="title" color="secondary" style={{fontSize: 14}}>
+            {!isNaN(summ) && summ ? 'СТОИМОСТЬ ДОСТАВКИ В ПОРТ ОДЕССА: ' + ' ' +  summ.toLocaleString() + ' $' : null}
         </Typography>
       <hr />
-      <Typography variant="h5" color="primary">
-          ОБЩАЯ СУММА: {(summaState.costCar  && summ) && !isNaN((+summaState.costCar + +summ).toFixed(2)) ? (+summaState.costCar + +summ).toFixed(2) : null}
+      <div style={{display: 'flex'}}>
+
+      <Typography variant="h6" color="primary" style={{margin: 'auto'}}>
+        {(summaState.costCar  && summ) && !isNaN((+summaState.costCar + +summ).toFixed(0)) ?    'ОБЩАЯ СТОИМОСТЬ ДОСТАВКИ: ' + (+summaState.costCar + +summ).toFixed(0) +'$' : null}
       </Typography>
+      </div>
 
     </Paper>
 

@@ -1,4 +1,25 @@
-import { useState } from 'react';
+
+import React, { useState, Fragment } from 'react';
+import { Typography } from '@material-ui/core';
+
+ function feeString(money) {
+const {feeP, nds, fee, percent } = money;
+
+
+  return (
+    <Fragment>
+      <Typography  variant="subheading" color="secondary">
+              {Math.ceil(nds)} $ +20% НДС
+      </Typography>
+      <Typography  variant="subheading" color="secondary">
+        {Math.ceil(fee)} $ +10% Пошлина
+      </Typography>
+      <Typography  variant="subheading" color="secondary">
+        {Math.ceil(feeP)} $ + {percent}% От Пенсионный
+      </Typography>
+    </Fragment>
+  )
+}
 
 function useFormInput (initialValue){
   const [ value, setValue ] = useState(initialValue);
@@ -13,7 +34,7 @@ function useFormInput (initialValue){
   };
 }
 
-export { useFormInput };
+export { useFormInput, feeString };
 
 export function calculta(auction, purchasePrice){
   let feeA = 0,bidFee = 0,gateFee = 0;
