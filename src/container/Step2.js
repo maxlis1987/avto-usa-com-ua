@@ -53,7 +53,7 @@ function Step2 ({
 
   }, [years.value]);
   // let cost;
-  const [stepCost, setCost] = useState(cost);
+  const [stepCost, setCost] = useState(null);
 
   useEffect(() => {
     if(typeFuel !== '' && angineType > 1){
@@ -91,8 +91,8 @@ function Step2 ({
       }
 
     }
-
-  }, [typeFuel, angineType, yearCost,  costTamojnya, cost,stepCost]);
+    console.log(stepCost)
+  }, [typeFuel, angineType, yearCost,  costTamojnya, cost , stepCost]);
 
 
   const [brockerValue, setBrockerValue] = useState(stepState.brockerValue);
@@ -113,10 +113,10 @@ function Step2 ({
         percent = 0.04;}
       else {percent = 0.05;}
       const feeP = +(costTamojnya * percent);
-      const summ = Math.ceil(feeP + fee + nds + brockerValue);
+      const summ = Math.ceil(feeP + fee + nds + brockerValue + stepCost);
 
-      setMoney( { summ, nds, fee , feeP, percent })
-    }, [costTamojnya]);
+      setMoney({ summ, nds, fee , feeP, percent })
+    }, [costTamojnya, stepCost]);
 
 
   return (
@@ -170,6 +170,7 @@ function Step2 ({
 }
 const mapStateToProps = state => ({
   stepState: state.step2State,
+  cost: state.summaState.costCar,
   cost: state.summaState.costCar,
 });
 const mapDispatchToProps = dispatch => ({

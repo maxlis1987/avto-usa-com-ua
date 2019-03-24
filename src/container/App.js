@@ -40,20 +40,16 @@ function Main(props){
   const { classes } = props;
   const width = setWindowWidth();
   return (
-    <div className={classes.main}  style={{
-          flexDirection: width < 992
-          ? 'column'
-          : 'row'
-        }}>
+    <div className={classes.main} >
       <NavBar title='Расчет доставки авто'/>
       <MDBContainer className={classes.root}>
 
 
-      <div className={classes.step}>
+      <div className={classes.step} >
         <Step1 />
       </div>
 
-      <div  className={classes.step} style={{marginTop: width < 992 ? 0 : 70}}>
+      <div  className={classes.step}  >
         <Step2 />
       </div>
       </MDBContainer>

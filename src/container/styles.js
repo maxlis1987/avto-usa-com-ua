@@ -42,13 +42,14 @@ export const styles = theme => ({
     },
 
     '@media (min-width: 992px)': {
-      flexDirection: 'row'
+      flexDirection: 'row',
     },
   },
   step: {
     position: 'relative',
     marginTop: 70,
     minWidth: '35%',
-    minHeight: '80vh'
+    minHeight: '80vh',
+
   }
 });
