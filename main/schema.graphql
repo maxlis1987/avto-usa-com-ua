@@ -1,0 +1,72 @@
+type GenericResponse {
+  success: Boolean
+}
+
+type Mutation {
+  createUser(email: String, firstName: String, createdAt: String!, updatedAt: String!): User
+  updateUser(id: Int, email: String, firstName: String, createdAt: String, updatedAt: String): User
+  deleteUser(id: Int!): GenericResponse
+  createPost(dear: String, content: String, createdAt: String!, updatedAt: String!, userId: Int): Post
+  updatePost(id: Int, dear: String, content: String, createdAt: String, updatedAt: String, userId: Int): Post
+  deletePost(id: Int!): GenericResponse
+}
+
+type Post {
+  id: Int!
+  dear: String
+  content: String
+  createdAt: String!
+  updatedAt: String!
+  userId: Int
+  user: User
+}
+
+type Query {
+  users(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+  ): [User]
+  user(
+    id: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+  ): User
+  posts(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+  ): [Post]
+  post(
+    id: Int
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+  ): Post
+}
+
+# The `JSON` scalar type represents raw JSON as values.
+scalar SequelizeJSON
+
+type User {
+  id: Int!
+  email: String
+  firstName: String
+  createdAt: String!
+  updatedAt: String!
+  posts(
+    limit: Int
+    order: String
+
+    # A JSON object conforming the the shape specified in http://docs.sequelizejs.com/en/latest/docs/querying/
+    where: SequelizeJSON
+    offset: Int
+  ): [Post]
+}
