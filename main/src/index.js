@@ -47,11 +47,10 @@ const apolloServer = new ApolloServer({
         resolve(decoded.email);
       });
     });
-    console.log(user);
     return { user };
   }
 });
 
-apolloServer.listen(8080).then(({ url }) => {
+apolloServer.listen(3001).then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
 });

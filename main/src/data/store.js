@@ -16,7 +16,11 @@ const UserModel = db.define("user", {
 
 const PostModel = db.define("post", {
   title: { type: Sequelize.STRING },
-  text: { type: Sequelize.STRING }
+  text: { type: Sequelize.STRING },
+  link: { type: Sequelize.STRING },
+  createdAt:  { type: Sequelize.STRING },
+  updatedAt:  { type: Sequelize.STRING },
+  price: { type: Sequelize.NUMERIC }
 });
 
 UserModel.hasMany(PostModel);

@@ -20,29 +20,41 @@ const Mutation = {
 
   createUser: async (_, { email, first_name, last_name }) => {
     return User.create({
-      email: email,
-      first_name: first_name,
-      last_name: last_name
+      email,
+      first_name,
+      last_name
     }).then(user => {
       return user;
     });
   },
 
-  createPost: async (_, { title, text }) => {
+  createPost: async (_, { title, text, link, image_path, price }) => {
     try {
       const newPost = await Post.create({
-        title: title,
-        text: text
+        title,
+        text,
+        link,
+        image_path,
+        price
       });
       return newPost;
     } catch (e) {
       throw new AuthenticationError("pls log in");
     }
   },
-  updatePost: async (_, { id, title, text }) => {
+  updatePost: async (_, { id, title, text, link, image_path, price }) => {
 
     try {
-      const result = await Post.update({ id, title, text });
+      const result = await Post.update({ id, title, text, link, image_path, price });
+      return { ...result }
+    } catch (error) {
+      console.log('error')
+    }
+  },
+  deletePost: async (_, { id }) => {
+
+    try {
+      const result = await Post.delete({ id });
       return { ...result }
     } catch (error) {
       console.log('error')
