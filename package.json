@@ -1,39 +1,38 @@
 {
-  "name": "react",
-  "version": "0.0.0",
-  "private": true,
-  "dependencies": {
-    "@material-ui/core": "^3.9.2",
-    "babel-loader": "^8.0.5",
-    "eslint-plugin-react-hooks": "^1.5.0",
-    "mdbreact": "^4.11.0",
-    "node-sass": "^4.11.0",
-    "notistack": "^0.5.1",
-    "prop-types": "^15.7.2",
-    "react": "16.8.0",
-    "react-dom": "16.8.0",
-    "react-number-format": "^4.0.6",
-    "react-redux": "^6.0.1",
-    "react-router-dom": "^5.0.0",
-    "react-text-mask": "^5.4.3",
-    "react-video-cover": "^1.2.2",
-    "redux": "^4.0.0",
-    "redux-logger": "^3.0.6",
-    "redux-saga": "^1.0.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "devDependencies": {
-    "react-scripts": "latest"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "name": "tutorial",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@material-ui/core": "~1.5.1",
+        "mdbreact": "^4.11.0",
+        "node-sass": "^4.11.0",
+        "notistack": "^0.5.1",
+        "ra-data-json-server": "^2.8.0",
+        "@material-ui/icons": "^3.0.2",
+        "babel-loader": "^8.0.5",
+        "eslint-plugin-react-hooks": "^1.5.0",
+        "react-number-format": "^4.0.6",
+        "react-redux": "^6.0.1",
+        "react-router-dom": "^5.0.0",
+        "react-text-mask": "^5.4.3",
+        "react-video-cover": "^1.2.2",
+        "redux": "^4.0.0",
+        "redux-logger": "^3.0.6",
+        "redux-saga": "^1.0.2",
+        "react": "lasted",
+        "react-admin": "^2.0.0",
+        "react-dom": "lasted",
+        "react-scripts": "^2.0.5"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "eject": "react-scripts eject"
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie <= 11",
+        "not op_mini all"
+    ]
 }
