@@ -1,6 +1,6 @@
 export const styles = theme => ({
   video: {
-    zIndex: -100,
+    zIndex: -1000,
     position: 'fixed',
     right: 0,
     bottom: 0,
@@ -30,8 +30,9 @@ export const styles = theme => ({
   main: {
     zIndex: 10,
     position: 'relative',
-    display: 'block'
-  },
+    display: 'block',
+    margin: 0 , padding: 0  },
+
   root: {
     boxSizing: 'border-box',
     display: 'flex',
@@ -44,12 +45,12 @@ export const styles = theme => ({
     '@media (min-width: 992px)': {
       flexDirection: 'row',
     },
+
   },
   step: {
     position: 'relative',
-    marginTop: 70,
+    margin: 0 , padding: 0,
     minWidth: '35%',
-    minHeight: '80vh',
 
   }
 });

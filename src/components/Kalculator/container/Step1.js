@@ -19,11 +19,14 @@ import { useFormInput, calculta } from '../components/functions';
 
 function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti,  summaState, children }){
   const auction = useFormInput('auction');
-
+useEffect(() => {
+  document.querySelector('#root > div > div > div > main > div > div > div').style.backgroundColor = '#FFFFFF'
+}, [])
 
   useEffect(
     () => {
       onAddAuction({ auction: auction.value });
+
     },
     [ auction.value ],
   );
@@ -85,14 +88,14 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti,  summaState, ch
         {...auction}
         options={auction_data}
       />
-      <Typography variant="h6" color="inherit">
+      <Typography variant="title" color="inherit">
           Цена лота
       </Typography>
 
         <label >
           <Input enableLabel enableTamojnya/>
         </label>
-        <Typography variant="h6" color="inherit">
+        <Typography variant="title" color="inherit">
             Цена доставки
         </Typography>
 
@@ -120,7 +123,7 @@ function Step1 ({ stepState, onAddAuction, onAddSize, onAddCyti,  summaState, ch
       <hr />
       <div style={{display: 'flex'}}>
 
-      <Typography variant="h6" color="primary" style={{margin: 'auto'}}>
+      <Typography variant="title" color="primary" style={{margin: 'auto'}}>
         {(summaState.costCar  && summ) &&
         !isNaN((+summaState.costCar + +summ).toFixed(0))
         ? 'ОБЩАЯ СТОИМОСТЬ ДОСТАВКИ: '

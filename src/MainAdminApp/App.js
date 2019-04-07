@@ -1,33 +1,19 @@
 import React from 'react';
-import PostIcon from '@material-ui/icons/Book';
-import UserIcon from '@material-ui/icons/Group';
-import { Admin, Resource, ListGuesser } from 'react-admin';
-import jsonServerProvider from 'ra-data-json-server';
+import {Admin, Resource , Layout, Sidebar } from 'react-admin';
 
-import { PostList, PostEdit, PostCreate, PostShow } from './posts';
-import { UserList } from './users';
 import Dashboard from './Dashboard';
-import authProvider from './authProvider';
+import { PostList, PostShow } from './DataCars';
+import dataProvider from './dataProvider';
 
-const App = () => {
 
 
-return (
+export default () => (
     <Admin
-        dataProvider={jsonServerProvider('http://jsonplaceholder.typicode.com')}
-        authProvider={authProvider}
-        dashboard={() => <Dashboard />}
+
+      dataProvider={dataProvider}
+      dashboard={() => <Dashboard />}
+
     >
-        <Resource
-            name="posts"
-            icon={PostIcon}
-            list={PostList}
-            edit={PostEdit}
-            create={PostCreate}
-            show={PostShow}
-        />
-        <Resource name="users" icon={UserIcon} list={UserList} />
-        <Resource name="comments" list={ListGuesser} />
+      <Resource name={"Cars"} list={PostList} show={PostShow}/>
     </Admin>
-)};
-export default App;
+)

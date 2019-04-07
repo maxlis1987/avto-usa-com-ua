@@ -41,7 +41,7 @@ function Main(props){
   const width = setWindowWidth();
   return (
     <div className={classes.main} >
-      <NavBar title='Расчет доставки авто'/>
+      {/* <NavBar title='Расчет доставки авто'/> */}
       <MDBContainer className={classes.root}>
 
 

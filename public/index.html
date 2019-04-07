@@ -28,12 +28,19 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
-     <!-- <script>
+     <script>
+
       window.onload = (e) => {
-        document.querySelector('#forsage').play()
+        setTimeout(() =>{
+          document.querySelector('#forsage').play()
+          document.querySelector('#root > div > div > div > main > div > div > div').style.backgroundColor = '#FFFFFF';
+        }, 1000);
+	// document.querySelectorAll('#root > div > div > div > main > div > div > div > &').map(item => item.style.borderRadius = '25%')
+
+
 
 
       }
-    </script> -->
+    </script>
   </body>
 </html>

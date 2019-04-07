@@ -1,4 +1,4 @@
-import { combineReducers } from '../../../../../../.cache/typescript/2.9/node_modules/@types/react-redux/node_modules/redux';
+import { combineReducers } from 'redux';
 import step1Reducer from './step1';
 import step2Reducer from './step2';
 import summaReducer from './summa'

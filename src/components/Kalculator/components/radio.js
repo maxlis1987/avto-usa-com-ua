@@ -11,7 +11,7 @@ function RadioGroupComponent (props){
 
   return (
     <FormControl component='fieldset'>
-    <Typography variant="h6" color="inherit">
+    <Typography variant="title" color="inherit">
       {labelPlacement}
     </Typography>
 

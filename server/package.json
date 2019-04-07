@@ -7,8 +7,8 @@
     "start": "nodemon --exec node src/index.js",
     "generate": "nodemon -r esm src/data/store.js"
   },
-
   "dependencies": {
+    "apollo-client": "^2.5.1",
     "apollo-server": "^2.4.6",
     "apollo-server-express": "^2.4.6",
     "casual": "^1.6.0",
