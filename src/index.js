@@ -1,7 +1,7 @@
+import 'react-app-polyfill/ie11';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './Admin/App';
 import './index.css';
-import App from './MainAdminApp/App';
-import registerServiceWorker from './registerServiceWorker';
-ReactDOM.render(<App className='App'/>, document.getElementById('root'));
-registerServiceWorker();
+
+ReactDOM.render(<App />, document.getElementById('root'));
