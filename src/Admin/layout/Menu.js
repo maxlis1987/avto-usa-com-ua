@@ -50,6 +50,7 @@ class Menu extends Component {
                     leftIcon={<products.icon />}
                     onClick={onMenuClick}
                 />
+
                 {/*  <SubMenu
                     handleToggle={() => this.handleToggle('menuSales')}
                     isOpen={this.state.menuSales}

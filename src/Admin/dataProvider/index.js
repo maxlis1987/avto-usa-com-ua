@@ -5,7 +5,7 @@ import  {_schema as schema} from './schema.graphql'
 const getGqlResource = resource => {
     switch (resource) {
       case 'posts':
-        return 'Product';
+        return 'posts';
         case 'customers':
             return 'Customer';
 
@@ -74,7 +74,39 @@ const customBuildQuery = introspectionResults => {
 
             }
           }
-
+          if(type === 'CREATE'){
+            return {
+              mutation: gql`
+                mutation createPost(
+                  $id: ID!
+                  $title: String,
+                  $describtion: String,
+                  $link: String,
+                  $price: Int!,
+                  $image_path: String,
+                  $vincode: String
+                  ) {
+                  createPost(
+                    id: $id
+                    title: $title
+                    describtion: $describtion
+                    link: $link
+                    price: $price
+                    image_path: $image_path
+                    vincode: $vincode
+                    )
+                  }`,
+                  variables: {
+                    id: params.id,
+                    title: params.title,
+                    describtion: params.describtion,
+                    link: params.link,
+                    price: params.price,
+                    image_path: params.image_path,
+                    vincode: params.vincode,
+                  }
+              }
+            }
         return buildQuery(type, resource, params);
         }
     }

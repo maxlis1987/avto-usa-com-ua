@@ -17,8 +17,8 @@ const getGqlResource = resource => {
         // case 'products':
         //     return 'Product';
 
-        // case 'reviews':
-        //     return 'Review';
+        case 'reviews':
+            return 'Review';
 
         // case 'invoices':
         //     return 'Invoice';

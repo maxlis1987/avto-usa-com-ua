@@ -2,9 +2,7 @@ import React from 'react';
 import {
     Create,
     FormTab,
-    NumberInput,
-    ReferenceInput,
-    SelectInput,
+
     TabbedForm,
     TextInput,
     required,
@@ -27,7 +25,7 @@ const ProductCreate = ({ classes, ...props }) => (
             <FormTab label="resources.products.tabs.image">
                 <TextInput
                     autoFocus
-                    source="image"
+                    source="image_path"
                     options={{ fullWidth: true }}
                     validate={required()}
                 />
@@ -37,37 +35,37 @@ const ProductCreate = ({ classes, ...props }) => (
                     validate={required()}
                 />
             </FormTab>
-            <FormTab label="resources.products.tabs.details" path="details">
+            <FormTab label="resources.products.tabs.details">
                 <TextInput source="reference" validate={required()} />
-                <NumberInput
+                <TextInput
                     source="price"
                     validate={required()}
                     className={classes.price}
                 />
-                <NumberInput
+                <TextInput
                     source="vincode"
                     validate={required()}
                     className={classes.width}
                     formClassName={classes.widthFormGroup}
                 />
-                <NumberInput
+                <TextInput
                     source="link"
                     validate={required()}
                     className={classes.height}
                     formClassName={classes.heightFormGroup}
                 />
-                <ReferenceInput
+              {/*   <ReferenceInput
                     source="userId"
                     reference="posts"
                     allowEmpty
                 >
                     <SelectInput source="name" />
                 </ReferenceInput>
-                <NumberInput
+                <TextInput
                     source="createdAt"
                     validate={required()}
                     className={classes.stock}
-                />
+                /> */}
             </FormTab>
             <FormTab
                 label="resources.products.tabs.description"

@@ -26,7 +26,7 @@ const CategoryEdit = props => (
             <TextInput source="name" />
             <ReferenceManyField
                 reference="products"
-                target="category_id"
+                target="userId"
                 label="resources.categories.fields.products"
                 perPage={5}
             >

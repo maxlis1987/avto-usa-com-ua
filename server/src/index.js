@@ -37,7 +37,7 @@ const resolvers = {
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => {
+  // context: ({ req }) => {
     // const token = req.headers.authorization;
     // const user = new Promise((resolve, reject) => {
     //   jwt.verify(token, getKey, options, (err, decoded) => {
@@ -48,7 +48,7 @@ const apolloServer = new ApolloServer({
     //   });
     // });
     // return { user };
-  }
+  // }
 });
 
 apolloServer.listen(4000).then(({ url }) => {

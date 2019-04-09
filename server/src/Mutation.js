@@ -28,21 +28,19 @@ const Mutation = {
     });
   },
 
-  createPost: async (_, { title, describtion, link, image_path, price, vincode }) => {
-    try {
-      const newPost = await Post.create({
-        title,
-        describtion,
-        link,
-        image_path,
-        price,
-        vincode
-      });
-      return newPost;
-    } catch (e) {
-      throw new AuthenticationError("pls log in");
-    }
+  createPost: async (_, { title, describtion, link, image_path, price, vincode }) =>  {
+    return Post.create({
+      title,
+      describtion,
+      link,
+      image_path,
+      price,
+      vincode
+    }).then(post => {
+      return post;
+    });
   },
+
   updatePost: async (_, { id, title, describtion, link, image_path, price, vincode }) => {
 
     try {
