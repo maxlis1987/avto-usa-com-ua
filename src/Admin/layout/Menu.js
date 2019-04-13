@@ -144,6 +144,7 @@ class Menu extends Component {
                     }
                     medium={null}
                 />*/}
+
                 <Responsive
                     small={logout}
                     medium={null} // Pass null to render nothing on larger devices

@@ -1,9 +1,10 @@
 import buildApolloClient, { buildQuery as buildQueryFactory } from 'ra-data-graphql-simple';
-// import { DELETE, GET_LIST } from 'ra-core';
+// import { DELETE, GET_LIST, GET_ONE } from 'ra-core';
 import gql from 'graphql-tag';
 import {
   CREATE,
-  GET_LIST
+  GET_LIST,
+  GET_ONE
 } from 'ra-core';
 import  { _schema as schema } from './schema.graphql'
 const getGqlResource = resource => {
@@ -22,8 +23,8 @@ const getGqlResource = resource => {
         case 'products':
             return 'Product';
 
-        case 'reviews':
-            return 'Review';
+        case 'post':
+            return 'Post';
 
         case 'invoices':
             return 'Invoice';
@@ -32,7 +33,13 @@ const getGqlResource = resource => {
             throw new Error(`Unknown resource ${resource}`);
     }
 };
-
+const GET_POST_BY_ID = gql`
+  query post($id: ID!){
+    post(id: $id){
+      title
+    }
+  }
+`
 const customBuildQuery = introspectionResults => {
 
     const buildQuery = buildQueryFactory(introspectionResults);
@@ -64,9 +71,14 @@ const customBuildQuery = introspectionResults => {
                   title
                   link
                   image_path
-                  describtion
+                  image_path_1
+                  image_path_2
+                  image_path_3
+                  image_path_4
+                  description
                   vincode
                   userId
+                  price
                 }
               }`,
                variables:  params, // params = { id: ... }
@@ -77,56 +89,85 @@ const customBuildQuery = introspectionResults => {
 
             }
           }
-          if(type === CREATE){
+          if(type === GET_ONE){
+
             return {
-              mutation: gql`
-              mutation createPost(
-                $title: String,
-                $describtion: String,
-                $link: String,
-                $price: String,
-                $image_path: String,
-                $vincode: String,
-                $userId: String
-              ) {
-                createPost(
-                  title: $title,
-                  describtion: $describtion,
-                  link: $link,
-                  price: $price,
-                  image_path: $image_path,
-                  vincode: $vincode,
-                  userId: $userId
-                ) {
-                  id,
-                  title,
-                  describtion,
-                  link,
-                  price,
-                  image_path,
-                  vincode,
-                  userId
-                }
-              }`,
-              options: (params) => ({
-                variables: {
-                  title: params.title,
-                  describtion: params.describtion,
-                  link: params.link,
-                  price: params.price,
-                  image_path: params.image_path,
-                  vincode: params.vincode,
-                  userId: params.userId,
+              query: gql`
+                query post($id: ID!){
+                  post(id: $id){
+                    id
+                    title
+                    link
+                    image_path
+                    image_path_1
+                    image_path_2
+                    image_path_3
+                    image_path_4
+                    description
+                    vincode
+                    price
 
-                },
-              }),
+                  }
+                }`,
+                variables: params,
 
-              parseResponse: ({ data }) => {
-                console.log(data)
-                return data
-                }
+                  parseResponse: response => {
+                    console.log(response.data.post)
+                  return { data: response.data.post }
+                  },
+
               }
             }
+          // if(type === CREATE){
+          //   return {
+          //     mutation: gql`
+          //     mutation createPost(
+          //       $title: String,
+          //       $describtion: String,
+          //       $link: String,
+          //       $price: String,
+          //       $image_path: String,
+          //       $vincode: String,
+          //       $userId: String
+          //     ) {
+          //       createPost(
+          //         title: $title,
+          //         describtion: $describtion,
+          //         link: $link,
+          //         price: $price,
+          //         image_path: $image_path,
+          //         vincode: $vincode,
+          //         userId: $userId
+          //       ) {
+          //         id,
+          //         title,
+          //         describtion,
+          //         link,
+          //         price,
+          //         image_path,
+          //         vincode,
+          //         userId
+          //       }
+          //     }`,
+          //     options: (params) => ({
+          //       variables: {
+          //         title: params.title,
+          //         describtion: params.describtion,
+          //         link: params.link,
+          //         price: params.price,
+          //         image_path: params.image_path,
+          //         vincode: params.vincode,
+          //         userId: params.userId,
+
+          //       },
+          //     }),
+
+          //     parseResponse: ({ data }) => {
+          //       console.log(data)
+          //       return data
+          //       }
+          //     }
+          //   }
 
         return buildQuery(type, resource, params);
         }

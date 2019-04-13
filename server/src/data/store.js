@@ -22,6 +22,11 @@ const PostModel = db.define("post", {
   price: { type: Sequelize.STRING },
   vincode: { type: Sequelize.STRING },
   image_path: { type: Sequelize.STRING },
+  image_path_1: { type: Sequelize.STRING },
+  image_path_2: { type: Sequelize.STRING },
+  image_path_3: { type: Sequelize.STRING },
+  image_path_4: { type: Sequelize.STRING }
+
 });
 
 UserModel.hasMany(PostModel);

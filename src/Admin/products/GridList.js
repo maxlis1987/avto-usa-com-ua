@@ -3,6 +3,7 @@ import compose from 'recompose/compose';
 import MuiGridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 import { Link } from 'react-router-dom';
@@ -27,11 +28,17 @@ const styles = theme => ({
     },
     price: {
         display: 'inline',
-        fontSize: '1em',
+        fontSize: '2em',
+        color: 'tomato',
     },
     link: {
         color: '#fff',
     },
+    titleBar: {
+      color: 'silverblue',
+      fontSize: '1em',
+
+    }
 });
 
 const getColsForWidth = width => {
@@ -80,10 +87,9 @@ return (
                     <img src={data[id].image_path} alt="" />
                     <GridListTileBar
                         className={classes.tileBar}
-                        title={data[id].title}
+                        title={<span className={classes.titleBar}>{data[id].title}</span>}
                         subtitle={
-                            <span>
-                                {data[id].width}x{data[id].height},{' '}
+                          <span style={{color: 'tomato'}}>
                                 <NumberField
                                     className={classes.price}
                                     source="price"
@@ -94,6 +100,7 @@ return (
                                         currency: 'USD',
                                     }}
                                 />
+                                $
                             </span>
                         }
                     />

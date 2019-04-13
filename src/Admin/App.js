@@ -74,12 +74,17 @@ class App extends Component {
                 locale="en"
                 i18nProvider={i18nProvider}
             >
-
-                <Resource name="posts" {...products} />
+                <Resource name="posts"
+                create={products.create}
+                list={products.list}
+                edit={products.edit}
+                icon={products.icon}
+                show={products.show}
+                />
             </Admin>
         );
     }
-}
+  }
 
 export default App;
 {/* <Resource name="customers" {...visitors} />

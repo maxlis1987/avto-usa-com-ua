@@ -22,6 +22,7 @@ export const styles = {
     widthFormGroup: { display: 'inline-block' },
     height: { width: '5em' },
     heightFormGroup: { display: 'inline-block', marginLeft: 32 },
+    delete: {display: 'none'}
 };
 
 const ADD_IMAGE = gql`
@@ -31,6 +32,10 @@ const ADD_IMAGE = gql`
       $link: String,
       $price: String,
       $image_path: String,
+      $image_path_1: String,
+      $image_path_2: String,
+      $image_path_3: String,
+      $image_path_4: String,
       $vincode: String,
       $userId: String
       ) {
@@ -40,6 +45,10 @@ const ADD_IMAGE = gql`
       link: $link,
       price: $price,
       image_path: $image_path,
+      image_path_1: $image_path_1,
+      image_path_2: $image_path_2,
+      image_path_3: $image_path_3,
+      image_path_4: $image_path_4,
       vincode: $vincode,
       userId: $userId
       ) {
@@ -48,12 +57,22 @@ const ADD_IMAGE = gql`
       link,
       price,
       image_path,
+      image_path_1,
+      image_path_2,
+      image_path_3,
+      image_path_4,
       vincode,
       userId
     }
 }`;
 
-const ApproveButton = ({ title, image_path, price, vincode, link, userId, description }) => {
+const ApproveButton = ({
+  title,
+  image_path,
+  image_path_1,
+  image_path_2,
+  image_path_3,
+  image_path_4, price, vincode, link, userId, description }) => {
 
   return (
       <Mutation
@@ -67,6 +86,10 @@ const ApproveButton = ({ title, image_path, price, vincode, link, userId, descri
                 variables: {
                   title,
                   image_path,
+                  image_path_1,
+                  image_path_2,
+                  image_path_3,
+                  image_path_4,
                   price,
                   vincode,
                   link,
@@ -85,6 +108,10 @@ const ApproveButton = ({ title, image_path, price, vincode, link, userId, descri
 const ProductCreate = ({ classes, ...props }) => {
   const title = useFormInput('');
   const image_path = useFormInput('');
+  const image_path_1 = useFormInput('');
+  const image_path_2 = useFormInput('');
+  const image_path_3 = useFormInput('');
+  const image_path_4 = useFormInput('');
   const price = useFormInput('');
   const vincode = useFormInput('');
   const link = useFormInput('');
@@ -93,6 +120,10 @@ const ProductCreate = ({ classes, ...props }) => {
 
   const payload = {
     image_path: image_path.value,
+    image_path_1: image_path_1.value,
+    image_path_2: image_path_2.value,
+    image_path_3: image_path_3.value,
+    image_path_4: image_path_4.value,
     title: title.value,
     price: price.value,
     vincode: vincode.value,
@@ -112,6 +143,34 @@ return (
                     autoFocus
                     {...image_path}
                     source="image_path"
+                    options={{ fullWidth: true }}
+                    validate={required()}
+                />
+                <TextInput
+                    autoFocus
+                    {...image_path_1}
+                    source="image_path_1"
+                    options={{ fullWidth: true }}
+                    validate={required()}
+                />
+                <TextInput
+                    autoFocus
+                    {...image_path_2}
+                    source="image_path_2"
+                    options={{ fullWidth: true }}
+                    validate={required()}
+                />
+                <TextInput
+                    autoFocus
+                    {...image_path_3}
+                    source="image_path_3"
+                    options={{ fullWidth: true }}
+                    validate={required()}
+                />
+                <TextInput
+                    autoFocus
+                    {...image_path_4}
+                    source="image_path_4"
                     options={{ fullWidth: true }}
                     validate={required()}
                 />
