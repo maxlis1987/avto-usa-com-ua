@@ -1,5 +1,5 @@
 {
-    "name": "demo",
+    "name": "calculator",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -36,7 +36,7 @@
         "build": "react-scripts build",
         "eject": "react-scripts eject"
     },
-    "homepage": "https://marmelab.com/react-admin-demo",
+
     "browserslist": [
         ">0.2%",
         "not dead",
