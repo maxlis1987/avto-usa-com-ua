@@ -1,7 +1,11 @@
 import buildApolloClient, { buildQuery as buildQueryFactory } from 'ra-data-graphql-simple';
 // import { DELETE, GET_LIST } from 'ra-core';
 import gql from 'graphql-tag';
-import  {_schema as schema} from './schema.graphql'
+import {
+  CREATE,
+  GET_LIST
+} from 'ra-core';
+import  { _schema as schema } from './schema.graphql'
 const getGqlResource = resource => {
     switch (resource) {
       case 'posts':
@@ -51,8 +55,7 @@ const customBuildQuery = introspectionResults => {
         //         }
         //     }
         // }
-        if(type === 'GET_LIST'){
-
+        if(type === GET_LIST){
           return {
             query: gql`
               query {
@@ -74,39 +77,57 @@ const customBuildQuery = introspectionResults => {
 
             }
           }
-          if(type === 'CREATE'){
+          if(type === CREATE){
             return {
               mutation: gql`
-                mutation createPost(
-                  $id: ID!
-                  $title: String,
-                  $describtion: String,
-                  $link: String,
-                  $price: Int!,
-                  $image_path: String,
-                  $vincode: String
-                  ) {
-                  createPost(
-                    id: $id
-                    title: $title
-                    describtion: $describtion
-                    link: $link
-                    price: $price
-                    image_path: $image_path
-                    vincode: $vincode
-                    )
-                  }`,
-                  variables: {
-                    id: params.id,
-                    title: params.title,
-                    describtion: params.describtion,
-                    link: params.link,
-                    price: params.price,
-                    image_path: params.image_path,
-                    vincode: params.vincode,
-                  }
+              mutation createPost(
+                $title: String,
+                $describtion: String,
+                $link: String,
+                $price: String,
+                $image_path: String,
+                $vincode: String,
+                $userId: String
+              ) {
+                createPost(
+                  title: $title,
+                  describtion: $describtion,
+                  link: $link,
+                  price: $price,
+                  image_path: $image_path,
+                  vincode: $vincode,
+                  userId: $userId
+                ) {
+                  id,
+                  title,
+                  describtion,
+                  link,
+                  price,
+                  image_path,
+                  vincode,
+                  userId
+                }
+              }`,
+              options: (params) => ({
+                variables: {
+                  title: params.title,
+                  describtion: params.describtion,
+                  link: params.link,
+                  price: params.price,
+                  image_path: params.image_path,
+                  vincode: params.vincode,
+                  userId: params.userId,
+
+                },
+              }),
+
+              parseResponse: ({ data }) => {
+                console.log(data)
+                return data
+                }
               }
             }
+
         return buildQuery(type, resource, params);
         }
     }
@@ -117,11 +138,9 @@ export default () => {
         clientOptions: {
             uri: 'http://localhost:4000/graphql',
             headers: {
-              authorization: `Bearer ${
-                process.env.REACT_APP_DATA_PROVIDER
-              }`,
+              authorization: localStorage.getItem('token'),
             },
-        },
+          },
         introspection: { schema },
         buildQuery: customBuildQuery
     }).then(dataProvider => (type, resource, params) =>

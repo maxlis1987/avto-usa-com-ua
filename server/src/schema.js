@@ -9,8 +9,24 @@ const typeDefs = gql`
 
   type Mutation {
     createUser(email: String!, first_name: String!, last_name: String): User!
-    createPost(title: String, describtion: String, link: String, price: Int, image_path: String, vincode: String): Post!
-    updatePost(id: Int!, title: String, link: String, price: Int!, describtion: String, image_path: String, vincode: String): Post!
+    createPost(
+      title: String,
+      description: String,
+      link: String,
+      price: String,
+      image_path: String,
+      vincode: String,
+      userId: String
+      ): Post!
+    updatePost(
+      id: Int!,
+      title: String,
+      link: String,
+      price: String,
+      description: String,
+      image_path: String,
+      vincode: String
+      ): Post!
     deletePost(id: Int!): Post!
 
   }
@@ -27,9 +43,9 @@ const typeDefs = gql`
     id: ID!
     vincode: String
     title: String
-    describtion: String
+    description: String
     link: String
-    price: Int
+    price: String
     image_path: String
     createdAt: String
     updatedAt: String

@@ -28,23 +28,29 @@ const Mutation = {
     });
   },
 
-  createPost: async (_, { title, describtion, link, image_path, price, vincode }) =>  {
-    return Post.create({
-      title,
-      describtion,
-      link,
-      image_path,
-      price,
-      vincode
-    }).then(post => {
-      return post;
-    });
+  createPost: async (_, { title, description, link, image_path, price, vincode, userId }) =>  {
+    try {
+      const result = await Post.create({
+        title,
+        description,
+        link,
+        image_path,
+        price,
+        vincode,
+        userId
+      });
+
+      return { ...result }
+    }
+    catch (error) {
+      console.log('error', error)
+    }
   },
 
-  updatePost: async (_, { id, title, describtion, link, image_path, price, vincode }) => {
+  updatePost: async (_, { id, title, description, link, image_path, price, vincode }) => {
 
     try {
-      const result = await Post.update({ id, title, describtion, link, image_path, price, vincode });
+      const result = await Post.update({ id, title, description, link, image_path, price, vincode });
       return { ...result }
     } catch (error) {
       console.log('error')

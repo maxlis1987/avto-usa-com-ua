@@ -45,7 +45,7 @@ class Menu extends Component {
                 <MenuItemLink
                     to={`/products`}
                     primaryText={translate(`resources.products.name`, {
-                        smart_count: 2,
+                        smart_count:  1,
                     })}
                     leftIcon={<products.icon />}
                     onClick={onMenuClick}

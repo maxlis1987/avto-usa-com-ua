@@ -6,12 +6,14 @@ import {
     TabbedForm,
     TextInput,
     required,
-    Toolbar
+    Toolbar,
+    FlatButton,
+
 } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
 import RichTextInput from 'ra-input-rich-text';
 import useFormInput from './Network/onChange';
-import { Mutation } from 'react-apollo';
+import { Mutation } from 'react-apollo'
 import gql from "graphql-tag";
 export const styles = {
     stock: { width: '5em' },
@@ -25,7 +27,7 @@ export const styles = {
 const ADD_IMAGE = gql`
   mutation createPost(
       $title: String,
-      $describtion: String,
+      $description: String,
       $link: String,
       $price: String,
       $image_path: String,
@@ -34,16 +36,15 @@ const ADD_IMAGE = gql`
       ) {
       createPost(
       title: $title,
-      describtion: $describtion,
+      description: $description,
       link: $link,
       price: $price,
       image_path: $image_path,
       vincode: $vincode,
       userId: $userId
       ) {
-      id,
       title,
-      describtion,
+      description,
       link,
       price,
       image_path,
@@ -52,7 +53,34 @@ const ADD_IMAGE = gql`
     }
 }`;
 
+const ApproveButton = ({ title, image_path, price, vincode, link, userId, description }) => {
 
+  return (
+      <Mutation
+          type="CREATE"
+          resource="products"
+          mutation={ADD_IMAGE}
+      >
+          {(createPost, { data }) => (
+            <SaveButton label="Save" onClick={e => {
+              createPost({
+                variables: {
+                  title,
+                  image_path,
+                  price,
+                  vincode,
+                  link,
+                  userId,
+                  description
+                }
+            })
+
+            return data
+          }} />
+          )}
+      </Mutation>
+  );
+}
 
 const ProductCreate = ({ classes, ...props }) => {
   const title = useFormInput('');
@@ -63,25 +91,21 @@ const ProductCreate = ({ classes, ...props }) => {
   const userId = useFormInput('');
   const description = useFormInput('');
 
+  const payload = {
+    image_path: image_path.value,
+    title: title.value,
+    price: price.value,
+    vincode: vincode.value,
+    link: link.value,
+    userId: userId.value,
+    description: description.value
+  }
 
 
 return (
     <Create {...props}>
-    <Mutation mutation={ADD_IMAGE}>
-    {(createPost, { data }) => (
-        <TabbedForm toolbar={<button onClick={e => {
-          createPost({
-            variables: {
-              image_path: image_path.value,
-              title: title.value,
-              price: price.value,
-              vincode: vincode.value,
-              link: link.value,
-              userId: userId.value,
-              description: description.value
-            }
-          });
-        }} >Save</button>}>
+
+        <TabbedForm toolbar={<ApproveButton {...payload} />}>
 
             <FormTab label="resources.products.tabs.image">
                 <TextInput
@@ -121,34 +145,21 @@ return (
                     formClassName={classes.heightFormGroup}
                 />
                 <TextInput
-                {...userId}
+                    {...userId}
                     source="userId"
                     validate={required()}
                     className={classes.height}
                     formClassName={classes.heightFormGroup}
                 />
-              {/*   <ReferenceInput
-                    source="userId"
-                    reference="posts"
-                    allowEmpty
-                >
-                    <SelectInput source="name" />
-                </ReferenceInput>
-                <TextInput
-                    source="createdAt"
-                    validate={required()}
-                    className={classes.stock}
-                /> */}
             </FormTab>
-            <FormTab
-                label="resources.products.tabs.description"
-                path="description"
-            >
-                <TextInput  {...description} source="description" addLabel={false} />
+                <FormTab
+                    label="resources.products.tabs.description"
+                    path="description"
+                >
+                <textarea rows={15} cols={15}  {...description} source="description" addLabel={true} />
             </FormTab>
         </TabbedForm>
-      )}
-        </Mutation>
+
     </Create>
 );
 }
