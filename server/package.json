@@ -4,10 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec node src/index.js",
-    "generate": "nodemon -r esm src/data/store.js"
+    "start": "node src/index.js"
   },
-  "proxy": "http://localhost:4000/graphql",
+
   "dependencies": {
     "apollo-client": "^2.5.1",
     "apollo-server": "^2.4.6",

@@ -177,7 +177,7 @@ export default () => {
 
     return buildApolloClient({
         clientOptions: {
-            uri: 'http://localhost:4000/graphql',
+            uri: 'http://localhost:8080/graphql',
             headers: {
               authorization: localStorage.getItem('token'),
             },
