@@ -29,16 +29,19 @@ import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
 import Poster from './Poster';
 import { styles as createStyles } from './Create';
-console.log(createStyles)
+
 const ProductTitle = ({ record }) => <span>Poster #{record.reference}</span>;
 
-const PostShowActions = ({ basePath, data, resource }) => (
+const PostShowActions = ({ basePath, data, resource }) => {
+  const isLogin = window.sessionStorage.getItem('admin');
+
+return (
   <Toolbar>
-      <DeleteButton basePath={basePath} record={data} style={createStyles.delete}/>
+      <DeleteButton basePath={basePath} record={data} style={isLogin !== 'isLogin' ? createStyles.delete : null}/>
       <SaveButton basePath={basePath} record={data} style={createStyles.delete}/>
   </Toolbar>
 );
-
+}
 const styles = {
     ...createStyles,
     comment: {

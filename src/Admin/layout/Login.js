@@ -77,13 +77,17 @@ const renderInput = ({
 );
 
 class Login extends Component {
-    login = auth =>
-        this.props.userLogin(
-            auth,
-            this.props.location.state
-                ? this.props.location.state.nextPathname
-                : '/'
-        );
+    login = auth =>{
+      const { username, password } = auth;
+      console.log(username, password)
+      if(username == 'admin' && password == 'admin12345'){
+        window.sessionStorage.setItem('admin', 'isLogin');
+        return window.location.href =  '/'
+      }
+      window.sessionStorage.clear()
+      return window.location.href =  '/'
+}
+
 
     render() {
         const { classes, handleSubmit, isLoading, translate } = this.props;
@@ -102,6 +106,7 @@ class Login extends Component {
                                 <Field
                                     autoFocus
                                     name="username"
+
                                     component={renderInput}
                                     label={translate('ra.auth.username')}
                                     disabled={isLoading}

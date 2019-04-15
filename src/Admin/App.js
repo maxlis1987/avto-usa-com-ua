@@ -59,7 +59,7 @@ class App extends Component {
                 </div>
             );
         }
-
+       const admin = window.sessionStorage.getItem('admin')
         return (
             <Admin
                 title=""
@@ -67,15 +67,15 @@ class App extends Component {
                 customReducers={{ theme: themeReducer }}
                 customSagas={sagas}
             //  customRoutes={customRoutes}
-            //    authProvider={authProvider}
+               //  authProvider={authProvider}
              //   dashboard={Dashboard}
-            //  loginPage={Login}
+                loginPage={Login}
                 appLayout={Layout}
                 locale="en"
                 i18nProvider={i18nProvider}
             >
                 <Resource name="posts"
-                create={products.create}
+                create={admin === 'isLogin' ? products.create : false}
                 list={products.list}
                 edit={products.edit}
                 icon={products.icon}

@@ -11,23 +11,23 @@ const getGqlResource = resource => {
     switch (resource) {
       case 'posts':
         return 'posts';
-        case 'customers':
-            return 'Customer';
+        // case 'customers':
+        //     return 'Customer';
 
-        case 'categories':
-            return 'Category';
+        // case 'categories':
+        //     return 'Category';
 
-        case 'commands':
-            return 'Command';
+        // case 'commands':
+        //     return 'Command';
 
-        case 'products':
-            return 'Product';
+        // case 'products':
+        //     return 'Product';
 
         case 'post':
             return 'Post';
 
-        case 'invoices':
-            return 'Invoice';
+        // case 'invoices':
+        //     return 'Invoice';
 
         default:
             throw new Error(`Unknown resource ${resource}`);

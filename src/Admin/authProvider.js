@@ -3,6 +3,7 @@ import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_CHECK, AUTH_ERROR } from 'react-admin';
 export default (type, params) => {
     if (type === AUTH_LOGIN) {
         const { username } = params;
+
         localStorage.setItem('username', username);
         // accept all username/password combinations
         return Promise.resolve();

@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { withStyles } from '@material-ui/core/styles';
 
-import Logo from './Logo';
+// import Logo from './Logo';
 
 const styles = {
     title: {
@@ -21,22 +21,22 @@ const styles = {
 const CustomUserMenu = translate(({ translate, ...props }) => (
     <UserMenu {...props}>
         <MenuItemLink
-            to="/configuration"
-            primaryText={translate('pos.configuration')}
+            to="/login"
+            primaryText={translate('login')}
             leftIcon={<SettingsIcon />}
         />
     </UserMenu>
 ));
-// userMenu={<CustomUserMenu />}
+// userMenu={<CustomUserMenu />}  <Logo />
 const CustomAppBar = ({ classes, ...props }) => (
-    <AppBar {...props} >
+    <AppBar  userMenu={<CustomUserMenu />} {...props} >
         <Typography
             variant="title"
             color="inherit"
             className={classes.title}
             id="react-admin-title"
         />
-        <Logo />
+
         <span className={classes.spacer} />
     </AppBar>
 );

@@ -42,14 +42,14 @@ class Menu extends Component {
             <div>
                 {' '}
                 <DashboardMenuItem onClick={onMenuClick} />
-                <MenuItemLink
+                {/* <MenuItemLink
                     to={`/products`}
                     primaryText={translate(`resources.products.name`, {
                         smart_count:  1,
                     })}
                     leftIcon={<products.icon />}
                     onClick={onMenuClick}
-                />
+                /> */}
 
                 {/*  <SubMenu
                     handleToggle={() => this.handleToggle('menuSales')}
