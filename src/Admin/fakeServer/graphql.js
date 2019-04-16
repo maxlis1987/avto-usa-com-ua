@@ -7,6 +7,6 @@ export default () => {
     const restServer = JsonGraphqlServer({ data });
     const handler = restServer.getHandler();
 
-    fetchMock.mock('http://localhost:4000', handler);
+    fetchMock.mock('http://localhost:8080', handler);
     return () => fetchMock.restore();
 };

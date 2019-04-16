@@ -37,7 +37,7 @@ const PostShowActions = ({ basePath, data, resource }) => {
 
 return (
   <Toolbar>
-      <DeleteButton basePath={basePath} record={data} style={isLogin !== 'isLogin' ? createStyles.delete : null}/>
+      <DeleteButton basePath={basePath} record={data} style={createStyles.delete}/>
       <SaveButton basePath={basePath} record={data} style={createStyles.delete}/>
   </Toolbar>
 );
@@ -56,12 +56,12 @@ const ProductEdit = ({ classes, ...props }) => {
 
 return (
     <Edit {...props}  title={<ProductTitle />}>
-      <SimpleForm toolbar={<PostShowActions />}>
+      <SimpleForm toolbar={<PostShowActions />} >
 
-      <ImageField  source="image_path"/>
-      <ImageField  source="image_path_1"/>
+      <ImageField source="image_path"/>
+      <ImageField source="image_path_1"/>
       <ImageField  source="image_path_2"/>
-      <ImageField  source="image_path_3"/>
+      <ImageField source="image_path_3"/>
       <ImageField  source="image_path_4"/>
       <TextField source="title"/>
 

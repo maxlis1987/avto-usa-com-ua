@@ -19,7 +19,7 @@ import categories from './categories';
 import reviews from './reviews';
 
 import dataProviderFactory from './dataProvider';
-import fakeServerFactory from './fakeServer';
+
 
 const i18nProvider = locale => {
     if (locale === 'fr') {
