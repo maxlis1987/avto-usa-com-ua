@@ -6,15 +6,17 @@
   "scripts": {
     "start": "node src/index.js"
   },
-
   "dependencies": {
     "apollo-client": "^2.5.1",
     "apollo-server": "^2.4.6",
-    "apollo-server-express": "^2.4.6",
+    "apollo-server-express": "^2.4.8",
+    "body-parser": "^1.18.3",
     "casual": "^1.6.0",
     "esm": "^3.2.6",
     "express": "^4.16.4",
     "graphql": "^14.1.1",
+    "graphql-disable-introspection": "latest",
+    "graphql-server-express": "^1.4.0",
     "jsonwebtoken": "^8.5.0",
     "jwks-rsa": "^1.4.0",
     "lodash": "^4.17.11",

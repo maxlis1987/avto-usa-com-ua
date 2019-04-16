@@ -6,7 +6,7 @@ import './index.css';
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from 'react-apollo';
 const client = new ApolloClient({
-  uri: "http://localhost:8080/graphql"
+  uri: "http://sales.avto-usa.com.ua:8080/graphql"
 });
 ReactDOM.render(
  <ApolloProvider client={client}>

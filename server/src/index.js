@@ -1,56 +1,55 @@
-const { ApolloServer, gql, AuthenticationError } = require("apollo-server");
-// const Express = require("express");
-const jwt = require("jsonwebtoken");
-const jwksClient = require("jwks-rsa");
-const { typeDefs } = require("./schema");
-const { Query } = require("./Query");
-const { Mutation } = require("./Mutation");
 
-// const client = jwksClient({
-//   jwksUri: `https://dev-wkyjoddr.auth0.com/.well-known/jwks.json`
-// });
+///////////////////////////////////////
 
-// function getKey(header, cb) {
-//   client.getSigningKey(header.kid, function(err, key) {
-//     var signingKey = key.publicKey || key.rsaPublicKey;
-//     cb(null, signingKey);
-//   });
-// }
-
-// const options = {
-//   audience: "8p9t7Wt45PIfYAb4tr2YqtpcCTmg3ZJP",
-//   issuer: `https://dev-wkyjoddr.auth0.com`,
-//   algorithms: ["RS256"]
-// };
+const express = require("express");
+const { ApolloServer } = require('apollo-server-express');
+const fs = require('fs')
+const http = require('http')
+const  {typeDefs}  = require("./schema");
+const {Query}  = require("./Query");
+const {Mutation} = require("./Mutation");
+const NoIntrospection = require('graphql-disable-introspection');
+const bodyParser = require('body-parser')
+const { graphqlExpress } = require('graphql-server-express');
 
 const resolvers = {
   Query,
   Mutation
-  // Author: {
-  //   books: author => filter(books, { authorId: author.id })
-  // },
-  // Book: {
-  //   author: book => find(authors, { id: book.authorId })
-  // }
+
 };
 
-const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
-  // context: ({ req }) => {
-    // const token = req.headers.authorization;
-    // const user = new Promise((resolve, reject) => {
-    //   jwt.verify(token, getKey, options, (err, decoded) => {
-    //     if (err) {
-    //       return reject(err);
-    //     }
-    //     resolve(decoded.email);
-    //   });
-    // });
-    // return { user };
-  // }
-});
 
-apolloServer.listen(8080).then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+const configurations = {
+  // Note: You may need sudo to run on port 443
+  production: { port: 8080, hostname: 'sales.avto-usa.com.ua' },
+  development: { port: 4000, hostname: 'localhost' }
+};
+
+const environment = process.env.NODE_ENV || 'production';
+const config = configurations[environment];
+
+const apollo = new ApolloServer({ typeDefs, resolvers });
+
+const app = express();
+
+// bodyParser is needed just for POST.
+app.use('/graphql', bodyParser.json(), graphqlExpress({
+  schema: typeDefs,
+  validationRules: [NoIntrospection]
+}));
+
+apollo.applyMiddleware({ app });
+
+// Create the HTTPS or HTTP server, per configuration
+var server
+
+server = http.createServer(app)
+// Add subscription support
+apollo.installSubscriptionHandlers(server)
+console.log(server.hostname)
+server.listen({ port: config.port }, () =>
+  console.log(
+    '🚀 Server ready at',
+    `http://${config.hostname}:${config.port}${apollo.graphqlPath}`
+  )
+)

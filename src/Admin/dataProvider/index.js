@@ -175,12 +175,20 @@ const customBuildQuery = introspectionResults => {
 
 export default () => {
 
+  const configurations = {
+    // Note: You may need sudo to run on port 443
+    production: { port: 8080, hostname: 'sales.avto-usa.com.ua' },
+    development: { port: 4000, hostname: 'localhost' }
+  };
+
+  const environment = process.env.NODE_ENV || 'production';
+  const config = configurations[environment];
     return buildApolloClient({
         clientOptions: {
-            uri: 'http://localhost:8080/graphql',
-            headers: {
-              authorization: localStorage.getItem('token'),
-            },
+            uri: `http://${config.hostname}:${config.port}/graphql`,
+            // headers: {
+            //   authorization: localStorage.getItem('token'),
+            // },
           },
         introspection: { schema },
         buildQuery: customBuildQuery
