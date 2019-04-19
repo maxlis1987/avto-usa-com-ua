@@ -4,13 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "nodemon --experimental-modules -r dotenv/config src/index.js"
   },
 
   "dependencies": {
     "apollo-client": "^2.5.1",
     "apollo-server": "^2.4.6",
     "apollo-server-express": "^2.4.6",
+    "apollo-server-koa": "^2.4.8",
+    "dotenv": "^6.2.0",
+    "koa": "^2.7.0",
     "casual": "^1.6.0",
     "esm": "^3.2.6",
     "express": "^4.16.4",
@@ -19,7 +22,11 @@
     "jwks-rsa": "^1.4.0",
     "lodash": "^4.17.11",
     "sequelize": "^4.42.0",
-    "sqlite": "^3.0.2"
+    "sqlite": "^3.0.2",
+    "lowdb": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "promises-all": "^1.0.0",
+    "shortid": "^2.2.14"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"

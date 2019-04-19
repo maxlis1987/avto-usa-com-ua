@@ -1,56 +1,28 @@
-const { ApolloServer, gql, AuthenticationError } = require("apollo-server");
-// const Express = require("express");
-const jwt = require("jsonwebtoken");
-const jwksClient = require("jwks-rsa");
-const { typeDefs } = require("./schema");
-const { Query } = require("./Query");
-const { Mutation } = require("./Mutation");
+const { ApolloServer } = require('apollo-server');
+const { typeDefs } = require('./schema');
+const { Query } = require('./Query');
+const { Mutation } = require('./Mutation');
+const apolloServerKoa = require('apollo-server-koa');
+const Koa = require('koa');
 
-// const client = jwksClient({
-//   jwksUri: `https://dev-wkyjoddr.auth0.com/.well-known/jwks.json`
-// });
-
-// function getKey(header, cb) {
-//   client.getSigningKey(header.kid, function(err, key) {
-//     var signingKey = key.publicKey || key.rsaPublicKey;
-//     cb(null, signingKey);
-//   });
-// }
-
-// const options = {
-//   audience: "8p9t7Wt45PIfYAb4tr2YqtpcCTmg3ZJP",
-//   issuer: `https://dev-wkyjoddr.auth0.com`,
-//   algorithms: ["RS256"]
-// };
-
+const app = new Koa();
 const resolvers = {
-  Query,
-  Mutation
-  // Author: {
-  //   books: author => filter(books, { authorId: author.id })
-  // },
-  // Book: {
-  //   author: book => find(authors, { id: book.authorId })
-  // }
+	Query,
+	Mutation
 };
 
-const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
-  // context: ({ req }) => {
-    // const token = req.headers.authorization;
-    // const user = new Promise((resolve, reject) => {
-    //   jwt.verify(token, getKey, options, (err, decoded) => {
-    //     if (err) {
-    //       return reject(err);
-    //     }
-    //     resolve(decoded.email);
-    //   });
-    // });
-    // return { user };
-  // }
+const server = new apolloServerKoa.ApolloServer({
+	typeDefs,
+	resolvers,
+	uploads: {
+		maxFileSize: 10000000, // 10 MB
+		maxFiles: 20
+	}
 });
 
-apolloServer.listen(8080).then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+server.applyMiddleware({ app });
+
+app.listen(process.env.PORT, (error) => {
+	if (error) throw error;
+	console.info(`Serving http://localhost:${process.env.PORT} for ${process.env.NODE_ENV}.`);
 });

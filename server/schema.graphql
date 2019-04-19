@@ -12,13 +12,10 @@
       link: String,
       price: String,
       image_path: String,
-      image_path_1: String,
-      image_path_2: String,
-      image_path_3: String,
-      image_path_4: String,
-      vincode: String
-      userId: Int
+      vincode: String,
+      userId: String
       ): Post!
+
     updatePost(
       id: ID!,
       title: String,
@@ -26,18 +23,12 @@
       price: String,
       description: String,
       image_path: String,
-      image_path_1: String,
-      image_path_2: String,
-      image_path_3: String,
-      image_path_4: String,
-      vincode: String,
-      userId: String
+      vincode: String
       ): Post!
     deletePost(id: ID!): Post!
 
   }
 
-  #
   type User {
     id: ID!
     email: String!
@@ -53,10 +44,6 @@
     link: String
     price: String
     image_path: String
-    image_path_1: String
-    image_path_2: String
-    image_path_3: String
-    image_path_4: String
     createdAt: String
     updatedAt: String
     userId: String
