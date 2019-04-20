@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const casual = require('casual');
-
 const _ = require('lodash');
 
 const db = new Sequelize('dear', null, null, {
@@ -17,11 +16,11 @@ const UserModel = db.define('user', {
 const PostModel = db.define('post', {
 	title: { type: Sequelize.STRING },
 	description: { type: Sequelize.STRING },
-	userId: { type: Sequelize.STRING },
 	link: { type: Sequelize.STRING },
 	price: { type: Sequelize.STRING },
 	vincode: { type: Sequelize.STRING },
-	image_path: { type: Sequelize.STRING }
+	userId: { type: Sequelize.STRING },
+	image_path: { type: Sequelize.BLOB }
 });
 
 UserModel.hasMany(PostModel);

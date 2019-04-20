@@ -1,5 +1,5 @@
-import React from 'react';
-import { Create, FormTab, SaveButton, TabbedForm, TextInput, required, Toolbar, FlatButton } from 'react-admin';
+import React, { useEffect, useState } from 'react';
+import { Create, FormTab, SaveButton, TabbedForm, TextInput, required } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
 import RichTextInput from 'ra-input-rich-text';
 import useFormInput from './Network/onChange';
@@ -16,7 +16,7 @@ export const styles = {
 	delete: { display: 'none' }
 };
 
-const ADD_IMAGE = gql`
+const CREATE_POST = gql`
 	mutation createPost(
 		$title: String
 		$description: String
@@ -48,7 +48,7 @@ const ADD_IMAGE = gql`
 
 const ApproveButton = ({ title, image_path, price, vincode, link, userId, description }) => {
 	return (
-		<Mutation type="CREATE" resource="products" mutation={ADD_IMAGE}>
+		<Mutation type="CREATE" resource="products" mutation={CREATE_POST}>
 			{(createPost, { data }) => (
 				<SaveButton
 					label="Save"
@@ -64,7 +64,7 @@ const ApproveButton = ({ title, image_path, price, vincode, link, userId, descri
 								description
 							}
 						});
-
+						console.log('data', data);
 						return data;
 					}}
 				/>
@@ -75,15 +75,16 @@ const ApproveButton = ({ title, image_path, price, vincode, link, userId, descri
 
 const ProductCreate = ({ classes, ...props }) => {
 	const title = useFormInput('');
-	const image_path = useFormInput('');
+
+	const [ image_path, setValue ] = useState('');
 	const price = useFormInput('');
 	const vincode = useFormInput('');
 	const link = useFormInput('');
 	const userId = useFormInput('');
 	const description = useFormInput('');
-
+	useEffect(() => {}, [ image_path.length ]);
 	const payload = {
-		image_path: image_path.value,
+		image_path: image_path,
 		title: title.value,
 		price: price.value,
 		vincode: vincode.value,
@@ -96,14 +97,7 @@ const ProductCreate = ({ classes, ...props }) => {
 		<Create {...props}>
 			<TabbedForm toolbar={<ApproveButton {...payload} />}>
 				<FormTab label="resources.products.tabs.image">
-					<TextInput
-						autoFocus
-						{...image_path}
-						source="image_path"
-						options={{ fullWidth: true }}
-						validate={required()}
-					/>
-					<UploadFileList />
+					<UploadFileList myChange={setValue} />
 					<TextInput {...title} source="title" options={{ fullWidth: true }} validate={required()} />
 				</FormTab>
 				<FormTab label="resources.products.tabs.details">

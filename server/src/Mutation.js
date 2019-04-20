@@ -1,4 +1,3 @@
-const { AuthenticationError } = require('apollo-server');
 const { User, Post } = require('./data/store');
 
 const Mutation = {
@@ -12,7 +11,8 @@ const Mutation = {
 		});
 	},
 
-	createPost: async (_, { title, description, link, image_path, price, vincode, userId }) => {
+	createPost: async (_, { title, description, link, image_path, userId, price, vincode }) => {
+		console.log(image_path, 'sssssssssssssssssss');
 		try {
 			const result = await Post.create({
 				title,
@@ -30,7 +30,7 @@ const Mutation = {
 		}
 	},
 
-	updatePost: async (_, { id, title, description, link, image_path, price, vincode }) => {
+	updatePost: async (_, { id, title, description, link, image_path, userId, price, vincode }) => {
 		try {
 			const result = await Post.update({
 				id,
@@ -39,7 +39,8 @@ const Mutation = {
 				link,
 				image_path,
 				price,
-				vincode
+				vincode,
+				userId
 			});
 			return { ...result };
 		} catch (error) {

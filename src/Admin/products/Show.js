@@ -1,33 +1,7 @@
 import React from 'react';
-import {
-	Datagrid,
-	DateField,
-	Edit,
-	EditButton,
-	ShowButton,
-	FormTab,
-	NumberInput,
-	Pagination,
-	ReferenceInput,
-	ReferenceManyField,
-	SelectInput,
-	TabbedForm,
-	SaveButton,
-	TextField,
-	TextInput,
-	CardActions,
-	ImageField,
-	ArrayField,
-	SimpleForm,
-	DeleteButton,
-	Toolbar
-} from 'react-admin';
+import { Edit, SaveButton, TextField, ImageField, SimpleForm, DeleteButton, Toolbar } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
-import RichTextInput from 'ra-input-rich-text';
 
-import CustomerReferenceField from '../visitors/CustomerReferenceField';
-import StarRatingField from '../reviews/StarRatingField';
-import Poster from './Poster';
 import { styles as createStyles } from './Create';
 
 const ProductTitle = ({ record }) => <span>Poster #{record.reference}</span>;

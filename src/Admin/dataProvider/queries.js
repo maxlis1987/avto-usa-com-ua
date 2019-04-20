@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { CREATE, GET_LIST, GET_ONE } from 'ra-core';
+import { GET_LIST, GET_ONE } from 'ra-core';
 
 export default (type, resource, params, buildQuery) => {
 	if (type === GET_LIST) {
@@ -13,7 +13,6 @@ export default (type, resource, params, buildQuery) => {
 						image_path
 						description
 						vincode
-						userId
 						price
 					}
 				}
@@ -47,19 +46,6 @@ export default (type, resource, params, buildQuery) => {
 			}
 		};
 	}
-	if (type === 'FILE_UPLOADS') {
-		return {
-			query: gql`
-				query uploads {
-					uploads {
-						id
-						filename
-						mimetype
-						path
-					}
-				}
-			`
-		};
-	}
+
 	return buildQuery(type, resource, params);
 };

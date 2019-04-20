@@ -15,8 +15,8 @@ const typeDefs = gql`
 			link: String
 			price: String
 			image_path: String
-			vincode: String
 			userId: String
+			vincode: String
 		): Post!
 		updatePost(
 			id: ID!
@@ -24,6 +24,7 @@ const typeDefs = gql`
 			link: String
 			price: String
 			description: String
+			userId: String
 			image_path: String
 			vincode: String
 		): Post!
@@ -44,10 +45,10 @@ const typeDefs = gql`
 		description: String
 		link: String
 		price: String
+		userId: String
 		image_path: String
 		createdAt: String
 		updatedAt: String
-		userId: String
 	}
 `;
 

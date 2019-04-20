@@ -1,7 +1,7 @@
-const { ApolloServer } = require('apollo-server');
 const { typeDefs } = require('./schema');
 const { Query } = require('./Query');
 const { Mutation } = require('./Mutation');
+
 const apolloServerKoa = require('apollo-server-koa');
 const Koa = require('koa');
 
@@ -13,11 +13,7 @@ const resolvers = {
 
 const server = new apolloServerKoa.ApolloServer({
 	typeDefs,
-	resolvers,
-	uploads: {
-		maxFileSize: 10000000, // 10 MB
-		maxFiles: 20
-	}
+	resolvers
 });
 
 server.applyMiddleware({ app });
