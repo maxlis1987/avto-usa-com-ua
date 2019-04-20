@@ -24,7 +24,6 @@ const CREATE_POST = gql`
 		$price: String
 		$image_path: String
 		$vincode: String
-		$userId: String
 	) {
 		createPost(
 			title: $title
@@ -33,7 +32,6 @@ const CREATE_POST = gql`
 			price: $price
 			image_path: $image_path
 			vincode: $vincode
-			userId: $userId
 		) {
 			title
 			description
@@ -41,12 +39,11 @@ const CREATE_POST = gql`
 			price
 			image_path
 			vincode
-			userId
 		}
 	}
 `;
 
-const ApproveButton = ({ title, image_path, price, vincode, link, userId, description }) => {
+const ApproveButton = ({ title, image_path, price, vincode, link, description }) => {
 	return (
 		<Mutation type="CREATE" resource="products" mutation={CREATE_POST}>
 			{(createPost, { data }) => (
@@ -60,7 +57,7 @@ const ApproveButton = ({ title, image_path, price, vincode, link, userId, descri
 								price,
 								vincode,
 								link,
-								userId,
+
 								description
 							}
 						});
@@ -80,7 +77,7 @@ const ProductCreate = ({ classes, ...props }) => {
 	const price = useFormInput('');
 	const vincode = useFormInput('');
 	const link = useFormInput('');
-	const userId = useFormInput('');
+
 	const description = useFormInput('');
 	useEffect(() => {}, [ image_path.length ]);
 	const payload = {
@@ -89,7 +86,6 @@ const ProductCreate = ({ classes, ...props }) => {
 		price: price.value,
 		vincode: vincode.value,
 		link: link.value,
-		userId: userId.value,
 		description: description.value
 	};
 
@@ -112,13 +108,6 @@ const ProductCreate = ({ classes, ...props }) => {
 					<TextInput
 						{...link}
 						source="link"
-						validate={required()}
-						className={classes.height}
-						formClassName={classes.heightFormGroup}
-					/>
-					<TextInput
-						{...userId}
-						source="userId"
 						validate={required()}
 						className={classes.height}
 						formClassName={classes.heightFormGroup}

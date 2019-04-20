@@ -12,7 +12,6 @@ const Mutation = {
 	},
 
 	createPost: async (_, { title, description, link, image_path, userId, price, vincode }) => {
-		console.log(image_path, 'sssssssssssssssssss');
 		try {
 			const result = await Post.create({
 				title,

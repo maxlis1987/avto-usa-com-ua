@@ -1,14 +1,4 @@
 import React, { Fragment } from 'react';
-import gql from 'graphql-tag';
-import { Mutation } from 'react-apollo';
-const GET_IMAGE = gql`
-	mutation($files: [Upload!]!) {
-		multipleUpload(files: $files) {
-			id
-			data
-		}
-	}
-`;
 
 const UploadFileList = ({ myChange }) => {
 	let str = '';
