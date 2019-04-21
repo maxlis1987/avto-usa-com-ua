@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+// img.replace(/^data:image\/(png|jpg);base64,/, "")
 
 const UploadFileList = ({ myChange }) => {
 	let str = '';
@@ -22,30 +23,33 @@ const UploadFileList = ({ myChange }) => {
 						reader.onload = (function(img) {
 							return function(e) {
 								const base64data = reader.result;
+								// .replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, '');
 								if (str == '') {
-									str = `'["${base64data}"`;
+									str = base64data;
 								} else {
-									str = `${str}, "${base64data}"`;
+									str = `${str}mama_maria${base64data}`;
 								}
-								img.src = e.target.result;
 							};
 						})(img);
 						return file;
 					});
 					setTimeout(() => {
-						const result = `${str}]'`;
+						let result = str;
+						if (result.split('mama_maria')) {
+							result = result.split('mama_maria');
+							result = JSON.stringify(result);
+						} else {
+							result = `["${result}"]`;
+							result = JSON.stringify(result);
+						}
 						myChange(result);
 						return result;
 					}, 1000);
 				}}
 			/>
 		</Fragment>
-		// <Mutation mutation={GET_IMAGE}>
-		// 	{(multipleUpload) => (
-
-		// 	)}
-		// </Mutation>
 	);
 };
 
 export default UploadFileList;
+// img.replace(/^data:image\/(png|jpg);base64,/, "")

@@ -14,3 +14,4 @@ ReactDOM.render(
 	</ApolloProvider>,
 	document.getElementById('root')
 );
+// img.replace(/^data:image\/(png|jpg);base64,/, "")

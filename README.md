@@ -1,1 +1,1 @@
-aaa
+img.replace(/^data:image\/(png|jpg);base64,/, "")

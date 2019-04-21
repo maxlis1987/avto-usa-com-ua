@@ -1,5 +1,5 @@
 const { User, Post } = require('./data/store');
-
+const uuidv4 = require('uuid/v4');
 const Mutation = {
 	createUser: async (_, { email, first_name, last_name }) => {
 		return User.create({
@@ -14,6 +14,7 @@ const Mutation = {
 	createPost: async (_, { title, description, link, image_path, price, vincode }) => {
 		try {
 			const result = await Post.create({
+				id: uuidv4(),
 				title,
 				description,
 				link,
