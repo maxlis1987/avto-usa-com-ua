@@ -57,11 +57,9 @@ const ApproveButton = ({ title, image_path, price, vincode, link, description })
 								price,
 								vincode,
 								link,
-
 								description
 							}
 						});
-						console.log('data', data);
 						return data;
 					}}
 				/>
@@ -88,7 +86,7 @@ const ProductCreate = ({ classes, ...props }) => {
 		link: link.value,
 		description: description.value
 	};
-
+	console.log('image_path', image_path);
 	return (
 		<Create {...props}>
 			<TabbedForm toolbar={<ApproveButton {...payload} />}>

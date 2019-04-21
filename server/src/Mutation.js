@@ -11,7 +11,7 @@ const Mutation = {
 		});
 	},
 
-	createPost: async (_, { title, description, link, image_path, userId, price, vincode }) => {
+	createPost: async (_, { title, description, link, image_path, price, vincode }) => {
 		try {
 			const result = await Post.create({
 				title,
@@ -19,8 +19,7 @@ const Mutation = {
 				link,
 				image_path,
 				price,
-				vincode,
-				userId
+				vincode
 			});
 
 			return { ...result };
@@ -29,7 +28,7 @@ const Mutation = {
 		}
 	},
 
-	updatePost: async (_, { id, title, description, link, image_path, userId, price, vincode }) => {
+	updatePost: async (_, { id, title, description, link, image_path, price, vincode }) => {
 		try {
 			const result = await Post.update({
 				id,
@@ -38,8 +37,7 @@ const Mutation = {
 				link,
 				image_path,
 				price,
-				vincode,
-				userId
+				vincode
 			});
 			return { ...result };
 		} catch (error) {

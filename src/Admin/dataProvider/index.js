@@ -30,13 +30,7 @@ const getGqlResource = (resource) => {
 			throw new Error(`Unknown resource ${resource}`);
 	}
 };
-const GET_POST_BY_ID = gql`
-	query post($id: ID!) {
-		post(id: $id) {
-			title
-		}
-	}
-`;
+
 const customBuildQuery = (introspectionResults) => {
 	const buildQuery = buildQueryFactory(introspectionResults);
 
