@@ -3,7 +3,7 @@ import { Edit, SaveButton, TextField, ImageField, SimpleForm, DeleteButton, Tool
 import withStyles from '@material-ui/core/styles/withStyles';
 import { styles as createStyles } from './Create';
 import SliderImages from './SliderImages';
-const ProductTitle = ({ record }) => <span>Poster #{record.reference}</span>;
+const ProductTitle = ({ record }) => <span>{record.title}</span>;
 const PostShowActions = (props) => {
 	const isLogin = window.sessionStorage.getItem('admin');
 	return (
