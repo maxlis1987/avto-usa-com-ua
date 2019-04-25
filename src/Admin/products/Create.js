@@ -113,6 +113,8 @@ const ApproveButton = ({
 								transmission
 							}
 						});
+
+						window.location.href = '/';
 						return data;
 					}}
 				/>

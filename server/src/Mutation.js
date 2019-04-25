@@ -30,6 +30,7 @@ const Mutation = {
 	) => {
 		try {
 			const result = await Post.create({
+				id: uuidv4(),
 				title,
 				description,
 				link,

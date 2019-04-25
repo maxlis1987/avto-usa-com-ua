@@ -39,9 +39,10 @@ const styles = {
 };
 
 const ProductEdit = ({ classes, ...props }) => {
+	console.log(props);
 	return (
 		<Edit {...props} title={<ProductTitle />}>
-			<SimpleForm toolbar={<PostShowActions />} className={classes.main}>
+			<SimpleForm toolbar={<PostShowActions />} className={classes.main} redirect="show" resource="userId">
 				<TextField addLabel={false} source="title" className={classes.titleLabel} />
 				<TextField addLabel={false} source="price" className={classes.priceLabel} />
 				<SliderImages source="image_path" className={classes.imageBlock} />

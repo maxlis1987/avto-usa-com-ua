@@ -48,6 +48,7 @@ export default (type, resource, params, buildQuery) => {
 						odometer
 						typeBody
 						transmission
+						userId
 					}
 				}
 			`,
