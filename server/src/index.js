@@ -18,7 +18,7 @@ const server = new apolloServerKoa.ApolloServer({
 
 server.applyMiddleware({ app });
 
-app.listen(process.env.PORT, (error) => {
+app.listen(4000, (error) => {
 	if (error) throw error;
-	console.info(`Serving http://localhost:${process.env.PORT} for ${process.env.NODE_ENV}.`);
+	console.info(`Serving http://localhost:4000 .`);
 });

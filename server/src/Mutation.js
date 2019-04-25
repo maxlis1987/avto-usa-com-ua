@@ -14,13 +14,13 @@ const Mutation = {
 	createPost: async (_, { title, description, link, image_path, price, vincode }) => {
 		try {
 			const result = await Post.create({
-				id: uuidv4(),
 				title,
 				description,
 				link,
 				image_path,
-				price,
-				vincode
+				price: price + ' $',
+				vincode,
+				userId: uuidv4()
 			});
 
 			return { ...result };
