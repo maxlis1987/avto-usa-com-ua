@@ -21,6 +21,7 @@ const styles = {
 		textOverflow: 'ellipsis',
 		whiteSpace: 'nowrap'
 	},
+	widthFormGroup: { display: 'inline-block', margin: 5 },
 	main: {
 		display: 'block',
 		textAlign: 'left'
@@ -42,9 +43,14 @@ const ProductEdit = ({ classes, ...props }) => {
 		<Edit {...props} title={<ProductTitle />}>
 			<SimpleForm toolbar={<PostShowActions />} className={classes.main}>
 				<TextField addLabel={false} source="title" className={classes.titleLabel} />
-
 				<TextField addLabel={false} source="price" className={classes.priceLabel} />
 				<SliderImages source="image_path" className={classes.imageBlock} />
+				<TextField formClassName={classes.widthFormGroup} source="drive" />
+				<TextField formClassName={classes.widthFormGroup} source="fuelType" />
+				<TextField formClassName={classes.widthFormGroup} source="engineVolume" />
+				<TextField formClassName={classes.widthFormGroup} source="odometer" />
+				<TextField formClassName={classes.widthFormGroup} source="typeBody" />
+				<TextField formClassName={classes.widthFormGroup} source="transmission" />
 				<TextField addLabel={false} source="description" />
 			</SimpleForm>
 		</Edit>

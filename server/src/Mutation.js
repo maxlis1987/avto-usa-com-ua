@@ -11,7 +11,23 @@ const Mutation = {
 		});
 	},
 
-	createPost: async (_, { title, description, link, image_path, price, vincode }) => {
+	createPost: async (
+		_,
+		{
+			title,
+			description,
+			link,
+			image_path,
+			price,
+			vincode,
+			drive,
+			fuelType,
+			engineVolume,
+			odometer,
+			typeBody,
+			transmission
+		}
+	) => {
 		try {
 			const result = await Post.create({
 				title,
@@ -20,7 +36,13 @@ const Mutation = {
 				image_path,
 				price: price + ' $',
 				vincode,
-				userId: uuidv4()
+				userId: uuidv4(),
+				drive,
+				fuelType,
+				engineVolume,
+				odometer,
+				typeBody,
+				transmission
 			});
 
 			return { ...result };
@@ -29,7 +51,24 @@ const Mutation = {
 		}
 	},
 
-	updatePost: async (_, { id, title, description, link, image_path, price, vincode }) => {
+	updatePost: async (
+		_,
+		{
+			id,
+			title,
+			description,
+			link,
+			image_path,
+			price,
+			vincode,
+			drive,
+			fuelType,
+			engineVolume,
+			odometer,
+			typeBody,
+			transmission
+		}
+	) => {
 		try {
 			const result = await Post.update({
 				id,
@@ -38,7 +77,13 @@ const Mutation = {
 				link,
 				image_path,
 				price,
-				vincode
+				vincode,
+				drive,
+				fuelType,
+				engineVolume,
+				odometer,
+				typeBody,
+				transmission
 			});
 			return { ...result };
 		} catch (error) {

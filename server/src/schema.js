@@ -16,6 +16,12 @@ const typeDefs = gql`
 			price: String
 			image_path: String
 			vincode: String
+			engineVolume: String
+			typeBody: String
+			transmission: String
+			odometer: String
+			fuelType: String
+			drive: String
 		): Post!
 		updatePost(
 			id: ID!
@@ -25,6 +31,12 @@ const typeDefs = gql`
 			description: String
 			image_path: String
 			vincode: String
+			engineVolume: String
+			typeBody: String
+			transmission: String
+			odometer: String
+			fuelType: String
+			drive: String
 		): Post!
 		deletePost(id: ID!): Post!
 	}
@@ -47,6 +59,12 @@ const typeDefs = gql`
 		image_path: String
 		createdAt: String
 		updatedAt: String
+		engineVolume: String
+		typeBody: String
+		transmission: String
+		odometer: String
+		fuelType: String
+		drive: String
 	}
 `;
 

@@ -10,7 +10,7 @@ export const styles = {
 	stock: { width: '5em' },
 	price: { width: '5em' },
 	width: { width: '5em' },
-	widthFormGroup: { display: 'inline-block' },
+	widthFormGroup: { display: 'inline-block', margin: 5 },
 	height: { width: '5em' },
 	heightFormGroup: { display: 'inline-block', marginLeft: 32 },
 	delete: { display: 'none' }
@@ -24,6 +24,12 @@ const CREATE_POST = gql`
 		$price: String
 		$image_path: String
 		$vincode: String
+		$drive: String
+		$fuelType: String
+		$engineVolume: String
+		$odometer: String
+		$typeBody: String
+		$transmission: String
 	) {
 		createPost(
 			title: $title
@@ -32,6 +38,12 @@ const CREATE_POST = gql`
 			price: $price
 			image_path: $image_path
 			vincode: $vincode
+			drive: $drive
+			fuelType: $fuelType
+			engineVolume: $engineVolume
+			odometer: $odometer
+			typeBody: $typeBody
+			transmission: $transmission
 		) {
 			title
 			description
@@ -39,13 +51,43 @@ const CREATE_POST = gql`
 			price
 			image_path
 			vincode
+			drive
+			fuelType
+			engineVolume
+			odometer
+			typeBody
+			transmission
 		}
 	}
 `;
 
-const ApproveButton = ({ title, image_path, price, vincode, link, description }) => {
+const ApproveButton = ({
+	title,
+	image_path,
+	price,
+	vincode,
+	link,
+	description,
+	drive,
+	fuelType,
+	engineVolume,
+	odometer,
+	typeBody,
+	transmission
+}) => {
 	const isDisabled =
-		title !== '' && image_path && price !== '' && vincode !== '' && link !== '' && description !== '';
+		title !== '' &&
+		image_path &&
+		price !== '' &&
+		vincode !== '' &&
+		link !== '' &&
+		description !== '' &&
+		drive !== '' &&
+		fuelType &&
+		engineVolume !== '' &&
+		odometer !== '' &&
+		typeBody !== '' &&
+		transmission !== '';
 	console.log(isDisabled);
 	return (
 		<Mutation type="CREATE" resource="products" mutation={CREATE_POST}>
@@ -62,7 +104,13 @@ const ApproveButton = ({ title, image_path, price, vincode, link, description })
 								price,
 								vincode,
 								link,
-								description
+								description,
+								drive,
+								fuelType,
+								engineVolume,
+								odometer,
+								typeBody,
+								transmission
 							}
 						});
 						return data;
@@ -80,6 +128,12 @@ const ProductCreate = ({ classes, ...props }) => {
 	const vincode = useFormInput('');
 	const link = useFormInput('');
 	const description = useFormInput('');
+	const drive = useFormInput('');
+	const fuelType = useFormInput('');
+	const engineVolume = useFormInput('');
+	const odometer = useFormInput('');
+	const typeBody = useFormInput('');
+	const transmission = useFormInput('');
 
 	useEffect(() => {}, [ image_path.length ]);
 	const payload = {
@@ -88,31 +142,68 @@ const ProductCreate = ({ classes, ...props }) => {
 		price: price.value,
 		vincode: vincode.value,
 		link: link.value,
-		description: description.value
+		description: description.value,
+		drive: drive.value,
+		fuelType: fuelType.value,
+		engineVolume: engineVolume.value,
+		odometer: odometer.value,
+		typeBody: typeBody.value,
+		transmission: transmission.value
 	};
 	return (
 		<Create {...props}>
 			<TabbedForm toolbar={<ApproveButton {...payload} />}>
 				<FormTab label="resources.products.tabs.details">
-					<TextInput {...title} source="title" options={{ fullWidth: true }} validate={required()} />
-					<TextInput {...price} source="price" validate={required()} className={classes.price} />
+					<TextInput {...title} source="title" validate={required()} formClassName={classes.widthFormGroup} />
+					<TextInput {...drive} source="drive" validate={required()} formClassName={classes.widthFormGroup} />
+					<TextInput
+						{...fuelType}
+						source="fuelType"
+						validate={required()}
+						formClassName={classes.widthFormGroup}
+					/>
+					<TextInput
+						{...engineVolume}
+						source="engineVolume"
+						validate={required()}
+						formClassName={classes.widthFormGroup}
+					/>
+					<TextInput
+						{...odometer}
+						source="odometer"
+						validate={required()}
+						formClassName={classes.widthFormGroup}
+					/>
+					<TextInput
+						{...typeBody}
+						source="typeBody"
+						validate={required()}
+						formClassName={classes.widthFormGroup}
+					/>
+					<TextInput
+						{...transmission}
+						source="transmission"
+						validate={required()}
+						formClassName={classes.widthFormGroup}
+					/>
+					<TextInput {...price} source="price" validate={required()} formClassName={classes.widthFormGroup} />
 					<TextInput
 						{...vincode}
 						source="vincode"
 						validate={required()}
-						className={classes.width}
 						formClassName={classes.widthFormGroup}
 					/>
-					<TextInput
-						{...link}
-						source="link"
-						validate={required()}
-						className={classes.height}
-						formClassName={classes.heightFormGroup}
-					/>
+					<TextInput {...link} source="link" validate={required()} formClassName={classes.heightFormGroup} />
 				</FormTab>
 				<FormTab label="resources.products.tabs.description" path="description">
-					<textarea rows={15} cols={15} {...description} source="description" addLabel={true} />
+					<textarea
+						validate={required()}
+						rows={15}
+						cols={15}
+						{...description}
+						source="description"
+						addLabel={true}
+					/>
 				</FormTab>
 				<FormTab label="resources.products.tabs.image">
 					<UploadFileList myChange={setValue} />

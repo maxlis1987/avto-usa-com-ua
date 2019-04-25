@@ -14,6 +14,12 @@ export default (type, resource, params, buildQuery) => {
 						description
 						vincode
 						price
+						drive
+						fuelType
+						engineVolume
+						odometer
+						typeBody
+						transmission
 					}
 				}
 			`,
@@ -36,6 +42,12 @@ export default (type, resource, params, buildQuery) => {
 						description
 						vincode
 						price
+						drive
+						fuelType
+						engineVolume
+						odometer
+						typeBody
+						transmission
 					}
 				}
 			`,
