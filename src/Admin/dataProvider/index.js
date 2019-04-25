@@ -43,7 +43,7 @@ export default () => {
 	return buildApolloClient({
 		clientOptions: {
 			uri: 'http://localhost:4000/graphql'
-			// uri: 'http://195.191.24.168:4000/graphql'
+			// uri: 'http://avto-usa.com.ua:4000/graphql'
 		},
 		introspection: { schema },
 		buildQuery: customBuildQuery

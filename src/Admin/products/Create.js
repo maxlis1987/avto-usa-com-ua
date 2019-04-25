@@ -75,7 +75,7 @@ const ApproveButton = ({
 	typeBody,
 	transmission
 }) => {
-	const isDisabled =
+	let isDisabled =
 		title !== '' &&
 		image_path &&
 		price !== '' &&
@@ -88,7 +88,7 @@ const ApproveButton = ({
 		odometer !== '' &&
 		typeBody !== '' &&
 		transmission !== '';
-	console.log(isDisabled);
+
 	return (
 		<Mutation type="CREATE" resource="products" mutation={CREATE_POST}>
 			{(createPost, { data }) => (
@@ -114,7 +114,10 @@ const ApproveButton = ({
 							}
 						});
 
-						window.location.href = '/';
+						setTimeout(() => {
+							window.location.href = '/';
+						}, 6000);
+						isDisabled = false;
 						return data;
 					}}
 				/>
