@@ -44,11 +44,16 @@ const CREATE_POST = gql`
 `;
 
 const ApproveButton = ({ title, image_path, price, vincode, link, description }) => {
+	const isDisabled =
+		title !== '' && image_path && price !== '' && vincode !== '' && link !== '' && description !== '';
+	console.log(isDisabled);
 	return (
 		<Mutation type="CREATE" resource="products" mutation={CREATE_POST}>
 			{(createPost, { data }) => (
 				<SaveButton
 					label="Save"
+					disabled={!isDisabled}
+					style={{ margin: 25 }}
 					onClick={(e) => {
 						createPost({
 							variables: {
@@ -70,13 +75,12 @@ const ApproveButton = ({ title, image_path, price, vincode, link, description })
 
 const ProductCreate = ({ classes, ...props }) => {
 	const title = useFormInput('');
-
 	const [ image_path, setValue ] = useState('');
 	const price = useFormInput('');
 	const vincode = useFormInput('');
 	const link = useFormInput('');
-
 	const description = useFormInput('');
+
 	useEffect(() => {}, [ image_path.length ]);
 	const payload = {
 		image_path: image_path,
@@ -89,11 +93,8 @@ const ProductCreate = ({ classes, ...props }) => {
 	return (
 		<Create {...props}>
 			<TabbedForm toolbar={<ApproveButton {...payload} />}>
-				<FormTab label="resources.products.tabs.image">
-					<UploadFileList myChange={setValue} />
-					<TextInput {...title} source="title" options={{ fullWidth: true }} validate={required()} />
-				</FormTab>
 				<FormTab label="resources.products.tabs.details">
+					<TextInput {...title} source="title" options={{ fullWidth: true }} validate={required()} />
 					<TextInput {...price} source="price" validate={required()} className={classes.price} />
 					<TextInput
 						{...vincode}
@@ -112,6 +113,9 @@ const ProductCreate = ({ classes, ...props }) => {
 				</FormTab>
 				<FormTab label="resources.products.tabs.description" path="description">
 					<textarea rows={15} cols={15} {...description} source="description" addLabel={true} />
+				</FormTab>
+				<FormTab label="resources.products.tabs.image">
+					<UploadFileList myChange={setValue} />
 				</FormTab>
 			</TabbedForm>
 		</Create>

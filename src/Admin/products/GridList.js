@@ -52,9 +52,8 @@ const times = (nbChildren, fn) => Array.from({ length: nbChildren }, (_, key) =>
 const LoadingGridList = ({ width, classes, nbItems = 10 }) => (
 	<div className={classes.root}>
 		<MuiGridList cellHeight={180} cols={getColsForWidth(width)} className={classes.gridList}>
-			{' '}
-			{times(nbItems, (key) => (
-				<GridListTile key={key}>
+			{times(nbItems, (userId) => (
+				<GridListTile key={userId}>
 					<div className={classes.placeholder} />
 				</GridListTile>
 			))}

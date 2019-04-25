@@ -4,14 +4,12 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { styles as createStyles } from './Create';
 import SliderImages from './SliderImages';
 const ProductTitle = ({ record }) => <span>Poster #{record.reference}</span>;
-const PostShowActions = ({ basePath, data, resource }) => {
+const PostShowActions = (props) => {
 	const isLogin = window.sessionStorage.getItem('admin');
-
-	const display = isLogin ? null : createStyles.delete;
 	return (
 		<Toolbar>
-			<DeleteButton basePath={basePath} record={data} style={createStyles.delete} />
-			<SaveButton basePath={basePath} record={data} style={createStyles.delete} />
+			<DeleteButton basePath={props.basePath} record={props.record} style={createStyles.delete} />
+			<SaveButton basePath={props.basePath} record={props.record} style={createStyles.delete} />
 		</Toolbar>
 	);
 };
