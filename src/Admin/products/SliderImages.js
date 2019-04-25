@@ -5,7 +5,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 const SliderImages = (props) => {
 	let images = JSON.parse(props.record.image_path);
 	return (
-		<div style={{ maxWidth: 400 }}>
+		<div style={{ width: '90vw', margin: 'auto' }}>
 			<Carousel autoPlay>
 				{images.map((image, index) => (
 					<div>

@@ -40,7 +40,7 @@
 		description: String
 		link: String
 		price: String
-		userId: Int
+		userId: String
 		image_path: String
 		createdAt: String
 		updatedAt: String

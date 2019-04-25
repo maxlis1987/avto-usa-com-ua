@@ -93,7 +93,6 @@ const LoadedGridList = ({ classes, ids, data, basePath, width }) => {
 												currency: 'USD'
 											}}
 										/>
-										$
 									</span>
 								}
 							/>

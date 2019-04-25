@@ -37,7 +37,7 @@ class App extends Component {
 		//     process.env.REACT_APP_DATA_PROVIDER
 		// );
 
-		const dataProvider = await dataProviderFactory(process.env.REACT_APP_DATA_PROVIDER);
+		const dataProvider = await dataProviderFactory();
 
 		this.setState({ dataProvider });
 	}

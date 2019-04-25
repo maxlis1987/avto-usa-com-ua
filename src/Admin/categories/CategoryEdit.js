@@ -33,7 +33,7 @@ const CategoryEdit = (props) => (
 				<Datagrid>
 					<ThumbnailField />
 					<ProductRefField source="reference" />
-					<NumberField source="price" options={{ style: 'currency', currency: 'USD' }} />
+					<NumberField source="price" />
 
 					<EditButton />
 				</Datagrid>

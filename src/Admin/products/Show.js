@@ -6,6 +6,8 @@ import SliderImages from './SliderImages';
 const ProductTitle = ({ record }) => <span>Poster #{record.reference}</span>;
 const PostShowActions = ({ basePath, data, resource }) => {
 	const isLogin = window.sessionStorage.getItem('admin');
+
+	const display = isLogin ? null : createStyles.delete;
 	return (
 		<Toolbar>
 			<DeleteButton basePath={basePath} record={data} style={createStyles.delete} />
@@ -20,20 +22,32 @@ const styles = {
 		overflow: 'hidden',
 		textOverflow: 'ellipsis',
 		whiteSpace: 'nowrap'
+	},
+	main: {
+		display: 'block',
+		textAlign: 'left'
+	},
+	titleLabel: {
+		fontSize: '1.1em'
+	},
+	priceLabel: {
+		fontSize: '1.4em',
+		color: 'tomato'
+	},
+	imageBlock: {
+		width: '88vw'
 	}
 };
 
 const ProductEdit = ({ classes, ...props }) => {
 	return (
 		<Edit {...props} title={<ProductTitle />}>
-			<SimpleForm toolbar={<PostShowActions />}>
-				<SliderImages source="image_path" />
+			<SimpleForm toolbar={<PostShowActions />} className={classes.main}>
+				<TextField addLabel={false} source="title" className={classes.titleLabel} />
 
-				<TextField source="title" />
-
-				<TextField source="price" />
-				<TextField source="vincode" />
-				<TextField source="description" />
+				<TextField addLabel={false} source="price" className={classes.priceLabel} />
+				<SliderImages source="image_path" className={classes.imageBlock} />
+				<TextField addLabel={false} source="description" />
 			</SimpleForm>
 		</Edit>
 	);
