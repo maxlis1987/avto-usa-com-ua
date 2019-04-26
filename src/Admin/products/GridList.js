@@ -3,7 +3,6 @@ import compose from 'recompose/compose';
 import MuiGridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 import { Link } from 'react-router-dom';
@@ -66,14 +65,6 @@ const LoadedGridList = ({ classes, ids, data, basePath, width }) => {
 		<div className={classes.root}>
 			<MuiGridList cellHeight={180} cols={getColsForWidth(width)} className={classes.gridList}>
 				{ids.map((id) => {
-					// let images;
-
-					// if (data[id].image_path.split('mama_maria')) {
-					// 	images = data[id].image_path.split('mama_maria');
-					// } else {
-					// 	images = data[id].image_path;
-					// 	images.length = 1;
-					// }
 					return (
 						<GridListTile component={Link} key={id} to={linkToRecord(basePath, data[id].id)}>
 							<img src={JSON.parse(data[id].image_path)[0]} alt="" />

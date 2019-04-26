@@ -4,9 +4,9 @@ import ProductEdit from './Show';
 import ProductCreate from './Create';
 import PostShow from './ProductEdit';
 export default {
-    list: ProductList,
-    create: ProductCreate,
-    edit: ProductEdit,
-    icon: ProductIcon,
-    // show: PostShow
+	list: ProductList,
+	create: ProductCreate,
+	edit: ProductEdit,
+	icon: ProductIcon
+	// show: PostShow
 };

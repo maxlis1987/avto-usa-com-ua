@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-// img.replace(/^data:image\/(png|jpg);base64,/, "")
 
 const UploadFileList = ({ myChange }) => {
 	let str = '';
@@ -23,7 +22,6 @@ const UploadFileList = ({ myChange }) => {
 						reader.onload = (function(img) {
 							return function(e) {
 								const base64data = reader.result;
-								// .replace(/^data:image\/(png|jpg|jpeg|gif);base64,/, '');
 								if (str == '') {
 									str = base64data;
 								} else {

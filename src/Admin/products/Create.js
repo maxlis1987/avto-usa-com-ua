@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Create, FormTab, SaveButton, TabbedForm, TextInput, required } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
-import RichTextInput from 'ra-input-rich-text';
 import useFormInput from './Network/onChange';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -12,8 +11,7 @@ export const styles = {
 	width: { width: '5em' },
 	widthFormGroup: { display: 'inline-block', margin: 5 },
 	height: { width: '5em' },
-	heightFormGroup: { display: 'inline-block', marginLeft: 32 },
-	delete: { display: 'none' }
+	heightFormGroup: { display: 'inline-block', marginLeft: 32 }
 };
 
 const CREATE_POST = gql`
@@ -83,7 +81,7 @@ const ApproveButton = ({
 		link !== '' &&
 		description !== '' &&
 		drive !== '' &&
-		fuelType &&
+		fuelType !== '' &&
 		engineVolume !== '' &&
 		odometer !== '' &&
 		typeBody !== '' &&
@@ -113,10 +111,8 @@ const ApproveButton = ({
 								transmission
 							}
 						});
+						window.location.href = '/';
 
-						setTimeout(() => {
-							window.location.href = '/';
-						}, 6000);
 						isDisabled = false;
 						return data;
 					}}
