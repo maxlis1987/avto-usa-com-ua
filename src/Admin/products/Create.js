@@ -111,9 +111,11 @@ const ApproveButton = ({
 								transmission
 							}
 						});
-						window.location.href = '/';
-
 						isDisabled = false;
+						setTimeout(() => {
+							window.location.href = '/#/posts/create';
+							document.location.reload(true);
+						}, 1000);
 						return data;
 					}}
 				/>
@@ -136,7 +138,6 @@ const ProductCreate = ({ classes, ...props }) => {
 	const typeBody = useFormInput('');
 	const transmission = useFormInput('');
 
-	useEffect(() => {}, [ image_path.length ]);
 	const payload = {
 		image_path: image_path,
 		title: title.value,
@@ -197,14 +198,7 @@ const ProductCreate = ({ classes, ...props }) => {
 					<TextInput {...link} source="link" validate={required()} formClassName={classes.heightFormGroup} />
 				</FormTab>
 				<FormTab label="resources.products.tabs.description" path="description">
-					<textarea
-						validate={required()}
-						rows={15}
-						cols={15}
-						{...description}
-						source="description"
-						addLabel={true}
-					/>
+					<textarea rows={15} cols={15} {...description} source="description" />
 				</FormTab>
 				<FormTab label="resources.products.tabs.image">
 					<UploadFileList myChange={setValue} />
