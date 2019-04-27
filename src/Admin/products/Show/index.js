@@ -22,7 +22,7 @@ const ResponsiveBlock = withStyles(styles)(({ classes, ...props }) => (
 					<span className={classes.titleLabel}>{props.record.title}</span>
 					<span className={classes.priceLabel}>{props.record.price}</span>
 				</div>
-				<LabelShow {...props} className={classes.labelGrid} />
+				<LabelShow {...props} mobailSizeIcon={30} className={classes.labelGrid} />
 				<SliderImages {...props} className={classes.imageBlock} />
 				<span>{props.record.description}</span>
 			</Fragment>
@@ -42,7 +42,7 @@ const ResponsiveBlock = withStyles(styles)(({ classes, ...props }) => (
 		}
 	/>
 ));
-const LabelShow = withStyles(styles)(({ classes, className, myMargin, ...props }) => {
+const LabelShow = withStyles(styles)(({ classes, className, myMargin, mobailSizeIcon, ...props }) => {
 	const items = [
 		{ label: props.record.drive, image: drive, id: 1 },
 		{ label: props.record.fuelType, image: gasoline, id: 2 },
@@ -53,14 +53,14 @@ const LabelShow = withStyles(styles)(({ classes, className, myMargin, ...props }
 	];
 	return (
 		<div className={className}>
-			{items.map((item) => <ItemLabel myMargin={myMargin} key={item.id} {...item} />)}
+			{items.map((item) => <ItemLabel myMargin={myMargin} key={item.id} {...item} mobailSizeIcon={mobailSizeIcon}/>)}
 		</div>
 	);
 });
 
-const ItemLabel = withStyles(styles)(({ classes, label, image, myMargin }) => (
+const ItemLabel = withStyles(styles)(({ classes, label, image, myMargin , mobailSizeIcon}) => (
 	<span className={classes.widthFormGroup} style={{ marginTop: myMargin }}>
-		<img src={image} alt="" style={{ width: 40, height: 40 }} />
+		<img src={image} alt="" style={{ width: mobailSizeIcon ? mobailSizeIcon : 40, height: mobailSizeIcon ? mobailSizeIcon :40 }} />
 		<br />
 		{label}
 	</span>

@@ -28,7 +28,8 @@ class Menu extends Component {
     };
 
     static propTypes = {
-        onMenuClick: PropTypes.func
+        onMenuClick: PropTypes.func,
+        logout: PropTypes.object,
     };
 
     handleToggle = menu => {

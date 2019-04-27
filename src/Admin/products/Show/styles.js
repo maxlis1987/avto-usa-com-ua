@@ -33,7 +33,7 @@ const styles = {
 		heigth: 200,
 		maxWidth: 400,
 		'& > *': {
-			width: 120,
+			width: 100,
 			margin: 'auto',
 			heigth: 40
 		}

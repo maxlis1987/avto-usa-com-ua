@@ -36,7 +36,7 @@
       fuelType: String
       drive: String
 		): Car!
-		deletePost(id: ID!): Car!
+		deleteCar(id: ID!): Car!
 	}
 
   type User {
