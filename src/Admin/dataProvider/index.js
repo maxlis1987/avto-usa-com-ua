@@ -42,8 +42,7 @@ const customBuildQuery = (introspectionResults) => {
 export default () => {
 	return buildApolloClient({
 		clientOptions: {
-			    uri: 'http://localhost:4000/graphql'
-			// uri: 'http://sales.avto-usa.com.ua:14951/graphql'
+			uri: 'http://sales.avto-usa.com.ua:14951/graphql'
 		},
 		introspection: { schema },
 		buildQuery: customBuildQuery
