@@ -6,8 +6,8 @@ import queries from './queries';
 
 const getGqlResource = (resource) => {
 	switch (resource) {
-		case 'posts':
-			return 'posts';
+		case 'cars':
+			return 'Cars';
 		// case 'customers':
 		//     return 'Customer';
 
@@ -20,8 +20,8 @@ const getGqlResource = (resource) => {
 		// case 'products':
 		//     return 'Product';
 
-		case 'post':
-			return 'Post';
+		case 'car':
+			return 'Car';
 
 		// case 'invoices':
 		//     return 'Invoice';
@@ -42,8 +42,8 @@ const customBuildQuery = (introspectionResults) => {
 export default () => {
 	return buildApolloClient({
 		clientOptions: {
-			uri: 'http://localhost:4000/graphql'
-			// uri: 'http://avto-usa.com.ua:4000/graphql'
+			    uri: 'http://localhost:4000/graphql'
+			// uri: 'http://sales.avto-usa.com.ua:14951/graphql'
 		},
 		introspection: { schema },
 		buildQuery: customBuildQuery

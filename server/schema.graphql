@@ -1,7 +1,7 @@
 	type Query {
 		users: [User]
-		posts: [Post]
-		post(id: ID!): Post!
+		cars: [Post]
+		car(id: ID!): Car!
 	}
 
 	type Mutation {
@@ -20,7 +20,7 @@
       fuelType: String
       drive: String
 
-		): Post!
+		): Car!
 		updatePost(
 			id: ID!
 			title: String
@@ -35,8 +35,8 @@
       odometer: String
       fuelType: String
       drive: String
-		): Post!
-		deletePost(id: ID!): Post!
+		): Car!
+		deletePost(id: ID!): Car!
 	}
 
   type User {
@@ -45,7 +45,7 @@
 		password: String!
 	}
 
-	type Post {
+	type Car {
 		id: ID!
 		vincode: String
 		title: String

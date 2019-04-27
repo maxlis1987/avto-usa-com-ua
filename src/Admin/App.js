@@ -64,7 +64,7 @@ class App extends Component {
 				customReducers={{ theme: themeReducer }}
 				customSagas={sagas}
 				// customRoutes={customRoutes}
-				authProvider={authProvider}
+				// authProvider={authProvider}
 				// dashboard={Dashboard}
 				loginPage={Login}
 				appLayout={Layout}
@@ -72,7 +72,7 @@ class App extends Component {
 				i18nProvider={i18nProvider}
 			>
 				<Resource
-					name="posts"
+					name="cars"
 					create={admin === 'isLogin' ? products.create : false}
 					list={products.list}
 					edit={products.edit}

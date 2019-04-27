@@ -25,23 +25,41 @@ const styles = {
 };
 
 const ProductEdit = ({ classes, ...props }) => (
-	<Edit {...props} title={<ProductTitle />}>
-		<TabbedForm>
-			<FormTab label="resources.products.tabs.image">
-				<Poster />
-				<TextInput source="image_path" options={{ fullWidth: true }} />
-			</FormTab>
-			<FormTab label="resources.products.tabs.details" path="details">
-				<TextInput source="price" className={classes.price} />
-				<TextInput source="price" className={classes.width} formClassName={classes.widthFormGroup} />
-				<TextInput source="vincode" className={classes.height} formClassName={classes.heightFormGroup} />
-			</FormTab>
-			<FormTab label="resources.products.tabs.description" path="description">
-				<RichTextInput source="description" addLabel={false} />
-			</FormTab>
-			<FormTab label="resources.products.tabs.reviews" path="post" />
-		</TabbedForm>
-	</Edit>
+
+    <Edit {...props} title={<ProductTitle />}>
+        <TabbedForm >
+            <FormTab label="resources.products.tabs.image">
+                <Poster />
+                <TextInput source="image_path" options={{ fullWidth: true }} />
+
+            </FormTab>
+            <FormTab label="resources.products.tabs.details" path="details">
+
+                <TextInput source="price" className={classes.price} />
+                <TextInput
+                    source="price"
+                    className={classes.width}
+                    formClassName={classes.widthFormGroup}
+                />
+                <TextInput
+                    source="vincode"
+                    className={classes.height}
+                    formClassName={classes.heightFormGroup}
+                />
+
+
+            </FormTab>
+            <FormTab
+                label="resources.products.tabs.description"
+                path="description"
+            >
+                <RichTextInput source="description" addLabel={false} />
+            </FormTab>
+            <FormTab label="resources.products.tabs.reviews" path="car">
+
+            </FormTab>
+        </TabbedForm>
+    </Edit>
 );
 
 export default withStyles(styles)(ProductEdit);

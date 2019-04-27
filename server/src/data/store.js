@@ -12,7 +12,7 @@ const UserModel = db.define('user', {
 	pasword: { type: Sequelize.STRING }
 });
 
-const PostModel = db.define('post', {
+const CarModel = db.define('car', {
 	title: { type: Sequelize.STRING },
 	description: { type: Sequelize.STRING },
 	link: { type: Sequelize.STRING },
@@ -28,10 +28,10 @@ const PostModel = db.define('post', {
 	fuelType: { type: Sequelize.STRING }
 });
 
-UserModel.hasMany(PostModel);
-PostModel.belongsTo(UserModel);
+UserModel.hasMany(CarModel);
+CarModel.belongsTo(UserModel);
 
 const User = db.models.user;
-const Post = db.models.post;
+const Car = db.models.car;
 
-module.exports = { User, Post };
+module.exports = { User, Car };

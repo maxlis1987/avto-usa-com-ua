@@ -3,13 +3,13 @@ const { gql } = require('apollo-server');
 const typeDefs = gql`
 	type Query {
 		users: [User]
-		posts: [Post]
-		post(id: ID!): Post!
+		cars: [Car]
+		car(id: ID!): Car!
 	}
 
 	type Mutation {
 		createUser(email: String!, first_name: String!, last_name: String): User!
-		createPost(
+		createCar(
 			title: String
 			description: String
 			link: String
@@ -22,8 +22,8 @@ const typeDefs = gql`
 			odometer: String
 			fuelType: String
 			drive: String
-		): Post!
-		updatePost(
+		): Car!
+		updateCar(
 			id: ID!
 			title: String
 			link: String
@@ -37,8 +37,8 @@ const typeDefs = gql`
 			odometer: String
 			fuelType: String
 			drive: String
-		): Post!
-		deletePost(id: ID!): Post!
+		): Car!
+		deleteCar(id: ID!): Car!
 	}
 
 	type User {
@@ -47,7 +47,7 @@ const typeDefs = gql`
 		password: String!
 	}
 
-	type Post {
+	type Car {
 		id: ID!
 		vincode: String
 		title: String

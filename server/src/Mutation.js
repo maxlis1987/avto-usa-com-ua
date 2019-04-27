@@ -1,4 +1,4 @@
-const { User, Post } = require('./data/store');
+const { User, Car } = require('./data/store');
 const uuidv4 = require('uuid/v4');
 const Mutation = {
 	createUser: async (_, { email, first_name, last_name }) => {
@@ -11,7 +11,7 @@ const Mutation = {
 		});
 	},
 
-	createPost: async (
+	createCar: async (
 		_,
 		{
 			title,
@@ -29,7 +29,7 @@ const Mutation = {
 		}
 	) => {
 		try {
-			const result = await Post.create({
+			const result = await Car.create({
 				id: uuidv4(),
 				title,
 				description,
@@ -52,7 +52,7 @@ const Mutation = {
 		}
 	},
 
-	updatePost: async (
+	updateCar: async (
 		_,
 		{
 			id,
@@ -71,7 +71,7 @@ const Mutation = {
 		}
 	) => {
 		try {
-			const result = await Post.update({
+			const result = await Car.update({
 				id,
 				title,
 				description,
@@ -91,9 +91,9 @@ const Mutation = {
 			console.log('error');
 		}
 	},
-	deletePost: async (_, { id }) => {
+	deleteCar: async (_, { id }) => {
 		try {
-			const result = await Post.delete({ id });
+			const result = await Car.delete({ id });
 			return { ...result };
 		} catch (error) {
 			console.log('error');

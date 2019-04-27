@@ -28,8 +28,7 @@ class Menu extends Component {
     };
 
     static propTypes = {
-        onMenuClick: PropTypes.func,
-        logout: PropTypes.object,
+        onMenuClick: PropTypes.func
     };
 
     handleToggle = menu => {
@@ -40,115 +39,33 @@ class Menu extends Component {
         const { onMenuClick, open, logout, translate } = this.props;
         return (
             <div>
-                {' '}
-                <DashboardMenuItem onClick={onMenuClick} />
-                {/* <MenuItemLink
-                    to={`/products`}
-                    primaryText={translate(`resources.products.name`, {
-                        smart_count:  1,
-                    })}
-                    leftIcon={<products.icon />}
-                    onClick={onMenuClick}
-                /> */}
-
-                {/*  <SubMenu
-                    handleToggle={() => this.handleToggle('menuSales')}
-                    isOpen={this.state.menuSales}
-                    sidebarIsOpen={open}
-                    name="pos.menu.sales"
-                    icon={<orders.icon />}
-                >
-                   <MenuItemLink
-                        to={`/commands`}
-                        primaryText={translate(`resources.commands.name`, {
-                            smart_count: 2,
-                        })}
-                        leftIcon={<orders.icon />}
-                        onClick={onMenuClick}
-                    />
-                    <MenuItemLink
-                        to={`/invoices`}
-                        primaryText={translate(`resources.invoices.name`, {
-                            smart_count: 2,
-                        })}
-                        leftIcon={<invoices.icon />}
-                        onClick={onMenuClick}
-                    />
-                </SubMenu>
-                <SubMenu
-                    handleToggle={() => this.handleToggle('menuCatalog')}
-                    isOpen={this.state.menuCatalog}
-                    sidebarIsOpen={open}
-                    name="pos.menu.catalog"
-                    icon={<products.icon />}
-                >
-                    <MenuItemLink
-                        to={`/products`}
-                        primaryText={translate(`resources.products.name`, {
-                            smart_count: 2,
-                        })}
-                        leftIcon={<products.icon />}
-                        onClick={onMenuClick}
-                    />
-                  <MenuItemLink
-                        to={`/categories`}
-                        primaryText={translate(`resources.categories.name`, {
-                            smart_count: 2,
-                        })}
-                        leftIcon={<categories.icon />}
-                        onClick={onMenuClick}
-                    />
-                </SubMenu>
-                <SubMenu
-                    handleToggle={() => this.handleToggle('menuCustomer')}
-                    isOpen={this.state.menuCustomer}
-                    sidebarIsOpen={open}
-                    name="pos.menu.customers"
-                    icon={<visitors.icon />}
-                >
-                    <MenuItemLink
-                        to={`/customers`}
-                        primaryText={translate(`resources.customers.name`, {
-                            smart_count: 2,
-                        })}
-                        leftIcon={<visitors.icon />}
-                        onClick={onMenuClick}
-                    />
-                    <MenuItemLink
-                        to={`/segments`}
-                        primaryText={translate(`resources.segments.name`, {
-                            smart_count: 2,
-                        })}
-                        leftIcon={<LabelIcon />}
-                        onClick={onMenuClick}
-                    />
-                      </SubMenu>
-
-
-                <MenuItemLink
-                    to={`/reviews`}
-                    primaryText={translate(`resources.reviews.name`, {
-                        smart_count: 2,
-                    })}
-                    leftIcon={<reviews.icon />}
-                    onClick={onMenuClick}
-                />
-                <Responsive
-                    xsmall={
-                        <MenuItemLink
-                            to="/configuration"
-                            primaryText={translate('pos.configuration')}
-                            leftIcon={<SettingsIcon />}
+            <MenuItemLink
+                            to={`/cars`}
+                            primaryText={`Автомобили`}
+                            leftIcon={<orders.icon />}
                             onClick={onMenuClick}
                         />
-                    }
-                    medium={null}
-                />*/}
-
-                <Responsive
-                    small={logout}
-                    medium={null} // Pass null to render nothing on larger devices
-                />
+                {/*<SubMenu
+                        handleToggle={() => this.handleToggle('menuSales')}
+                        isOpen={this.state.menuSales}
+                        sidebarIsOpen={open}
+                        name="Cars"
+                        icon={<orders.icon />}
+                    >
+                       <MenuItemLink
+                            to={`/cars`}
+                            primaryText={`Available cars`}
+                            leftIcon={<orders.icon />}
+                            onClick={onMenuClick}
+                        />
+                        <MenuItemLink
+                            to={`/cars`}
+                            primaryText={`Sold cars`}
+                            leftIcon={<orders.icon />}
+                            onClick={onMenuClick}
+                        />
+                        
+                </SubMenu>*/}
             </div>
         );
     }

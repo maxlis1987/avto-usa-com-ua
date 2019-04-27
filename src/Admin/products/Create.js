@@ -14,8 +14,8 @@ export const styles = {
 	heightFormGroup: { display: 'inline-block', marginLeft: 32 }
 };
 
-const CREATE_POST = gql`
-	mutation createPost(
+const CREATE_CAR = gql`
+	mutation createCar(
 		$title: String
 		$description: String
 		$link: String
@@ -29,7 +29,7 @@ const CREATE_POST = gql`
 		$typeBody: String
 		$transmission: String
 	) {
-		createPost(
+		createCar(
 			title: $title
 			description: $description
 			link: $link
@@ -88,14 +88,14 @@ const ApproveButton = ({
 		transmission !== '';
 
 	return (
-		<Mutation type="CREATE" resource="products" mutation={CREATE_POST}>
-			{(createPost, { data }) => (
+		<Mutation type="CREATE" resource="products" mutation={CREATE_CAR}>
+			{(createCar, { data }) => (
 				<SaveButton
 					label="Save"
 					disabled={!isDisabled}
 					style={{ margin: 25 }}
 					onClick={(e) => {
-						createPost({
+						createCar({
 							variables: {
 								title,
 								image_path,
@@ -113,9 +113,10 @@ const ApproveButton = ({
 						});
 						isDisabled = false;
 						setTimeout(() => {
-							window.location.href = '/#/posts/create';
+							window.location.href = '/#/cars/create';
 							document.location.reload(true);
 						}, 1000);
+
 						return data;
 					}}
 				/>
