@@ -8,9 +8,8 @@ const db = new Sequelize('dear', null, null, {
 });
 
 const UserModel = db.define('user', {
-	email: { type: Sequelize.STRING },
-	first_name: { type: Sequelize.STRING },
-	last_name: { type: Sequelize.STRING }
+	username: { type: Sequelize.STRING },
+	pasword: { type: Sequelize.STRING }
 });
 
 const PostModel = db.define('post', {

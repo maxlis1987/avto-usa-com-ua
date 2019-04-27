@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Admin, Resource } from 'react-admin';
-
+import { createBrowserHistory as createHistory } from 'history';
 import './App.css';
-
 import authProvider from './authProvider';
 import sagas from './sagas';
 import themeReducer from './themeReducer';
 import { Login, Layout } from './layout';
 import { Dashboard } from './dashboard';
-// import customRoutes from './routes';
+import customRoutes from './routes';
 import englishMessages from './i18n/en';
 
 import visitors from './visitors';
@@ -19,6 +18,7 @@ import categories from './categories';
 import reviews from './reviews';
 
 import dataProviderFactory from './dataProvider';
+const history = createHistory();
 
 const i18nProvider = (locale) => {
 	if (locale === 'fr') {
@@ -64,7 +64,7 @@ class App extends Component {
 				customReducers={{ theme: themeReducer }}
 				customSagas={sagas}
 				// customRoutes={customRoutes}
-				// authProvider={authProvider}
+				authProvider={authProvider}
 				// dashboard={Dashboard}
 				loginPage={Login}
 				appLayout={Layout}

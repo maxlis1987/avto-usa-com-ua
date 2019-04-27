@@ -1,40 +1,45 @@
-import React from 'react';
-import { Mutation } from 'react-apollo';
-import gql from "graphql-tag";
-
-const ADD_IMAGE = gql`
-  mutation createPost($image_path: String) {
-    createPost(image_path: $image_path) {
-      image_path
-    }
-  }
+import gql from 'graphql-tag';
+export const CREATE_POST = gql`
+	mutation createPost(
+		$title: String
+		$description: String
+		$link: String
+		$price: String
+		$image_path: String
+		$vincode: String
+		$drive: String
+		$fuelType: String
+		$engineVolume: String
+		$odometer: String
+		$typeBody: String
+		$transmission: String
+	) {
+		createPost(
+			title: $title
+			description: $description
+			link: $link
+			price: $price
+			image_path: $image_path
+			vincode: $vincode
+			drive: $drive
+			fuelType: $fuelType
+			engineVolume: $engineVolume
+			odometer: $odometer
+			typeBody: $typeBody
+			transmission: $transmission
+		) {
+			title
+			description
+			link
+			price
+			image_path
+			vincode
+			drive
+			fuelType
+			engineVolume
+			odometer
+			typeBody
+			transmission
+		}
+	}
 `;
-
-export default () => {
-  let input;
-  return (
-
-    <Mutation mutation={ADD_IMAGE}>
-          {(createPost, { data }) => (
-            <div>
-              <form
-                onSubmit={e => {
-                  e.preventDefault();
-                  createPost({ variables: { image_path: input.value } });
-                  input.value = "";
-                }}
-              >
-              <input
-                style={{border: '1px solid red'}}
-                ref={node => {
-                  input = node;
-                }}
-              />
-                <button type="submit">Add Todo</button>
-              </form>
-            </div>
-          )}
-        </Mutation>
-
-  )
-}

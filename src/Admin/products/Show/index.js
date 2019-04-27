@@ -29,20 +29,20 @@ const ResponsiveBlock = withStyles(styles)(({ classes, ...props }) => (
 		}
 		medium={
 			<Fragment>
-				<div className={classes.headerShow}>
-					<span className={classes.titleLabel}>{props.record.title}</span>
-					<span className={classes.priceLabel}>{props.record.price}</span>
-				</div>
 				<div style={{ display: 'inline-flex' }}>
 					<SliderImages {...props} className={classes.imageBlock} />
-					<LabelShow {...props} className={classes.labelGrid} myMargin={50} />
+					<div style={{ display: 'block' }}>
+						<h3 className={classes.titleLabel}>{props.record.title}</h3>
+						<h3 className={classes.priceLabel}>{props.record.price}</h3>
+						<LabelShow {...props} className={classes.labelGrid} myMargin={50} />
+					</div>
 				</div>
 				<p>{props.record.description}</p>
 			</Fragment>
 		}
 	/>
 ));
-const LabelShow = ({ className, myMargin, ...props }) => {
+const LabelShow = withStyles(styles)(({ classes, className, myMargin, ...props }) => {
 	const items = [
 		{ label: props.record.drive, image: drive, id: 1 },
 		{ label: props.record.fuelType, image: gasoline, id: 2 },
@@ -56,7 +56,7 @@ const LabelShow = ({ className, myMargin, ...props }) => {
 			{items.map((item) => <ItemLabel myMargin={myMargin} key={item.id} {...item} />)}
 		</div>
 	);
-};
+});
 
 const ItemLabel = withStyles(styles)(({ classes, label, image, myMargin }) => (
 	<span className={classes.widthFormGroup} style={{ marginTop: myMargin }}>

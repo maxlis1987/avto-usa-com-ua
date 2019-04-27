@@ -14,12 +14,12 @@ const styles = {
 	},
 	titleLabel: {
 		fontSize: '1.1em',
-		maxWidth: '65%'
+		textAlign: 'center'
 	},
 	priceLabel: {
 		fontSize: '1.8em',
 		color: 'tomato',
-		maxWidth: '33%'
+		textAlign: 'center'
 	},
 	imageBlock: {
 		float: 'left',
