@@ -9,7 +9,7 @@ const db = new Sequelize('dear', null, null, {
 
 const UserModel = db.define('user', {
 	username: { type: Sequelize.STRING },
-	pasword: { type: Sequelize.STRING }
+	password: { type: Sequelize.STRING }
 });
 
 const PostModel = db.define('post', {
@@ -25,7 +25,9 @@ const PostModel = db.define('post', {
 	typeBody: { type: Sequelize.STRING },
 	transmission: { type: Sequelize.STRING },
 	odometer: { type: Sequelize.STRING },
-	fuelType: { type: Sequelize.STRING }
+	fuelType: { type: Sequelize.STRING },
+	createdAt: { type: Sequelize.STRING },
+	updatedAt: { type: Sequelize.STRING }
 });
 
 UserModel.hasMany(PostModel);

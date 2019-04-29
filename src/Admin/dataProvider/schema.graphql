@@ -2,10 +2,15 @@
 		users: [User]
 		posts: [Post]
 		post(id: ID!): Post!
+		user(id: ID!): User!
 	}
 
 	type Mutation {
-		createUser(email: String!, first_name: String!, last_name: String): User!
+		createUser(
+      username: String
+      password: String
+      createdAt: String
+      ): User!
 		createPost(
 			title: String
 			description: String
@@ -13,13 +18,12 @@
 			price: String
 			image_path: String
 			vincode: String
-      engineVolume: String
-      typeBody: String
-      transmission: String
-      odometer: String
-      fuelType: String
-      drive: String
-
+			engineVolume: String
+			typeBody: String
+			transmission: String
+			odometer: String
+			fuelType: String
+			drive: String
 		): Post!
 		updatePost(
 			id: ID!
@@ -29,20 +33,20 @@
 			description: String
 			image_path: String
 			vincode: String
-      engineVolume: String
-      typeBody: String
-      transmission: String
-      odometer: String
-      fuelType: String
-      drive: String
+			engineVolume: String
+			typeBody: String
+			transmission: String
+			odometer: String
+			fuelType: String
+			drive: String
 		): Post!
 		deletePost(id: ID!): Post!
 	}
 
-  type User {
+	type User {
 		id: ID!
-		username: String!
-		password: String!
+		username: String
+		password: String
 	}
 
 	type Post {
@@ -56,10 +60,10 @@
 		image_path: String
 		createdAt: String
 		updatedAt: String
-    engineVolume: String
-    typeBody: String
-    transmission: String
-    odometer: String
-    fuelType: String
-    drive: String
+		engineVolume: String
+		typeBody: String
+		transmission: String
+		odometer: String
+		fuelType: String
+		drive: String
 	}

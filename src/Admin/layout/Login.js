@@ -74,9 +74,10 @@ class Login extends Component {
 		return (window.location.href = '/');
 	};
 
-	componentDidMount() {
-		window.location.href = '/#/posts';
-	}
+	// componentDidMount() {
+	// 	window.location.href = '/#/posts';
+  // }
+  
 	render() {
 		const { classes, handleSubmit, isLoading, translate } = this.props;
 		return (

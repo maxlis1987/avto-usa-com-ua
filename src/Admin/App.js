@@ -64,7 +64,7 @@ class App extends Component {
 				customReducers={{ theme: themeReducer }}
 				customSagas={sagas}
 				// customRoutes={customRoutes}
-				authProvider={authProvider}
+				// authProvider={authProvider}
 				// dashboard={Dashboard}
 				loginPage={Login}
 				appLayout={Layout}

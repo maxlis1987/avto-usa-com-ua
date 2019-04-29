@@ -1,14 +1,18 @@
 const { User, Post } = require('./data/store');
 const uuidv4 = require('uuid/v4');
+
 const Mutation = {
-	createUser: async (_, { email, first_name, last_name }) => {
-		return User.create({
-			email,
-			first_name,
-			last_name
-		}).then((user) => {
-			return user;
-		});
+	createUser: async (_, { username, password }) => {
+		try {
+			const result = await User.create({
+				username,
+				password
+			});
+
+			return { ...result };
+		} catch (error) {
+			console.log('error', error);
+		}
 	},
 
 	createPost: async (
