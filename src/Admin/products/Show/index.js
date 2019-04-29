@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Edit, SaveButton, TextField, SimpleForm, DeleteButton, Toolbar, Responsive } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { Paper } from '@material-ui/core';
 import SliderImages from './SliderImages';
 import { styles } from './styles';
 import { body, drive, engine, gasoline, odometer, transmission } from './img';
@@ -9,6 +10,10 @@ const ProductEdit = ({ classes, ...props }) => {
 	return (
 		<Edit {...props} title={<ProductTitle />}>
 			<SimpleForm toolbar={<PostShowActions />} className={classes.main} redirect="show" resource="userId">
+				<Paper className={classes.headerDescriptionLable}>
+					Все машины уже выкуплены и оплачены с аукционов и находиться в порту Одесса.<br /> По вопросам
+					оплаты или заказа автомобиля обращаться по тел. 0678323457 0982416505
+				</Paper>
 				<ResponsiveBlock {...props} />
 			</SimpleForm>
 		</Edit>
@@ -22,24 +27,27 @@ const ResponsiveBlock = withStyles(styles)(({ classes, ...props }) => (
 					<span className={classes.titleLabel}>{props.record.title}</span>
 					<span className={classes.priceLabel}>{props.record.price}</span>
 				</div>
-				<LabelShow {...props} mobailSizeIcon={30} className={classes.labelGrid} />
-				<SliderImages {...props} className={classes.imageBlock} />
+				<LabelShow {...props} mobailSizeIcon={30} className={classes.labelGridMobile} />
+				<SliderImages {...props} className={classes.imageBlockMobile} />
 				<span>{props.record.description}</span>
 			</Fragment>
 		}
 		medium={
 			<Fragment>
-				<div style={{ display: 'inline-flex' }}>
+				<div style={{ display: 'inline-flex', maxWidth: '100%' }}>
 					<SliderImages {...props} className={classes.imageBlock} />
-					<div style={{ display: 'block' }}>
+					<div style={{ display: 'block', marginTop: 10, width: '100%' }}>
 						<h3 className={classes.titleLabel}>{props.record.title}</h3>
-						<h3 className={classes.priceLabel}>{props.record.price}</h3>
-						<h2 className={classes.descriptionLabel}>Стоимость включает в себя доставку в порт Одесса и растаможку</h2>	
+						<h3 style={{ marginLeft: 50 }} className={classes.priceLabel}>
+							{props.record.price}
+						</h3>
+						<p className={classes.descriptionLabel}>
+							Стоимость включает в себя доставку в порт Одесса и растаможку автомобиля.
+						</p>
 						<LabelShow {...props} className={classes.labelGrid} myMargin={50} />
-						<h2 className={classes.descriptionLabel}>{props.record.description}</h2>
+						<p className={classes.description}>{props.record.description}</p>
 					</div>
 				</div>
-				
 			</Fragment>
 		}
 	/>
@@ -55,14 +63,20 @@ const LabelShow = withStyles(styles)(({ classes, className, myMargin, mobailSize
 	];
 	return (
 		<div className={className}>
-			{items.map((item) => <ItemLabel myMargin={myMargin} key={item.id} {...item} mobailSizeIcon={mobailSizeIcon}/>)}
+			{items.map((item) => (
+				<ItemLabel myMargin={myMargin} key={item.id} {...item} mobailSizeIcon={mobailSizeIcon} />
+			))}
 		</div>
 	);
 });
 
-const ItemLabel = withStyles(styles)(({ classes, label, image, myMargin , mobailSizeIcon}) => (
+const ItemLabel = withStyles(styles)(({ classes, label, image, myMargin, mobailSizeIcon }) => (
 	<span className={classes.widthFormGroup} style={{ marginTop: myMargin }}>
-		<img src={image} alt="" style={{ width: mobailSizeIcon ? mobailSizeIcon : 40, height: mobailSizeIcon ? mobailSizeIcon :40 }} />
+		<img
+			src={image}
+			alt=""
+			style={{ width: mobailSizeIcon ? mobailSizeIcon : 30, height: mobailSizeIcon ? mobailSizeIcon : 30 }}
+		/>
 		<br />
 		{label}
 	</span>

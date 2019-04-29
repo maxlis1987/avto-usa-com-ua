@@ -15,15 +15,15 @@ import { linkToRecord } from 'ra-core';
 const styles = (theme) => ({
 	root: {
 		display: 'flex',
-	    flexWrap: 'wrap',
-	    justifyContent: 'space-around',
-	    overflow: 'hidden',
+		flexWrap: 'wrap',
+		justifyContent: 'space-around',
+		overflow: 'hidden'
 	},
 	gridList: {
 		width: '100%',
 		margin: '2px',
 		flexGrow: '1',
-		height: 'auto' 
+		height: 'auto'
 	},
 	tileBar: {
 		background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.4) 70%,rgba(0,0,0,0) 100%)',
@@ -74,33 +74,28 @@ const LoadingGridList = ({ width, classes, nbItems = 10 }) => (
 const LoadedGridList = ({ classes, ids, data, basePath, width }) => {
 	return (
 		<div className={classes.root}>
-			<MuiGridList 
-			cols={getColsForWidth(width)} 
-			className={classes.gridList}>
+			<MuiGridList cols={getColsForWidth(width)} className={classes.gridList}>
 				{ids.map((id) => {
 					return (
-						<MuiGridListTile 
-						component={Link} 
-						key={id} 
-						to={linkToRecord(basePath, data[id].id)}>
+						<MuiGridListTile component={Link} key={id} to={linkToRecord(basePath, data[id].id)}>
 							<img src={JSON.parse(data[id].image_path)[0]} alt="" />
 							<MuiGridListTileBar
 								classes={{
-							        title: classes.titleBar, 
-							        root: classes.tileBar
-							      }}
+									title: classes.titleBar,
+									root: classes.tileBar
+								}}
 								title={data[id].title}
 								subtitle={
 									<NumberField
-											className={classes.price}
-											source="price"
-											record={data[id]}
-											color="inherit"
-											options={{
-												style: 'currency',
-												currency: 'USD'
-											}}
-										/>
+										className={classes.price}
+										source="price"
+										record={data[id]}
+										color="inherit"
+										options={{
+											style: 'currency',
+											currency: 'USD'
+										}}
+									/>
 								}
 							/>
 						</MuiGridListTile>
