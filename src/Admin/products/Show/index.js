@@ -34,10 +34,12 @@ const ResponsiveBlock = withStyles(styles)(({ classes, ...props }) => (
 					<div style={{ display: 'block' }}>
 						<h3 className={classes.titleLabel}>{props.record.title}</h3>
 						<h3 className={classes.priceLabel}>{props.record.price}</h3>
+						<h2 className={classes.descriptionLabel}>Стоимость включает в себя доставку в порт Одесса и растаможку</h2>	
 						<LabelShow {...props} className={classes.labelGrid} myMargin={50} />
+						<h2 className={classes.descriptionLabel}>{props.record.description}</h2>
 					</div>
 				</div>
-				<p>{props.record.description}</p>
+				
 			</Fragment>
 		}
 	/>

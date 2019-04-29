@@ -16,6 +16,12 @@ const styles = {
 		fontSize: '1.1em',
 		textAlign: 'center'
 	},
+	descriptionLabel: {
+		maxWidth: '20em',
+		fontSize: '1em',
+		margin: 25,
+		textAlign: 'left'
+	},
 	priceLabel: {
 		fontSize: '1.8em',
 		color: 'tomato',
