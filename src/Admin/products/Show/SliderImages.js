@@ -20,7 +20,7 @@ const SliderImages = (props) => {
 				</div>
 			}
 			medium={
-				<div style={{ width: '35vw', marginTop: 10 }}>
+				<div style={{ width: '40vw', marginTop: 10 }}>
 					<Carousel autoPlay swipeScrollTolerance={1}>
 						{images.map((image, index) => (
 							<div key={index * 23}>

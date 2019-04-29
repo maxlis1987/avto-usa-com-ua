@@ -7,49 +7,54 @@ const styles = {
 		textOverflow: 'ellipsis',
 		whiteSpace: 'nowrap'
 	},
-	widthFormGroup: { display: 'inline-block', margin: 5, textAlign: 'center' },
+	widthFormGroup: { 
+		display: 'inline-block', 
+		textAlign: 'center' 
+	},
 	main: {
 		display: 'block',
 		textAlign: 'left'
 	},
 	titleLabel: {
-		display: 'inline-block',
 		fontSize: '1.1em',
 		textAlign: 'center',
-		margin: 10
+		margin: 10,
+		fontWeight: 'bold',
+
+	},
+	priceLabel: {
+
+		margin: 10,
+		fontSize: '1.3em',
+		fontWeight: 'bold',
+		color: 'tomato',
+		textAlign: 'center',
+
 	},
 	descriptionLabel: {
-		maxWidth: '20em',
 		fontSize: '1em',
 		color: 'blue',
 		margin: 10,
 		fontStyle: 'italic',
 		marginTop: 0,
-		textAlign: 'left'
+		textAlign: 'center'
 	},
 	description: {
-		maxWidth: '20em',
+		maxWidth: '100%',
 		fontSize: '1em',
 		color: 'charcoal-grey',
 		margin: 10,
 		fontStyle: 'italic',
 		marginTop: 0,
-		textAlign: 'left',
+		textAlign: 'center',
 		position: 'relative',
 		top: 50
 	},
-	priceLabel: {
-		display: 'inline-block',
-		margin: 10,
-		marginLeft: 30,
-		fontSize: '1.3em',
-		fontWeight: 'bold',
-		color: 'tomato',
-		textAlign: 'center'
-	},
+
 	imageBlock: {
 		float: 'left',
-		margin: '7px 7px 7px 0px'
+		margin: '7px 7px 7px 0px',
+		width: '50%'
 	},
 	delete: { display: 'none' },
 	labelGrid: {
@@ -58,7 +63,7 @@ const styles = {
 		marginTop: -10,
 		marginLeft: 20,
 		heigth: 200,
-		maxWidth: 400,
+		maxWidth: '100%',
 		'& > *': {
 			width: 100,
 			margin: 'auto'
@@ -85,9 +90,11 @@ const styles = {
 	headerDescriptionLable: {
 		backgroundColor: 'orange',
 		color: 'blue',
-		width: '80%',
+		width: '100%',
 		lineHeight: 1.3,
-		margin: '0px 0px 0px 0px'
+		margin: '0px 0px 0px 0px',
+		textAlign: 'center',
+		fontStyle: 'oblique'
 	}
 };
 export { createStyles, styles };

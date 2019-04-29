@@ -11,7 +11,7 @@ const ProductEdit = ({ classes, ...props }) => {
 		<Edit {...props} title={<ProductTitle />}>
 			<SimpleForm toolbar={<PostShowActions />} className={classes.main} redirect="show" resource="userId">
 				<Paper className={classes.headerDescriptionLable}>
-					Все машины уже выкуплены и оплачены с аукционов и находиться в порту Одесса.<br /> По вопросам
+					Все машины уже выкуплены и оплачены с аукционов и находиться в порту Одесса. <br /> По вопросам
 					оплаты или заказа автомобиля обращаться по тел. 0678323457 0982416505
 				</Paper>
 				<ResponsiveBlock {...props} />
@@ -34,11 +34,13 @@ const ResponsiveBlock = withStyles(styles)(({ classes, ...props }) => (
 		}
 		medium={
 			<Fragment>
-				<div style={{ display: 'inline-flex', maxWidth: '100%' }}>
+				<div style={{ display: 'inline-flex', width: '100%' }}>
 					<SliderImages {...props} className={classes.imageBlock} />
 					<div style={{ display: 'block', marginTop: 10, width: '100%' }}>
-						<h3 className={classes.titleLabel}>{props.record.title}</h3>
-						<h3 style={{ marginLeft: 50 }} className={classes.priceLabel}>
+						<h3 className={classes.titleLabel}>
+							{props.record.title}
+						</h3>
+						<h3 className={classes.priceLabel}>
 							{props.record.price}
 						</h3>
 						<p className={classes.descriptionLabel}>
