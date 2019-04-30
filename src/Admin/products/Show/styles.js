@@ -96,7 +96,8 @@ const styles = {
 		textAlign: 'center',
 		fontStyle: 'oblique',
 		fontSize: '1.1em',
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		borderRadius: '10px'
 	},
 	arriveDateLabel: {
 		fontSize: '1.1em',

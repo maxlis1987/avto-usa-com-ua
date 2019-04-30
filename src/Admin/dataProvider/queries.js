@@ -26,8 +26,11 @@ export default (type, resource, params, buildQuery) => {
 			`,
 			variables: params, // params = { id: ... }
 			parseResponse: (response) => {
+				
 				const data = [ ...response.data.cars ];
-				return { data: data, total: 12 };
+				var output = resource === 'SoldCars' ? data.filter(car => car.price === 'SOLD $') : data.filter(car => car.price !== 'SOLD $')
+				console.log('output', output)
+				return { data: output, total: data.length };
 			}
 		};
 	}

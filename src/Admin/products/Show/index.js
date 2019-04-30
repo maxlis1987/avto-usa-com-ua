@@ -1,22 +1,37 @@
 import React, { Fragment } from 'react';
-import { Edit, SaveButton, TextField, SimpleForm, DeleteButton, Toolbar, Responsive } from 'react-admin';
+import { Edit, SaveButton, TextField, SimpleForm, DeleteButton, Toolbar, Responsive, Show, CardActions, EditButton, SimpleShowLayout } from 'react-admin';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Paper } from '@material-ui/core';
+import { Paper, Button} from '@material-ui/core';
 import SliderImages from './SliderImages';
 import { styles } from './styles';
 import { body, drive, engine, gasoline, odometer, transmission } from './img';
 
-const ProductEdit = ({ classes, ...props }) => {
+const cardActionStyle = {
+    zIndex: 2,
+    display: 'inline-block',
+    float: 'right',
+};
+
+const PostShowActionsEdit = ({ basepath, data, resource }) => (
+    <CardActions style={cardActionStyle}>
+        {/*<EditButton basePath={basePath} record={data} />*/}
+        {/* Add your custom actions */}
+        
+    </CardActions>
+);
+
+const ProductPreview = ({ classes, ...props }) => {
 	return (
-		<Edit {...props} title={<ProductTitle />}>
-			<SimpleForm toolbar={<PostShowActions />} className={classes.main} redirect="show" resource="userId">
+
+		<Show {...props} actions={<PostShowActionsEdit />}>
+		<SimpleShowLayout className={classes.main}>
 				<Paper className={classes.headerDescriptionLable}>
 					Все машины уже выкуплены и оплачены с аукционов и находиться в порту Одесса. <br /> По вопросам
 					оплаты или заказа автомобиля обращаться по тел. 0678323457 0982416505 0975993309
 				</Paper>
 				<ResponsiveBlock {...props} />
-			</SimpleForm>
-		</Edit>
+			</SimpleShowLayout>
+		</Show>
 	);
 };
 const ResponsiveBlock = withStyles(styles)(({ classes, ...props }) => (
@@ -87,15 +102,5 @@ const ItemLabel = withStyles(styles)(({ classes, label, image, myMargin, mobailS
 	</span>
 ));
 
-const ProductTitle = ({ record }) => <span>{record.title}</span>;
 
-const PostShowActions = (props) => {
-	const isLogin = window.sessionStorage.getItem('admin');
-	return (
-		<Toolbar>
-			<DeleteButton basePath={props.basePath} record={props.record} style={styles.delete} />
-			<SaveButton basePath={props.basePath} record={props.record} style={styles.delete} />
-		</Toolbar>
-	);
-};
-export default withStyles(styles)(ProductEdit);
+export default withStyles(styles)(ProductPreview);

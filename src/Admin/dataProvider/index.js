@@ -8,6 +8,8 @@ const getGqlResource = (resource) => {
 	switch (resource) {
 		case 'cars':
 			return 'Cars';
+		case 'soldcars':
+			return 'SoldCars';
 		// case 'customers':
 		//     return 'Customer';
 

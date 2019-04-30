@@ -79,6 +79,14 @@ class App extends Component {
 					icon={products.icon}
 					show={products.show}
 				/>
+				<Resource
+					name="soldcars"
+					create={admin === 'isLogin' ? products.create : false}
+					list={products.list}
+					edit={products.edit}
+					icon={products.icon}
+					show={products.show}
+				/>
 			</Admin>
 		);
 	}

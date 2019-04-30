@@ -37,10 +37,16 @@ class Menu extends Component {
 			<div>
 				<MenuItemLink
 					to={`/cars`}
-					primaryText={`Автомобили`}
+					primaryText={`Авто в наличии`}
 					leftIcon={<DirectionsCar style={{ color: 'blue' }} />}
 					onClick={onMenuClick}
 				/>
+                <MenuItemLink
+                    to={`/soldcars`}
+                    primaryText={`Проданные Авто`}
+                    leftIcon={<DirectionsCar style={{ color: 'red' }} />}
+                    onClick={onMenuClick}
+                />
 				{/*{' '}
                 <DashboardMenuItem onClick={onMenuClick} />
                 {/* <MenuItemLink
