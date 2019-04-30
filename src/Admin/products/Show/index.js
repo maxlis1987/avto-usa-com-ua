@@ -27,7 +27,7 @@ const ProductPreview = ({ classes, ...props }) => {
 		<SimpleShowLayout className={classes.main}>
 				<Paper className={classes.headerDescriptionLable}>
 					Все машины уже выкуплены и оплачены с аукционов и находиться в порту Одесса. <br /> По вопросам
-					оплаты или заказа автомобиля обращаться по тел. 0678323457 0982416505 0975993309
+					оплаты или заказа автомобиля обращаться по тел. 0672323457 0982416505 0975993309
 				</Paper>
 				<ResponsiveBlock {...props} />
 			</SimpleShowLayout>
