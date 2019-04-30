@@ -36,7 +36,7 @@ const CustomAppBar = ({ classes, ...props }) => (
 				<Typography variant="title" color="inherit" className={classes.title}>
 					<p>
 						<strong>
-							<i>Авто из США с аукционов</i> 0678323457 0982416505
+							<i>Авто из США с аукционов</i> 0678323457 0982416505 0975993309
 						</strong>
 					</p>
 				</Typography>

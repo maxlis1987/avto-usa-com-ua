@@ -20,6 +20,7 @@ export default (type, resource, params, buildQuery) => {
 						odometer
 						typeBody
 						transmission
+						arriveDate
 					}
 				}
 			`,
@@ -48,6 +49,7 @@ export default (type, resource, params, buildQuery) => {
 						odometer
 						typeBody
 						transmission
+						arriveDate
 						userId
 					}
 				}

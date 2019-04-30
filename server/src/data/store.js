@@ -21,6 +21,7 @@ const CarModel = db.define('car', {
 	userId: { type: Sequelize.STRING },
 	image_path: { type: Sequelize.STRING },
 	drive: { type: Sequelize.STRING },
+	arriveDate: { type: Sequelize.STRING },
 	engineVolume: { type: Sequelize.STRING },
 	typeBody: { type: Sequelize.STRING },
 	transmission: { type: Sequelize.STRING },

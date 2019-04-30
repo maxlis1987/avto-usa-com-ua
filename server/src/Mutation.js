@@ -25,7 +25,8 @@ const Mutation = {
 			engineVolume,
 			odometer,
 			typeBody,
-			transmission
+			transmission,
+			arriveDate
 		}
 	) => {
 		try {
@@ -43,7 +44,8 @@ const Mutation = {
 				engineVolume,
 				odometer,
 				typeBody,
-				transmission
+				transmission,
+				arriveDate
 			});
 
 			return { ...result };
@@ -67,7 +69,8 @@ const Mutation = {
 			engineVolume,
 			odometer,
 			typeBody,
-			transmission
+			transmission,
+			arriveDate
 		}
 	) => {
 		try {
@@ -84,7 +87,8 @@ const Mutation = {
 				engineVolume,
 				odometer,
 				typeBody,
-				transmission
+				transmission,
+				arriveDate
 			});
 			return { ...result };
 		} catch (error) {

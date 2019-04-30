@@ -23,6 +23,7 @@ const CREATE_CAR = gql`
 		$image_path: String
 		$vincode: String
 		$drive: String
+		$arriveDate: String
 		$fuelType: String
 		$engineVolume: String
 		$odometer: String
@@ -37,6 +38,7 @@ const CREATE_CAR = gql`
 			image_path: $image_path
 			vincode: $vincode
 			drive: $drive
+			arriveDate: $arriveDate
 			fuelType: $fuelType
 			engineVolume: $engineVolume
 			odometer: $odometer
@@ -50,6 +52,7 @@ const CREATE_CAR = gql`
 			image_path
 			vincode
 			drive
+			arriveDate
 			fuelType
 			engineVolume
 			odometer
@@ -69,6 +72,7 @@ const ApproveButton = ({
 	drive,
 	fuelType,
 	engineVolume,
+	arriveDate,
 	odometer,
 	typeBody,
 	transmission
@@ -85,6 +89,7 @@ const ApproveButton = ({
 		engineVolume !== '' &&
 		odometer !== '' &&
 		typeBody !== '' &&
+		arriveDate !== '' &&
 		transmission !== '';
 
 	return (
@@ -108,6 +113,7 @@ const ApproveButton = ({
 								engineVolume,
 								odometer,
 								typeBody,
+								arriveDate,
 								transmission
 							}
 						});
@@ -134,6 +140,7 @@ const ProductCreate = ({ classes, ...props }) => {
 	const description = useFormInput('');
 	const drive = useFormInput('');
 	const fuelType = useFormInput('');
+	const arriveDate = useFormInput('');
 	const engineVolume = useFormInput('');
 	const odometer = useFormInput('');
 	const typeBody = useFormInput('');
@@ -147,6 +154,7 @@ const ProductCreate = ({ classes, ...props }) => {
 		link: link.value,
 		description: description.value,
 		drive: drive.value,
+		arriveDate: arriveDate.value,
 		fuelType: fuelType.value,
 		engineVolume: engineVolume.value,
 		odometer: odometer.value,
@@ -159,6 +167,7 @@ const ProductCreate = ({ classes, ...props }) => {
 				<FormTab label="resources.products.tabs.details">
 					<TextInput {...title} source="title" validate={required()} formClassName={classes.widthFormGroup} />
 					<TextInput {...drive} source="drive" validate={required()} formClassName={classes.widthFormGroup} />
+					<TextInput {...arriveDate} source="arriveDate" validate={required()} formClassName={classes.widthFormGroup} />
 					<TextInput
 						{...fuelType}
 						source="fuelType"

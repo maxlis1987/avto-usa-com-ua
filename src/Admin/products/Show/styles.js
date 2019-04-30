@@ -88,13 +88,24 @@ const styles = {
 		justifyContent: 'space-between'
 	},
 	headerDescriptionLable: {
-		backgroundColor: 'orange',
-		color: 'blue',
+		backgroundColor: 'skyblue',
+		color: 'red',
 		width: '100%',
 		lineHeight: 1.3,
 		margin: '0px 0px 0px 0px',
 		textAlign: 'center',
-		fontStyle: 'oblique'
+		fontStyle: 'oblique',
+		fontSize: '1.1em',
+		fontWeight: 'bold'
+	},
+	arriveDateLabel: {
+		fontSize: '1.1em',
+		color: 'green',
+		margin: 10,
+		fontStyle: 'oblique',
+		marginTop: 0,
+		textAlign: 'center',
+		fontWeight: 'bold'
 	}
 };
 export { createStyles, styles };

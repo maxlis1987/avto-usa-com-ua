@@ -22,6 +22,7 @@ const typeDefs = gql`
 			odometer: String
 			fuelType: String
 			drive: String
+			arriveDate: String
 		): Car!
 		updateCar(
 			id: ID!
@@ -37,6 +38,7 @@ const typeDefs = gql`
 			odometer: String
 			fuelType: String
 			drive: String
+			arriveDate: String
 		): Car!
 		deleteCar(id: ID!): Car!
 	}
@@ -64,6 +66,7 @@ const typeDefs = gql`
 		odometer: String
 		fuelType: String
 		drive: String
+		arriveDate: String
 	}
 `;
 
