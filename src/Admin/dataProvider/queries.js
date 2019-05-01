@@ -6,7 +6,7 @@ export default (type, resource, params, buildQuery) => {
 		return {
 			query: gql`
 				query {
-					posts {
+					cars {
 						id
 						title
 						link
@@ -20,12 +20,13 @@ export default (type, resource, params, buildQuery) => {
 						odometer
 						typeBody
 						transmission
+						arriveDate
 					}
 				}
 			`,
 			variables: params, // params = { id: ... }
 			parseResponse: (response) => {
-				const data = [ ...response.data.posts ];
+				const data = [ ...response.data.cars ];
 				return { data: data, total: 12 };
 			}
 		};
@@ -33,8 +34,8 @@ export default (type, resource, params, buildQuery) => {
 	if (type === GET_ONE) {
 		return {
 			query: gql`
-				query post($id: ID!) {
-					post(id: $id) {
+				query car($id: ID!) {
+					car(id: $id) {
 						id
 						title
 						link
@@ -48,6 +49,7 @@ export default (type, resource, params, buildQuery) => {
 						odometer
 						typeBody
 						transmission
+						arriveDate
 						userId
 					}
 				}
@@ -55,7 +57,7 @@ export default (type, resource, params, buildQuery) => {
 			variables: params,
 
 			parseResponse: (response) => {
-				return { data: response.data.post };
+				return { data: response.data.car };
 			}
 		};
 	}

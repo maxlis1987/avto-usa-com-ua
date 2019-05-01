@@ -75,9 +75,8 @@ class Login extends Component {
 	};
 
 	// componentDidMount() {
-	// 	window.location.href = '/#/posts';
-  // }
-  
+	// 	window.location.href = '/#/cars';
+	// }
 	render() {
 		const { classes, handleSubmit, isLoading, translate } = this.props;
 		return (

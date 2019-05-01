@@ -1,21 +1,17 @@
-const { User, Post } = require('./data/store');
+const { User, Car } = require('./data/store');
 const uuidv4 = require('uuid/v4');
-
 const Mutation = {
-	createUser: async (_, { username, password }) => {
-		try {
-			const result = await User.create({
-				username,
-				password
-			});
-
-			return { ...result };
-		} catch (error) {
-			console.log('error', error);
-		}
+	createUser: async (_, { email, first_name, last_name }) => {
+		return User.create({
+			email,
+			first_name,
+			last_name
+		}).then((user) => {
+			return user;
+		});
 	},
 
-	createPost: async (
+	createCar: async (
 		_,
 		{
 			title,
@@ -29,11 +25,12 @@ const Mutation = {
 			engineVolume,
 			odometer,
 			typeBody,
-			transmission
+			transmission,
+			arriveDate
 		}
 	) => {
 		try {
-			const result = await Post.create({
+			const result = await Car.create({
 				id: uuidv4(),
 				title,
 				description,
@@ -47,7 +44,8 @@ const Mutation = {
 				engineVolume,
 				odometer,
 				typeBody,
-				transmission
+				transmission,
+				arriveDate
 			});
 
 			return { ...result };
@@ -56,7 +54,7 @@ const Mutation = {
 		}
 	},
 
-	updatePost: async (
+	updateCar: async (
 		_,
 		{
 			id,
@@ -71,11 +69,12 @@ const Mutation = {
 			engineVolume,
 			odometer,
 			typeBody,
-			transmission
+			transmission,
+			arriveDate
 		}
 	) => {
 		try {
-			const result = await Post.update({
+			const result = await Car.update({
 				id,
 				title,
 				description,
@@ -88,16 +87,17 @@ const Mutation = {
 				engineVolume,
 				odometer,
 				typeBody,
-				transmission
+				transmission,
+				arriveDate
 			});
 			return { ...result };
 		} catch (error) {
 			console.log('error');
 		}
 	},
-	deletePost: async (_, { id }) => {
+	deleteCar: async (_, { id }) => {
 		try {
-			const result = await Post.delete({ id });
+			const result = await Car.delete({ id });
 			return { ...result };
 		} catch (error) {
 			console.log('error');

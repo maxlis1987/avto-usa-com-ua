@@ -1,10 +1,9 @@
-const { User, Post } = require('./data/store');
+const { User, Car } = require('./data/store');
 
 const Query = {
 	users: () => User.findAll(),
-	posts: () => Post.findAll(),
-	post: (_, { id }, { posts }) => Post.findById(id),
-	user: (_, { id }, { users }) => User.findById(id)
+	cars: () => Car.findAll(),
+	car: (_, { id }, { cars }) => Car.findById(id)
 };
 
 module.exports = { Query };

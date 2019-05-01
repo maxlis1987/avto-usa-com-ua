@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, UserMenu, MenuItemLink, translate } from 'react-admin';
+import { AppBar, UserMenu, MenuItemLink, translate, Responsive } from 'react-admin';
 import { Typography, Button } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,9 +9,13 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
 	title: {
 		flex: 1,
-		textOverflow: 'ellipsis',
-		whiteSpace: 'nowrap',
-		overflow: 'hidden'
+		// textOverflow: 'ellipsis',
+		whiteSpace: 'wrap',
+		overflow: 'hidden',
+		'& > *': {
+			margin: 'auto',
+			textAlign: 'center'
+		}
 	},
 	spacer: {
 		flex: 1
@@ -26,7 +30,18 @@ const CustomUserMenu = translate(({ translate, ...props }) => (
 // userMenu={<CustomUserMenu />}  <Logo />
 const CustomAppBar = ({ classes, ...props }) => (
 	<AppBar userMenu={<CustomUserMenu />} {...props}>
-		<Typography variant="title" color="inherit" className={classes.title} id="react-admin-title" />
+		<Responsive
+			xsmall={<div />}
+			medium={
+				<Typography variant="title" color="inherit" className={classes.title}>
+					<p>
+						<strong>
+							<i>Авто из США с аукционов</i> 0672323457 0982416505 0975993309
+						</strong>
+					</p>
+				</Typography>
+			}
+		/>
 
 		<span className={classes.spacer} />
 	</AppBar>

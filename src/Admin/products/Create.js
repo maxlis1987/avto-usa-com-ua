@@ -14,8 +14,8 @@ export const styles = {
 	heightFormGroup: { display: 'inline-block', marginLeft: 32 }
 };
 
-const CREATE_POST = gql`
-	mutation createPost(
+const CREATE_CAR = gql`
+	mutation createCar(
 		$title: String
 		$description: String
 		$link: String
@@ -23,13 +23,14 @@ const CREATE_POST = gql`
 		$image_path: String
 		$vincode: String
 		$drive: String
+		$arriveDate: String
 		$fuelType: String
 		$engineVolume: String
 		$odometer: String
 		$typeBody: String
 		$transmission: String
 	) {
-		createPost(
+		createCar(
 			title: $title
 			description: $description
 			link: $link
@@ -37,6 +38,7 @@ const CREATE_POST = gql`
 			image_path: $image_path
 			vincode: $vincode
 			drive: $drive
+			arriveDate: $arriveDate
 			fuelType: $fuelType
 			engineVolume: $engineVolume
 			odometer: $odometer
@@ -50,6 +52,7 @@ const CREATE_POST = gql`
 			image_path
 			vincode
 			drive
+			arriveDate
 			fuelType
 			engineVolume
 			odometer
@@ -69,6 +72,7 @@ const ApproveButton = ({
 	drive,
 	fuelType,
 	engineVolume,
+	arriveDate,
 	odometer,
 	typeBody,
 	transmission
@@ -85,17 +89,18 @@ const ApproveButton = ({
 		engineVolume !== '' &&
 		odometer !== '' &&
 		typeBody !== '' &&
+		arriveDate !== '' &&
 		transmission !== '';
 
 	return (
-		<Mutation type="CREATE" resource="products" mutation={CREATE_POST}>
-			{(createPost, { data }) => (
+		<Mutation type="CREATE" resource="products" mutation={CREATE_CAR}>
+			{(createCar, { data }) => (
 				<SaveButton
 					label="Save"
 					disabled={!isDisabled}
 					style={{ margin: 25 }}
 					onClick={(e) => {
-						createPost({
+						createCar({
 							variables: {
 								title,
 								image_path,
@@ -108,14 +113,16 @@ const ApproveButton = ({
 								engineVolume,
 								odometer,
 								typeBody,
+								arriveDate,
 								transmission
 							}
 						});
 						isDisabled = false;
 						setTimeout(() => {
-							window.location.href = '/#/posts/create';
+							window.location.href = '/#/cars/create';
 							document.location.reload(true);
 						}, 1000);
+
 						return data;
 					}}
 				/>
@@ -133,6 +140,7 @@ const ProductCreate = ({ classes, ...props }) => {
 	const description = useFormInput('');
 	const drive = useFormInput('');
 	const fuelType = useFormInput('');
+	const arriveDate = useFormInput('');
 	const engineVolume = useFormInput('');
 	const odometer = useFormInput('');
 	const typeBody = useFormInput('');
@@ -146,6 +154,7 @@ const ProductCreate = ({ classes, ...props }) => {
 		link: link.value,
 		description: description.value,
 		drive: drive.value,
+		arriveDate: arriveDate.value,
 		fuelType: fuelType.value,
 		engineVolume: engineVolume.value,
 		odometer: odometer.value,
@@ -158,6 +167,7 @@ const ProductCreate = ({ classes, ...props }) => {
 				<FormTab label="resources.products.tabs.details">
 					<TextInput {...title} source="title" validate={required()} formClassName={classes.widthFormGroup} />
 					<TextInput {...drive} source="drive" validate={required()} formClassName={classes.widthFormGroup} />
+					<TextInput {...arriveDate} source="arriveDate" validate={required()} formClassName={classes.widthFormGroup} />
 					<TextInput
 						{...fuelType}
 						source="fuelType"

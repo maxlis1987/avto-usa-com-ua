@@ -1,8 +1,11 @@
 import React from 'react';
 import compose from 'recompose/compose';
 import MuiGridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+
+import MuiGridListTile from '@material-ui/core/GridListTile';
+import MuiGridListTileBar from '@material-ui/core/GridListTileBar';
+import Typography from '@material-ui/core/Typography';
+
 import { withStyles } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 import { Link } from 'react-router-dom';
@@ -11,14 +14,21 @@ import { linkToRecord } from 'ra-core';
 
 const styles = (theme) => ({
 	root: {
-		margin: '-2px'
+		display: 'flex',
+		flexWrap: 'wrap',
+		justifyContent: 'space-around',
+		overflow: 'hidden'
 	},
 	gridList: {
 		width: '100%',
-		margin: 0
+		margin: '2px',
+		flexGrow: '1',
+		height: 'auto'
 	},
 	tileBar: {
-		background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.4) 70%,rgba(0,0,0,0) 100%)'
+		background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.4) 70%,rgba(0,0,0,0) 100%)',
+		whiteSpace: 'normal',
+		height: '50%'
 	},
 	placeholder: {
 		backgroundColor: theme.palette.grey[300],
@@ -26,7 +36,7 @@ const styles = (theme) => ({
 	},
 	price: {
 		display: 'inline',
-		fontSize: '2em',
+		fontSize: '1.5em',
 		color: 'tomato'
 	},
 	link: {
@@ -34,7 +44,8 @@ const styles = (theme) => ({
 	},
 	titleBar: {
 		color: 'silverblue',
-		fontSize: '1em'
+		fontSize: '1em',
+		whiteSpace: 'normal'
 	}
 });
 
@@ -52,9 +63,9 @@ const LoadingGridList = ({ width, classes, nbItems = 10 }) => (
 	<div className={classes.root}>
 		<MuiGridList cellHeight={180} cols={getColsForWidth(width)} className={classes.gridList}>
 			{times(nbItems, (userId) => (
-				<GridListTile key={userId}>
+				<MuiGridListTile key={userId}>
 					<div className={classes.placeholder} />
-				</GridListTile>
+				</MuiGridListTile>
 			))}
 		</MuiGridList>
 	</div>
@@ -63,30 +74,31 @@ const LoadingGridList = ({ width, classes, nbItems = 10 }) => (
 const LoadedGridList = ({ classes, ids, data, basePath, width }) => {
 	return (
 		<div className={classes.root}>
-			<MuiGridList cellHeight={180} cols={getColsForWidth(width)} className={classes.gridList}>
+			<MuiGridList cols={getColsForWidth(width)} className={classes.gridList}>
 				{ids.map((id) => {
 					return (
-						<GridListTile component={Link} key={id} to={linkToRecord(basePath, data[id].id)}>
+						<MuiGridListTile component={Link} key={id} to={linkToRecord(basePath, data[id].id)}>
 							<img src={JSON.parse(data[id].image_path)[0]} alt="" />
-							<GridListTileBar
-								className={classes.tileBar}
-								title={<span className={classes.titleBar}>{data[id].title}</span>}
+							<MuiGridListTileBar
+								classes={{
+									title: classes.titleBar,
+									root: classes.tileBar
+								}}
+								title={data[id].title}
 								subtitle={
-									<span style={{ color: 'tomato' }}>
-										<NumberField
-											className={classes.price}
-											source="price"
-											record={data[id]}
-											color="inherit"
-											options={{
-												style: 'currency',
-												currency: 'USD'
-											}}
-										/>
-									</span>
+									<NumberField
+										className={classes.price}
+										source="price"
+										record={data[id]}
+										color="inherit"
+										options={{
+											style: 'currency',
+											currency: 'USD'
+										}}
+									/>
 								}
 							/>
-						</GridListTile>
+						</MuiGridListTile>
 					);
 				})}
 			</MuiGridList>

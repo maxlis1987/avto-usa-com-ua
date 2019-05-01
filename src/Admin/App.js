@@ -72,7 +72,7 @@ class App extends Component {
 				i18nProvider={i18nProvider}
 			>
 				<Resource
-					name="posts"
+					name="cars"
 					create={admin === 'isLogin' ? products.create : false}
 					list={products.list}
 					edit={products.edit}
